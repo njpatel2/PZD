@@ -13,7 +13,7 @@
     </style>
   </head>
   <body>
-  <h2 class="text-center">${successMessage}</h2>
+  <h2 class="text-center" id ="successMsg">${successMessage}</h2>
     <div class="container">
       <div class="col-md-4 col-md-offset-4">
         <form method="post" action="/Dologin" class="form-login" >

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,35 +24,37 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
+	static String successmsg ="";
 	@RequestMapping("/home")
     public ModelAndView home()
 	{
 		ModelAndView mv = new ModelAndView("home");
+		if(!successmsg.isBlank()) {
+		mv.addObject("successMessage", "Successfully Registered");}
+		successmsg ="";
 		return mv;
 	}
 	
-//	@RequestMapping("/register")
-//    public ModelAndView register()
-//	{
-//		ModelAndView mv = new ModelAndView("reg");
-//		return mv;
-//	}
-	
+	/**
+	 * @param registrationDao
+	 * @return
+	 */
 	@RequestMapping("/registration")
-	public ModelAndView registerUserAccount(@RequestBody UserRegistrationDTO registrationDao)
+	@ResponseBody
+	public String registerUserAccount(@RequestBody UserRegistrationDTO registrationDao)
     {    	
-		ModelAndView mv = new ModelAndView("successurl");
-		
-		registrationDao.setPassword(passwordEncoder.encode(registrationDao.getPassword()));
-		System.out.println(registrationDao.getPassword());
-    	userService.save(registrationDao);
-    	return mv;
+		successmsg = "";
+		try {
+			registrationDao.setPassword(passwordEncoder.encode(registrationDao.getPassword()));
+			System.out.println(registrationDao.getPassword());
+			userService.save(registrationDao);
+			successmsg = "Successfully registered";
+		} catch (Exception e) {
+			throw e;
+		}
+    	return successmsg;
     }
 
-	
-	
-	
-	
 	@RequestMapping("/successurl")
     public ModelAndView successurl()
 	{

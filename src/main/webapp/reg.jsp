@@ -12,8 +12,7 @@
     <script type="text/javascript" src="/JS/RegistrationPage.js"></script>
      </head>
 <body>
-
- <h2 class="text-center">${successMessage}</h2>
+<h2 class="text-center" id = "successMessage1">${successMessage}</h2>
     <div class="container">
       <div class="col-md-4 col-md-offset-4">
         <form name="form" id="form" method="post" class="form-login" onsubmit="sendDataToController()" >

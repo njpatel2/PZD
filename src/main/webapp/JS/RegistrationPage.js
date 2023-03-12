@@ -1,24 +1,17 @@
 
+function hideElement()
+{
+	document.getElementById("successMessage").style.display === "none";
+}
+
 function sendDataToController() {
 	debugger;
-	var username = $("#username").val();
-	var password = $("#password").val();
-	var email = $("#email").val();
-	var role = $("#role").val();
-/*var user = $("#form").serialize();*/
 
-var user = {}
-    user["name"] = $("#username").val();
-/*data: JSON.stringify({
-			name: $("#username").val(),
-			password: $("#password").val(),
-			email: $("#email").val(),
-			role: $("#role").val()
-		}),*/
-
+var sus = null;
 	$.ajax({
 		type: "POST",
 		url: "/registration",
+		async: false,
 		data: JSON.stringify({
 			name: $("#username").val(),
 			password: $("#password").val(),
@@ -27,16 +20,18 @@ var user = {}
 		}),
 		contentType: "application/json",
 		success: function(data) {
-			console.log("SUCCESS: ", data);
+			window.location.href = '/home'; 
 		},
 		error: function(e) {
+			debugger;
 			console.log("ERROR: ", e);
+			document.getElementById("successMessage1").innerHTML="Failed to Register";
 		},
 		done: function(e) {
 			console.log("DONE");
 		}
 	});
-
+event.preventDefault();
 }
 
 function authenticate() {
