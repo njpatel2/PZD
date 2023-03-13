@@ -30,6 +30,23 @@ body {
 	border-radius: 3px;
 	box-shadow: 0px 0px 5px #c1c1c1;
 }
+.form-login input[type=tel], .form-login input[type=password] {
+	width: 100%;
+	padding: 10px;
+	margin: 5px 0 10px 0;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0px 0px 5px #c1c1c1;
+}
+
+.form-login input[type=tel], .form-login input[type=password] {
+	width: 100%;
+	padding: 10px;
+	margin: 5px 0 10px 0;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0px 0px 5px #c1c1c1;
+}
 
 .form-login input[type=submit] {
 	background-color: #007bff;

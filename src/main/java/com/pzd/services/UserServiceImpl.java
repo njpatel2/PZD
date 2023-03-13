@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	public User save(UserRegistrationDTO userdao) {
 		// TODO Auto-generated method stub
 		
-		User user = new User(userdao.getName(), userdao.getEmail(),userdao.getPassword(),userdao.getRole());		
+		User user = new User(userdao.getName(), userdao.getEmail(),userdao.getPassword(),userdao.getRole(),userdao.getContactNumber());		
 		return userRepository.save(user);
 	}
 	

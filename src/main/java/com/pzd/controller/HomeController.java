@@ -55,10 +55,10 @@ public class HomeController {
     	return successmsg;
     }
 
-	@RequestMapping("/successurl")
-    public ModelAndView successurl()
+	@RequestMapping("/index")
+    public ModelAndView index()
 	{
-		ModelAndView mv = new ModelAndView("successurl");
+		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
 }

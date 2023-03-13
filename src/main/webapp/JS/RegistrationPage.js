@@ -16,7 +16,8 @@ var sus = null;
 			name: $("#username").val(),
 			password: $("#password").val(),
 			email: $("#email").val(),
-			role: $("#role").val()
+			role: $("#role").val(),
+			contactNumber: $("#contactNumber").val()
 		}),
 		contentType: "application/json",
 		success: function(data) {

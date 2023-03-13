@@ -1,16 +1,11 @@
 package com.pzd.entities;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 
 @Entity(name ="Users")
@@ -25,7 +20,10 @@ public class User {
 	private String password;
 	
 	private String role;
+	
+	private int contactNumber;
 //	private boolean enabled;
+	
 	
 	User(){};
 	
@@ -37,6 +35,15 @@ public class User {
 		this.password = password;
 		this.role = role;
 //		this.enabled = enabled;
+	}
+
+	public User(String name, String email, String password, String role, int contactNumber) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.contactNumber = contactNumber;
 	}
 
 	public int getId() {
@@ -79,20 +86,20 @@ public class User {
 		this.role = role;
 	}
 
-//	public boolean isEnabled() {
-//		return enabled;
-//	}
-//
-//	public void setEnabled(boolean enabled) {
-//		this.enabled = enabled;
-//	}
+	public int getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(int contactNumber) {
+		this.contactNumber = contactNumber;
+	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ "]";
+				+ ", contactNumber=" + contactNumber + "]";
 	}
-	
+
 	
 
 	

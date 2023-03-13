@@ -3,14 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Login - Pizza Delivery App---this is home page</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/login.css">
-    <script type="text/javascript" src="/JS/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="/JS/lib/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/JS/RegistrationPage.js"></script>
-    <style>
-     
-    </style>
+    
+    <script type="text/javascript" src="/js/RegistrationPage.js"></script>
+    <%@include file="Common.jsp" %>
   </head>
   <body>
   <h2 class="text-center" id ="successMsg">${successMessage}</h2>

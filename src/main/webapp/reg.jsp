@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <title>registration</title>
    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/login.css">
-    <script type="text/javascript" src="/JS/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="/JS/lib/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/JS/RegistrationPage.js"></script>
+    <link rel="stylesheet" href="/css/commonc.css">
+    <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/RegistrationPage.js"></script>
      </head>
 <body>
 <h2 class="text-center" id = "successMessage1">${successMessage}</h2>
@@ -25,6 +25,10 @@
           
            <label for="email">Email:</label>
           <input type="email" name="email" id="email" required>
+          
+          <label for="username">contact Number:</label>
+          <input type="tel" name="contactNumber" id="contactNumber" required>
+          
 
           <input type="hidden" name = "role" id="role" class="form-control form-control-lg" value="ROLE_USER"/>
           

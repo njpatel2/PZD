@@ -57,15 +57,6 @@ public class UserController {
 		super();
 		this.userService = userService;
 	}
-    
-
-	@RequestMapping("/nikunj")
-    public ModelAndView nikunj()
-	{
-		ModelAndView mv = new ModelAndView("successurl");
-		return mv;
-	}
-	
 	
 	@RequestMapping("/home")
     public ModelAndView home()
