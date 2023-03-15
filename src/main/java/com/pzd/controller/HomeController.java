@@ -1,5 +1,7 @@
 package com.pzd.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pzd.dao.UserRegistrationDTO;
+import com.pzd.security.CustomUserDetails;
+import com.pzd.security.UserDetailsServiceImpl;
 import com.pzd.services.UserService;
 
 @RestController
@@ -22,10 +26,14 @@ public class HomeController {
     private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
+	private UserDetailsServiceImpl userDetailsServiceImpl;
+	
+	@Autowired
 	private UserService userService;
 	
 	static String successmsg ="";
-	@RequestMapping("/home")
+	
+	@RequestMapping({"/", "/home"})
     public ModelAndView home()
 	{
 		ModelAndView mv = new ModelAndView("home");
@@ -56,9 +64,18 @@ public class HomeController {
     }
 
 	@RequestMapping("/index")
-    public ModelAndView index()
+    public ModelAndView index(HttpServletRequest request)
 	{
-		ModelAndView mv = new ModelAndView("index");
+		ModelAndView mv = new ModelAndView();
+		CustomUserDetails customUserDetails = (CustomUserDetails) request.getSession().getAttribute("customUserDetails");
+		if(customUserDetails != null && customUserDetails.getAuthorities().contains("ROLE_ADMIN"))
+		{
+			mv.setViewName("admin");
+		}
+		else
+		{
+			mv.setViewName("admin");
+		}
 		return mv;
 	}
 }

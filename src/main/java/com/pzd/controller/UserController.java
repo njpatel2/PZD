@@ -61,7 +61,7 @@ public class UserController {
 	@RequestMapping("/home")
     public ModelAndView home()
 	{
-		ModelAndView mv = new ModelAndView("login");
+		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
 	
