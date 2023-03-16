@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZEK6sU6ZsGwVuH2mkQGjN" crossorigin="anonymous">
+  
   <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/commonc.css">
     <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
@@ -27,21 +30,21 @@
     <link rel="stylesheet" href="/css/icomoon.css">
     <link rel="stylesheet" href="/css/style.css">
     
-    <script src="/js/jquery.min.js"></script>
-  <script src="/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/js/popper.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/jquery.easing.1.3.js"></script>
-  <script src="/js/jquery.waypoints.min.js"></script>
-  <script src="/js/jquery.stellar.min.js"></script>
-  <script src="/js/owl.carousel.min.js"></script>
-  <script src="/js/jquery.magnific-popup.min.js"></script>
-  <script src="/js/aos.js"></script>
-  <script src="/js/jquery.animateNumber.min.js"></script>
-  <script src="/js/bootstrap-datepicker.js"></script>
-  <script src="/js/jquery.timepicker.min.js"></script>
-  <script src="/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script type="text/javascript"  src="/js/jquery.min.js"></script>
+  <script type="text/javascript"  src="/js/jquery-migrate-3.0.1.min.js"></script>
+  <script type="text/javascript"  src="/js/popper.min.js"></script>
+  <script type="text/javascript"  src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript"  src="/js/jquery.easing.1.3.js"></script>
+  <script type="text/javascript"  src="/js/jquery.waypoints.min.js"></script>
+  <script type="text/javascript"  src="/js/jquery.stellar.min.js"></script>
+  <script  type="text/javascript" src="/js/owl.carousel.min.js"></script>
+  <script  type="text/javascript" src="/js/jquery.magnific-popup.min.js"></script>
+  <script type="text/javascript"  src="/js/aos.js"></script>
+  <script type="text/javascript"  src="/js/jquery.animateNumber.min.js"></script>
+  <script type="text/javascript"  src="/js/bootstrap-datepicker.js"></script>
+  <script  type="text/javascript" src="/js/jquery.timepicker.min.js"></script>
+  <script type="text/javascript"  src="/js/scrollax.min.js"></script>
+  <script type="text/javascript"  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <!-- <script src="/js/google-map.js"></script> -->
   <script src="/js/main.js"></script>
   </head>

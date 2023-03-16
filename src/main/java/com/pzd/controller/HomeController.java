@@ -1,9 +1,14 @@
 package com.pzd.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,36 +26,46 @@ import com.pzd.services.UserService;
 @RestController
 @RequestMapping("/")
 public class HomeController {
-	
+
 	@Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-	
+	private BCryptPasswordEncoder passwordEncoder;
+
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
-	
+
 	@Autowired
 	private UserService userService;
-	
-	static String successmsg ="";
-	
-	@RequestMapping({"/", "/home"})
-    public ModelAndView home()
-	{
+
+	static String successmsg = "";
+
+	@RequestMapping({ "/", "/home" })
+	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("home");
-		if(!successmsg.isBlank()) {
-		mv.addObject("successMessage", "Successfully Registered");}
-		successmsg ="";
+		System.out.println("in home");
+		if (!successmsg.isBlank()) {
+			mv.addObject("successMessage", "Successfully Registered");
+		}
+		successmsg = "";
 		return mv;
 	}
 	
+	 @GetMapping("/logout")
+	    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+			ModelAndView mv = new ModelAndView("home");
+
+	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	        if (authentication != null) {
+	            new SecurityContextLogoutHandler().logout(request, response, authentication);
+	        }
+	        return mv;
+	    }
 	/**
 	 * @param registrationDao
 	 * @return
 	 */
 	@RequestMapping("/registration")
 	@ResponseBody
-	public String registerUserAccount(@RequestBody UserRegistrationDTO registrationDao)
-    {    	
+	public String registerUserAccount(@RequestBody UserRegistrationDTO registrationDao) {
 		successmsg = "";
 		try {
 			registrationDao.setPassword(passwordEncoder.encode(registrationDao.getPassword()));
@@ -60,21 +75,23 @@ public class HomeController {
 		} catch (Exception e) {
 			throw e;
 		}
-    	return successmsg;
-    }
+		return successmsg;
+	}
 
 	@RequestMapping("/index")
-    public ModelAndView index(HttpServletRequest request)
-	{
+	public ModelAndView index(HttpServletRequest request) {
+		System.out.println("in index");
 		ModelAndView mv = new ModelAndView();
-		CustomUserDetails customUserDetails = (CustomUserDetails) request.getSession().getAttribute("customUserDetails");
-		if(customUserDetails != null && customUserDetails.getAuthorities().contains("ROLE_ADMIN"))
-		{
-			mv.setViewName("admin");
-		}
-		else
-		{
-			mv.setViewName("admin");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()) {
+			request.getSession().setAttribute("userRoles", authentication.getAuthorities());
+			if (authentication.getAuthorities().contains("ADMIN")) {
+				mv.setViewName("admin");
+			} else {
+				mv.setViewName("index");
+			}
+		} else {
+			mv.setViewName("home");
 		}
 		return mv;
 	}

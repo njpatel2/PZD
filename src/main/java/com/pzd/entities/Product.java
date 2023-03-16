@@ -15,8 +15,8 @@ public class Product {
 	private String pName;
 	private String pDesc;
 	private String pPhoto;
-	private int pPrice;
-	private int pDiscount;
+	private float pPrice;
+	private float pDiscount;
 	private int pQuantity;
 	
 	@ManyToOne
@@ -25,7 +25,7 @@ public class Product {
 	public Product() {
 		super();
 	}
-	public Product(int piId, String pName, String pDesc, String pPhoto, int pPrice, int pDiscount, int pQuantity) {
+	public Product(int piId, String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity) {
 		super();
 		this.piId = piId;
 		this.pName = pName;
@@ -35,7 +35,7 @@ public class Product {
 		this.pDiscount = pDiscount;
 		this.pQuantity = pQuantity;
 	}
-	public Product(String pName, String pDesc, String pPhoto, int pPrice, int pDiscount, int pQuantity) {
+	public Product(String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity) {
 		super();
 		this.pName = pName;
 		this.pDesc = pDesc;
@@ -46,7 +46,7 @@ public class Product {
 	}
 	
 	
-	public Product( String pName, String pDesc, String pPhoto, int pPrice, int pDiscount, int pQuantity,
+	public Product( String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity,
 			Category category) {
 		super();
 		this.pName = pName;
@@ -81,13 +81,13 @@ public class Product {
 	public void setpPhoto(String pPhoto) {
 		this.pPhoto = pPhoto;
 	}
-	public int getpPrice() {
+	public float getpPrice() {
 		return pPrice;
 	}
 	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
 	}
-	public int getpDiscount() {
+	public float getpDiscount() {
 		return pDiscount;
 	}
 	public void setpDiscount(int pDiscount) {

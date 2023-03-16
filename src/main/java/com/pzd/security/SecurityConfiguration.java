@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -25,24 +26,29 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	System.out.println("in web conf::::::::::::::::::::::::::::::::::::::");
     	http
-    		.authenticationProvider(authenticationProvider())
-    		.authorizeRequests()
-    		.antMatchers("/home").permitAll()
-    		.antMatchers("/admin/**")
-    		.hasRole("ADMIN")
-    		.antMatchers("/user/**")
-    		.hasRole("USER")
-    		.and()
-    		.formLogin()
-        	.loginPage("/home")
-        	.loginProcessingUrl("/Dologin")
-        	.defaultSuccessUrl("/index")
-        	.and()
-        	.logout()
-        	.permitAll()
-        	.and()
-        	.csrf().disable();
-		
+    	.authenticationProvider(authenticationProvider())
+    	.authorizeRequests()
+        .antMatchers("/css/**", "/js/**","/fonts/**","/gif/**","/images/**","/scss/**").permitAll()
+            .antMatchers("/home").permitAll()
+            .antMatchers("/user/**").hasRole("USER")
+            .antMatchers("/index").authenticated()
+            .antMatchers("/**").hasRole("ADMIN")
+            .and()
+        .formLogin()
+            .loginPage("/home")
+            .loginProcessingUrl("/Dologin")
+            .defaultSuccessUrl("/index",true)
+            .and()
+        .logout()
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/home")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
+            .and()
+            .csrf()
+            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+//        .csrf().disable();
+    	
 		return http.build();
     }
     

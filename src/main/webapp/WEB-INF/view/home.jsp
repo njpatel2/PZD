@@ -12,7 +12,9 @@
     <div class="container">
       <div class="col-md-4 col-md-offset-4">
         <form method="post" action="/Dologin" class="form-login" >
-          <h2 class="text-center">Login to Pizza Delivery App</h2>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        
+          <h2 class="text-center" style="color:#121618">Please enter credentials</h2>
           <label for="username">Username:</label>
           <input type="text" name="username" id="username" required>
 
@@ -26,5 +28,6 @@
           
       </div>
     </div>
+    <%@include file="footer.jsp" %>
   </body>
 </html>
