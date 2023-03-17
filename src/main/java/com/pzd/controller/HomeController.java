@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -48,17 +49,18 @@ public class HomeController {
 		successmsg = "";
 		return mv;
 	}
-	
-	 @GetMapping("/logout")
-	    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
-			ModelAndView mv = new ModelAndView("home");
 
-	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	        if (authentication != null) {
-	            new SecurityContextLogoutHandler().logout(request, response, authentication);
-	        }
-	        return mv;
-	    }
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("home");
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null) {
+			new SecurityContextLogoutHandler().logout(request, response, authentication);
+		}
+		return mv;
+	}
+
 	/**
 	 * @param registrationDao
 	 * @return
@@ -85,7 +87,8 @@ public class HomeController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null && authentication.isAuthenticated()) {
 			request.getSession().setAttribute("userRoles", authentication.getAuthorities());
-			if (authentication.getAuthorities().contains("ADMIN")) {
+			if (authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+					.anyMatch("ROLE_ADMIN"::equals)) {
 				mv.setViewName("admin");
 			} else {
 				mv.setViewName("index");

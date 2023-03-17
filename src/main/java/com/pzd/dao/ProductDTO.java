@@ -1,9 +1,5 @@
 package com.pzd.dao;
 
-import javax.persistence.ManyToOne;
-
-import com.pzd.entities.Category;
-
 public class ProductDTO {
 
 	private String pName;
@@ -13,6 +9,11 @@ public class ProductDTO {
 	private float pDiscount;
 	private int pQuantity;
 	private int categoryId;
+
+	
+	public ProductDTO() {
+		super();
+	}
 
 	public ProductDTO(String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity,
 			int category) {
@@ -54,15 +55,15 @@ public class ProductDTO {
 		return pPrice;
 	}
 
-	public void setpPrice(int pPrice) {
-		this.pPrice = pPrice;
+	public void setpPrice(float pPrice2) {
+		this.pPrice = pPrice2;
 	}
 
 	public float getpDiscount() {
 		return pDiscount;
 	}
 
-	public void setpDiscount(int pDiscount) {
+	public void setpDiscount(float pDiscount) {
 		this.pDiscount = pDiscount;
 	}
 

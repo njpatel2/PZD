@@ -67,7 +67,7 @@
 	          
 	          <li class="nav-item"><a href="about.jsp" class="nav-link">About</a></li>
 	          <li class="nav-item"><a href="contact.jsp" class="nav-link">Contact</a></li>
-	          <li class="nav-item"><a href="admin.jsp" class="nav-link">Admin</a></li>
+	          <li class="nav-item"><a href="/admin/home" class="nav-link">Admin</a></li>
 	          <li class="nav-item">
 	          <img src="/gif/cart.png" width="60px"></img><span>00.00$</span>
 	          </li>

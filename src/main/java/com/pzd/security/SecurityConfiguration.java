@@ -29,7 +29,7 @@ public class SecurityConfiguration {
     	.authenticationProvider(authenticationProvider())
     	.authorizeRequests()
         .antMatchers("/css/**", "/js/**","/fonts/**","/gif/**","/images/**","/scss/**").permitAll()
-            .antMatchers("/home").permitAll()
+            .antMatchers("/home","/logout").permitAll()
             .antMatchers("/user/**").hasRole("USER")
             .antMatchers("/index").authenticated()
             .antMatchers("/**").hasRole("ADMIN")
@@ -45,9 +45,13 @@ public class SecurityConfiguration {
             .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID")
             .and()
-            .csrf()
-            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-//        .csrf().disable();
+//            .csrf()
+//            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+        .csrf().disable()
+//        .authorizeRequests()
+//        .antMatchers("/images/**").permitAll()
+        ; // allow file uploads to /upload directory
+       
     	
 		return http.build();
     }
