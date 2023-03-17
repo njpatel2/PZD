@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function() {
+	debugger;
 });
 
 //get list of category(id,name)
@@ -312,6 +313,7 @@ function displayCategoryList() {
 //functions for removing the product
 //making the category dropdown and setting onchange attribute to show user the products of selected category, then show the remove category model
 function removeProduct() {
+	document.getElementById('listOfProducts').innerHTML = '';
 	document.getElementById("removeProductForm").reset();
 	var list = getCategorieList();
 

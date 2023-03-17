@@ -13,6 +13,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query("SELECT p FROM product p JOIN p.category c WHERE c.categoryld = :categoryId")
 	ArrayList<Product> findByCategoryid(int categoryId);
 	
+	@Query("FROM product p ORDER BY p.category.id ASC")
+	ArrayList<Product> findOrderByCategoryId();
+
+
 //	public void save(ProductDTO productDTO);
 
 }

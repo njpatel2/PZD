@@ -21,7 +21,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-<%@include file="Common.jsp"%>
+<%@include file="header.jsp"%>
 <script type="text/javascript" src="/js/admin.js"></script>
 <style>
 .col-md-4 {

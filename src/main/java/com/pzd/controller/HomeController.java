@@ -2,6 +2,7 @@ package com.pzd.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -39,10 +40,9 @@ public class HomeController {
 
 	static String successmsg = "";
 
-	@RequestMapping({ "/", "/home" })
-	public ModelAndView home() {
-		ModelAndView mv = new ModelAndView("home");
-		System.out.println("in home");
+	@RequestMapping({ "/", "/login" })
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView("login");
 		if (!successmsg.isBlank()) {
 			mv.addObject("successMessage", "Successfully Registered");
 		}
@@ -52,7 +52,12 @@ public class HomeController {
 
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("home");
+		ModelAndView mv = new ModelAndView("login");
+
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null) {
@@ -80,21 +85,12 @@ public class HomeController {
 		return successmsg;
 	}
 
-	@RequestMapping("/index")
-	public ModelAndView index(HttpServletRequest request) {
-		System.out.println("in index");
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping("/home")
+	public ModelAndView home(HttpSession session) {
+		ModelAndView mv = new ModelAndView("home");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null && authentication.isAuthenticated()) {
-			request.getSession().setAttribute("userRoles", authentication.getAuthorities());
-			if (authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-					.anyMatch("ROLE_ADMIN"::equals)) {
-				mv.setViewName("admin");
-			} else {
-				mv.setViewName("index");
-			}
-		} else {
-			mv.setViewName("home");
+			session.setAttribute("userRole", authentication.getAuthorities().toString());
 		}
 		return mv;
 	}

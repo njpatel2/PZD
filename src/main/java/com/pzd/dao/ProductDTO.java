@@ -1,22 +1,39 @@
 package com.pzd.dao;
 
+import com.pzd.entities.Category;
+
 public class ProductDTO {
 
+	private int pId;
+	
 	private String pName;
 	private String pDesc;
 	private String pPhoto;
 	private float pPrice;
 	private float pDiscount;
 	private int pQuantity;
-	private int categoryId;
+	private CategoryDTO category;
 
 	
+	public ProductDTO(int pId, String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity,
+			CategoryDTO category) {
+		super();
+		this.pId = pId;
+		this.pName = pName;
+		this.pDesc = pDesc;
+		this.pPhoto = pPhoto;
+		this.pPrice = pPrice;
+		this.pDiscount = pDiscount;
+		this.pQuantity = pQuantity;
+		this.category = category;
+	}
+
 	public ProductDTO() {
 		super();
 	}
 
 	public ProductDTO(String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity,
-			int category) {
+			CategoryDTO category) {
 		super();
 		this.pName = pName;
 		this.pDesc = pDesc;
@@ -24,7 +41,15 @@ public class ProductDTO {
 		this.pPrice = pPrice;
 		this.pDiscount = pDiscount;
 		this.pQuantity = pQuantity;
-		this.categoryId = category;
+		this.category = category;
+	}
+
+	public int getpId() {
+		return pId;
+	}
+
+	public void setpId(int pId) {
+		this.pId = pId;
 	}
 
 	public String getpName() {
@@ -71,12 +96,12 @@ public class ProductDTO {
 		return pQuantity;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public CategoryDTO getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(CategoryDTO categoryId) {
+		this.category = categoryId;
 	}
 
 	public void setpQuantity(int pQuantity) {
@@ -86,7 +111,7 @@ public class ProductDTO {
 	@Override
 	public String toString() {
 		return "ProductDTO [pName=" + pName + ", pDesc=" + pDesc + ", pPhoto=" + pPhoto + ", pPrice=" + pPrice
-				+ ", pDiscount=" + pDiscount + ", pQuantity=" + pQuantity + ", category=" + categoryId + "]";
+				+ ", pDiscount=" + pDiscount + ", pQuantity=" + pQuantity + ", category=" + category + "]";
 	}
 
 }

@@ -11,7 +11,7 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int piId;
+	private int pId;
 	private String pName;
 	private String pDesc;
 	private String pPhoto;
@@ -27,7 +27,7 @@ public class Product {
 	}
 	public Product(int piId, String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity) {
 		super();
-		this.piId = piId;
+		this.pId = piId;
 		this.pName = pName;
 		this.pDesc = pDesc;
 		this.pPhoto = pPhoto;
@@ -57,11 +57,11 @@ public class Product {
 		this.pQuantity = pQuantity;
 		this.category = category;
 	}
-	public int getPiId() {
-		return piId;
+	public int getpId() {
+		return pId;
 	}
-	public void setPiId(int piId) {
-		this.piId = piId;
+	public void setpId(int pId) {
+		this.pId = pId;
 	}
 	public String getpName() {
 		return pName;
@@ -108,7 +108,7 @@ public class Product {
 	}
 	@Override
 	public String toString() {
-		return "Product [piId=" + piId + ", pName=" + pName + ", pDesc=" + pDesc + ", pPhoto=" + pPhoto + ", pPrice="
+		return "Product [piId=" + pId + ", pName=" + pName + ", pDesc=" + pDesc + ", pPhoto=" + pPhoto + ", pPrice="
 				+ pPrice + ", pDiscount=" + pDiscount + ", pQuantity=" + pQuantity + ", category=" + category + "]";
 	}
 	

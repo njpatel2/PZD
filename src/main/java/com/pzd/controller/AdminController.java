@@ -33,85 +33,53 @@ public class AdminController {
 
 	@Autowired
 	private CategoryServiceImpl categoryServiceImpl;
-
-	@RequestMapping("/home")
-	public ModelAndView home() {
-		ModelAndView mv = new ModelAndView("admin");
+	
+	@RequestMapping("/admin")
+	public ModelAndView adminMainPage() {
+		ModelAndView mv = new ModelAndView("admin");;
 		return mv;
 	}
 
+
 	@RequestMapping("/addProduct")
 	@ResponseBody
-	public void addProduct(@RequestParam("pName") String pName,
-            @RequestParam("pDesc") String pDesc,
-            @RequestParam("pPhoto") MultipartFile productPhoto,
-            @RequestParam("pPrice") float pPrice,
-            @RequestParam("pDiscount") float pDiscount,
-            @RequestParam("categoryId") int categoryId,
-            @RequestParam("pQuantity") int pQuantity, HttpServletRequest request) {
-		
+	public void addProduct(@RequestParam("pName") String pName, @RequestParam("pDesc") String pDesc,
+			@RequestParam("pPhoto") MultipartFile productPhoto, @RequestParam("pPrice") float pPrice,
+			@RequestParam("pDiscount") float pDiscount, @RequestParam("categoryId") int categoryId,
+			@RequestParam("pQuantity") int pQuantity, HttpServletRequest request) {
+
 		try {
+			
+			CategoryDTO categoryDTO = new CategoryDTO();
+			categoryDTO.setId(categoryId);
+			
 			ProductDTO productDTO = new ProductDTO();
 			productDTO.setpName(pName);
 			productDTO.setpDesc(pDesc);
 			productDTO.setpPhoto(productPhoto.getOriginalFilename());
 			productDTO.setpPrice(pPrice);
 			productDTO.setpDiscount(pDiscount);
-			productDTO.setCategoryId(categoryId);
+			productDTO.setCategory(categoryDTO);
 			productDTO.setpQuantity(pQuantity);
-			
-			String path =  request.getRealPath("images")+File.separator;
+
+			String path = request.getRealPath("images") + File.separator;
 			System.out.println(path);
-			
+
 			FileOutputStream fileOutputStream = new FileOutputStream(path + productPhoto.getOriginalFilename());
 			InputStream inputStream = productPhoto.getInputStream();
-			
-			byte []data = new byte[inputStream.available()];
+
+			byte[] data = new byte[inputStream.available()];
 			inputStream.read(data);
-			
+
 			fileOutputStream.write(data);
-			
+
 			fileOutputStream.close();
-			inputStream.close();	
+			inputStream.close();
 			productServiceImpl.addProduct(productDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-//	@RequestMapping("/addProduct")
-//	public @ResponseBody Map<String, Object> fileup(MultipartHttpServletRequest req, HttpServletRequest reqst){
-
-//	addProduct(@RequestParam("pName") String pName,
-//	                                @RequestParam("pDesc") String pDesc,
-//	                                @RequestParam("pPhoto") MultipartFile productPhoto,
-//	                                @RequestParam("pPrice") float pPrice,
-//	                                @RequestParam("pDiscount") float pDiscount,
-//	                                @RequestParam("categoryId") int categoryId,
-//	                                @RequestParam("pQuantity") int pQuantity,
-//	                                HttpServletRequest request) {
-
-//	@RequestMapping("/addProduct")
-//	@ResponseBody
-//	public ModelAndView addProduct(@RequestBody Map<String, Object> payload) {
-//	    ModelAndView mv = new ModelAndView("admin");
-//	    ProductDTO productDTO = new ProductDTO();
-//	    productDTO.setpName(pName);
-//	    productDTO.setpDesc(pDesc);
-//	    productDTO.setpPhoto(productPhoto);
-//	    productDTO.setpPrice(pPrice);
-//	    productDTO.setpDiscount(pDiscount);
-//	    productDTO.setCategoryId(categoryId);
-//	    productDTO.setpQuantity(pQuantity);
-
-//	    try {
-//	        productServiceImpl.addProduct(productDTO);
-//	    } catch (Exception e) {
-//	        e.printStackTrace();
-//	    }
-//
-//	    return null;
-//	}
 
 	@RequestMapping("/addCategory")
 	@ResponseBody

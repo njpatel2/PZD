@@ -24,34 +24,27 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    	System.out.println("in web conf::::::::::::::::::::::::::::::::::::::");
     	http
     	.authenticationProvider(authenticationProvider())
     	.authorizeRequests()
         .antMatchers("/css/**", "/js/**","/fonts/**","/gif/**","/images/**","/scss/**").permitAll()
-            .antMatchers("/home","/logout").permitAll()
-            .antMatchers("/user/**").hasRole("USER")
-            .antMatchers("/index").authenticated()
-            .antMatchers("/**").hasRole("ADMIN")
+            .antMatchers("/login","/logout").permitAll()
+            .antMatchers("/user/**").authenticated()
+            .antMatchers("/home").authenticated()
+            .antMatchers("/admin/**").hasRole("ADMIN")
             .and()
         .formLogin()
-            .loginPage("/home")
+            .loginPage("/login")
             .loginProcessingUrl("/Dologin")
-            .defaultSuccessUrl("/index",true)
+            .defaultSuccessUrl("/home",true)
             .and()
         .logout()
             .logoutUrl("/logout")
-            .logoutSuccessUrl("/home")
+            .logoutSuccessUrl("/login")
             .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID")
             .and()
-//            .csrf()
-//            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-        .csrf().disable()
-//        .authorizeRequests()
-//        .antMatchers("/images/**").permitAll()
-        ; // allow file uploads to /upload directory
-       
+        .csrf().disable();
     	
 		return http.build();
     }

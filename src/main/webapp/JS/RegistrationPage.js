@@ -21,7 +21,7 @@ var sus = null;
 		}),
 		contentType: "application/json",
 		success: function(data) {
-			window.location.href = '/home'; 
+			window.location.href = '/login'; 
 		},
 		error: function(e) {
 			debugger;
