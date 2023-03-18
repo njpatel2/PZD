@@ -1,4 +1,4 @@
-package com.pzd.dao;
+package com.pzd.DTO;
 
 public class CategoryDTO {
 	

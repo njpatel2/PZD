@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pzd.dao.CourseDao;
+import com.pzd.DTO.CourseDao;
 import com.pzd.entities.Course;
 
 

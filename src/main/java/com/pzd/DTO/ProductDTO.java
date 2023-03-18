@@ -1,4 +1,4 @@
-package com.pzd.dao;
+package com.pzd.DTO;
 
 import com.pzd.entities.Category;
 

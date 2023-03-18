@@ -120,90 +120,10 @@ document.getElementById('listOfCategories').innerHTML = '';
 //insert the new product to database
 function addProductToDatabase() {
 	
-	
-	
-	
 	var selectElement = document.getElementById("category");
 	var selectedOption = selectElement.querySelector("option:checked");
 	var selectedOptionId = selectedOption.id;
 	debugger;
-	
-	
-	
-	
-	var formData = new FormData();
-formData.append('pName', $("#product_name").val());
-formData.append('pDesc', $("#product_description").val());
-formData.append('pPhoto', $('#product_photo')[0].files[0]);
-formData.append('pPrice', $("#product_price").val());
-formData.append('pDiscount', $("#product_discount").val());
-formData.append('categoryId', selectedOptionId);
-formData.append('pQuantity', $("#product_count").val());
-
-/*$.ajax({
-    url: '/admin/addProduct',
-    type: 'POST',
-    data: formData,
-    contentType: false,
-    processData: false,
-    success: function(response) {
-        // Handle success response
-    },
-    error: function(xhr, status, error) {
-        // Handle error response
-    }
-});*/
-/*
-	var formData = new FormData();
-var fileInput = document.getElementById("product_photo");
-formData.append("product_photo", fileInput.files[0]);
-formData.append("pName", $("#product_name").val());
-formData.append("pDesc", $("#product_description").val());
-formData.append("pPrice", $("#product_price").val());
-formData.append("pDiscount", $("#product_discount").val());
-formData.append("categoryId", selectedOptionId);
-formData.append("pQuantity", $("#product_count").val());
-
-	
-	/*data: JSON.stringify({
-			pName: $("#product_name").val(),
-			pDesc: $("#product_description").val(),
-			productPhoto: document.getElementById("product_photo").files[0],
-			pPrice: $("#product_price").val(),
-			pDiscount: $("#product_discount").val(),
-			categoryId: selectedOptionId,
-			pQuantity: $("#product_count").val()
-
-		}),*/
-		var xx=  document.getElementById("product_photo").files[0];
-
-	debugger;
-	/*$.ajax({
-		type: "POST",
-		url: "/admin/addProduct",
-		async: false,
-		data: {
-			pName: $("#product_name").val(),
-			pDesc: $("#product_description").val(),
-			productPhoto: document.getElementById("product_photo").files[0],
-			pPrice: $("#product_price").val(),
-			pDiscount: $("#product_discount").val(),
-			categoryId: selectedOptionId,
-			pQuantity: $("#product_count").val()
-
-		},
-		contentType: "multipart/form-data",
-		success: function(data) {
-
-		},
-		error: function(e) {
-			debugger;
-			console.log(e);
-		},
-		done: function(e) {
-			console.log("DONE");
-		}
-	});*/
 	
 	var formData = new FormData();
 formData.append('pName', $("#product_name").val());

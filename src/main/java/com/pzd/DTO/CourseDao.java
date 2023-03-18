@@ -1,4 +1,4 @@
-package com.pzd.dao;
+package com.pzd.DTO;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

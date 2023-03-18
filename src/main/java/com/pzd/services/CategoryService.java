@@ -3,7 +3,7 @@ package com.pzd.services;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.pzd.dao.CategoryDTO;
+import com.pzd.DTO.CategoryDTO;
 import com.pzd.entities.Category;
 
 public interface CategoryService {

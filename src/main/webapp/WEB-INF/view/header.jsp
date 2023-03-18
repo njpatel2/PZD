@@ -82,7 +82,7 @@
 					<c:if test="${sessionScope.userRole == '[ROLE_ADMIN]'}">
 						<li class="nav-item"><a href="/admin/admin" class="nav-link">Admin</a></li>
 					</c:if>
-					<li class="nav-item"><a href=""><img class="hover-effect"
+					<li class="nav-item"><a href="/cart/cart"><img class="hover-effect"
 							src="/gif/cart.png" width="60px"></img><span id="totalBill" class="hover-effect">0.00$</span></a></li>
 					<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
 			</ul>

@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pzd.dao.ProductDTO;
-import com.pzd.dao.UserRegistrationDTO;
+import com.pzd.DTO.ProductDTO;
+import com.pzd.DTO.UserRegistrationDTO;
 import com.pzd.entities.Course;
 import com.pzd.entities.User;
 import com.pzd.repository.UserRepository;

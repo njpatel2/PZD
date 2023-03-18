@@ -16,9 +16,88 @@
 	rel="stylesheet">
 <%@include file="header.jsp"%>
 
-<!--  <script type="text/javascript" src="/js/home.js"></script>  -->
+
+<script type="text/javascript" src="/js/home.js"></script>
 
 <script type="text/javascript"  src="/js/main.js"></script>
+<style>
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.quantity input[type="number"] {
+  -moz-appearance: textfield;
+  margin: 0;
+  width: 40px;
+  font-size: 14px;
+  border: none;
+  text-align: center;
+}
+
+.quantity input[type="number"]:focus {
+  outline: none;
+}
+
+.quantity button {
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.5;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background-color 0.3s ease;
+}
+
+.quantity button:hover {
+  background-color: #ccc;
+}
+
+.product-image img {
+  max-width: 100%;
+}
+.product-image {
+    text-align: center;
+}
+.product-info {
+  text-align: center;
+}
+
+.product-info h2 {
+  margin-top: 0;
+}
+.modal-header .modal-title {
+	color: black;
+}
+
+.modal-body {
+	background-color: #101315;
+}
+.price {
+    float: right;
+}
+
+.price {
+    font-size: 1.25rem;
+    padding: 0.75rem 1.5rem;
+    line-height: 1.5;
+} 
+ .order-button{
+    font-size: 1.25rem;
+    padding: 0.75rem 1.5rem;
+    line-height: 0.9;
+}
+
+</style>
+
 </head>
 <body>
 
@@ -36,22 +115,9 @@
 		<div class="container-wrap" id="productsListParent">
 			<div class="row no-gutters d-flex" id="productsList">
 				
-				<!-- <div class="col-lg-4 d-flex ftco-animate">
-					<div class="services-wrap d-flex">
-						<a href="#" class="img"
-							style="background-image: url(/images/pizza-1.jpg);"></a>
-						<div class="text p-4">
-							<h3>Italian Pizza</h3>
-							<p>Far far away, behind the word mountains, far from the
-								countries Vokalia and Consonantia</p>
-							<p class="price">
-								<span>$2.90</span> <a href="#"
-									class="ml-2 btn btn-white btn-outline-white">Order</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 d-flex ftco-animate">
+			
+				<!--
+				<div class="col-lg-4 d-flex ftco-animate" id ="product1" onclick="showOrderItemPopUp()">
 					<div class="services-wrap d-flex">
 						<a href="#" class="img"
 							style="background-image: url(/images/pizza-2.jpg);"></a>
@@ -66,7 +132,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 d-flex ftco-animate">
+				<div class="col-lg-4 d-flex ftco-animate" id ="product2" onclick="showOrderItemPopUp()">
 					<div class="services-wrap d-flex">
 						<a href="#" class="img order-lg-last"
 							style="background-image: url(/images/pizza-3.jpg);"></a>
@@ -280,6 +346,46 @@
 			</div>
 		</div>
 	</section>
+	
+	<div class=" modal fade" id="orderItemModel" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true" onclick = "">
+		<div class="modal-dialog modal-dialog-centered model-lg"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header  ">
+					<h5 class="modal-title" id="orderItemModelTitle"> Add to Cart 
+					</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id = "addCategoryForm">
+						<div class="product-image">
+				  <img src="" alt="Product Image">
+				</div>
+				<div class="product-info">
+				  <h2>Product Name</h2>
+				  <p>Product Description</p>
+				  <label for="quantity">Quantity:</label>
+				  <div class="quantity">
+					<button class="minus-btn" type="button" name="button">-</button>
+					<input type="number" id="quantity" name="quantity" min="1" value="1">
+					<button class="plus-btn" type="button" name="button">+</button>
+				  </div>
+				  </div>
+					</form>
+					<p class="price">
+								<span>$ 20</span> <a href="#"
+									class="ml-2 btn btn-white btn-outline-white order-button">Order</a>
+							</p>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">

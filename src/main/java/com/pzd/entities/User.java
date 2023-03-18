@@ -1,11 +1,16 @@
 package com.pzd.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity(name ="Users")
@@ -22,11 +27,23 @@ public class User {
 	private String role;
 	
 	private int contactNumber;
-//	private boolean enabled;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Cart> cart = new ArrayList<>();
+
 	
 	
 	User(){};
 	
+	
+	
+	public User(int id) {
+		super();
+		this.id = id;
+	}
+
+
+
 	public User(String name, String email, String password, String role) {
 		super();
 		
@@ -44,6 +61,17 @@ public class User {
 		this.password = password;
 		this.role = role;
 		this.contactNumber = contactNumber;
+	}
+
+	
+	public User(String name, String email, String password, String role, int contactNumber, List<Cart> cart) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+		this.contactNumber = contactNumber;
+		this.cart = cart;
 	}
 
 	public int getId() {
@@ -94,13 +122,20 @@ public class User {
 		this.contactNumber = contactNumber;
 	}
 
+	public List<Cart> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", contactNumber=" + contactNumber + "]";
+				+ ", contactNumber=" + contactNumber + ", cart=" + cart + "]";
 	}
 
 	
-
 	
 }

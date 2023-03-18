@@ -4,9 +4,47 @@
 
 $(document).ready(function() {
   debugger;
-  showProducts();
+  //showProducts();
 });
 
+function showOrderItemPopUp(selectedProduct){
+	debugger;
+	var xx = selectedProduct;
+		$('#orderItemModel').modal('show');
+		const id = selectedProduct.getAttribute('id');
+		 var imgURL = selectedProduct.querySelector(".img").style.backgroundImage;
+        const productName = selectedProduct.querySelector("h3").textContent;
+        const productDescription = selectedProduct.querySelector("p:nth-of-type(1)").textContent;
+        const productPrice = selectedProduct.querySelector(".price span").textContent;
+       
+imgURL = imgURL.replace('url("', '').replace('")', '');
+console.log(imgURL); // Output: /images/pizza-1.jpg
+        
+        const modal = document.getElementById("orderItemModel");
+        modal.querySelector(".product-image img").src = imgURL;
+modal.querySelector(".product-info h2").textContent = productName;
+modal.querySelector(".product-info p").textContent = productDescription;
+modal.querySelector(".price span").textContent = productPrice;
+
+document.querySelector('.plus-btn').addEventListener('click', function() {
+	  document.getElementById('quantity').value++;
+	});
+
+	document.querySelector('.minus-btn').addEventListener('click', function() {
+	  if (document.getElementById('quantity').value > 1) {
+	    document.getElementById('quantity').value--;
+	  }
+	});
+}
+
+
+
+
+
+
+
+
+/*
 //get list of category(id,name)
 function getProductList() {
 	debugger;
@@ -46,7 +84,7 @@ var n=0;
 			// create the outer div element
 			var outerDiv = document.createElement("div");
 			outerDiv.classList.add("col-lg-4", "d-flex", "ftco-animate");
-
+			outerDiv.setAttribute("onclick","showOrderItemPopUp()");
 			// create the inner div element
 			var innerDiv = document.createElement("div");
 			innerDiv.classList.add("services-wrap", "d-flex");
@@ -118,4 +156,4 @@ var n=0;
 function OrderItem(id)
 {
 	
-}
+}*/

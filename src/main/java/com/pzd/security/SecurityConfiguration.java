@@ -30,6 +30,7 @@ public class SecurityConfiguration {
         .antMatchers("/css/**", "/js/**","/fonts/**","/gif/**","/images/**","/scss/**").permitAll()
             .antMatchers("/login","/logout").permitAll()
             .antMatchers("/user/**").authenticated()
+            .antMatchers("/cart/**").authenticated()
             .antMatchers("/home").authenticated()
             .antMatchers("/admin/**").hasRole("ADMIN")
             .and()

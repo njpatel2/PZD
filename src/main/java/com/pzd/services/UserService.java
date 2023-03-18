@@ -1,6 +1,6 @@
 package com.pzd.services;
 
-import com.pzd.dao.UserRegistrationDTO;
+import com.pzd.DTO.UserRegistrationDTO;
 import com.pzd.entities.User;
 
 

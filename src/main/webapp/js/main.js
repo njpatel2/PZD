@@ -231,6 +231,8 @@ AOS.init({
 				// create the outer div element
 				var outerDiv = document.createElement("div");
 				outerDiv.classList.add("col-lg-4", "d-flex", "ftco-animate");
+				outerDiv.setAttribute("onclick","showOrderItemPopUp(this)");
+				outerDiv.id=productList[i].pId;
 
 				// create the inner div element
 				var innerDiv = document.createElement("div");

@@ -3,7 +3,8 @@ package com.pzd.services;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.pzd.dao.ProductDTO;
+import com.pzd.DTO.ProductDTO;
+import com.pzd.entities.Cart;
 import com.pzd.entities.Product;
 
 public interface ProductService {
@@ -16,4 +17,5 @@ public interface ProductService {
 
 	public ArrayList<ProductDTO> getProductList();
 
+	
 }

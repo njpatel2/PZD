@@ -3,7 +3,7 @@ package com.pzd.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pzd.dao.UserRegistrationDTO;
+import com.pzd.DTO.UserRegistrationDTO;
 import com.pzd.entities.User;
 import com.pzd.repository.UserRepository;
 

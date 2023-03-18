@@ -1,10 +1,15 @@
 package com.pzd.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name = "product")
 public class Product {
@@ -22,9 +27,18 @@ public class Product {
 	@ManyToOne
 	private Category category;
 	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<Cart> cart = new ArrayList<>();
+	
 	public Product() {
 		super();
 	}
+	
+	public Product(int pId) {
+		super();
+		this.pId = pId;
+	}
+
 	public Product(int piId, String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity) {
 		super();
 		this.pId = piId;
@@ -57,6 +71,8 @@ public class Product {
 		this.pQuantity = pQuantity;
 		this.category = category;
 	}
+
+
 	public int getpId() {
 		return pId;
 	}
@@ -84,13 +100,13 @@ public class Product {
 	public float getpPrice() {
 		return pPrice;
 	}
-	public void setpPrice(int pPrice) {
+	public void setpPrice(float pPrice) {
 		this.pPrice = pPrice;
 	}
 	public float getpDiscount() {
 		return pDiscount;
 	}
-	public void setpDiscount(int pDiscount) {
+	public void setpDiscount(float pDiscount) {
 		this.pDiscount = pDiscount;
 	}
 	public int getpQuantity() {
@@ -99,19 +115,25 @@ public class Product {
 	public void setpQuantity(int pQuantity) {
 		this.pQuantity = pQuantity;
 	}
-	
 	public Category getCategory() {
 		return category;
 	}
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	public List<Cart> getCart() {
+		return cart;
+	}
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
+	}
 	@Override
 	public String toString() {
-		return "Product [piId=" + pId + ", pName=" + pName + ", pDesc=" + pDesc + ", pPhoto=" + pPhoto + ", pPrice="
-				+ pPrice + ", pDiscount=" + pDiscount + ", pQuantity=" + pQuantity + ", category=" + category + "]";
+		return "Product [pId=" + pId + ", pName=" + pName + ", pDesc=" + pDesc + ", pPhoto=" + pPhoto + ", pPrice="
+				+ pPrice + ", pDiscount=" + pDiscount + ", pQuantity=" + pQuantity + ", category=" + category
+				+ ", cart=" + cart + "]";
 	}
-	
+
 	
 	
 }

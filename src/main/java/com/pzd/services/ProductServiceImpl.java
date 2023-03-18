@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.SpringBeanContainer;
 import org.springframework.stereotype.Service;
 
-import com.pzd.dao.CategoryDTO;
-import com.pzd.dao.ProductDTO;
+import com.pzd.DTO.CategoryDTO;
+import com.pzd.DTO.ProductDTO;
+import com.pzd.entities.Cart;
 import com.pzd.entities.Category;
 import com.pzd.entities.Product;
+import com.pzd.repository.CartRepository;
 import com.pzd.repository.CategoryRepository;
 import com.pzd.repository.ProductRepository;
 
@@ -23,6 +25,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private CartRepository cartRepository;
 
 	@Override
 	public void addProduct(ProductDTO productDTO) {
@@ -94,4 +99,6 @@ public class ProductServiceImpl implements ProductService {
 		return productDTO;
 		
 	}
+
+	
 }

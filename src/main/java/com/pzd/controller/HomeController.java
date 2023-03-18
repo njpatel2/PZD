@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pzd.dao.UserRegistrationDTO;
+import com.pzd.DTO.UserRegistrationDTO;
 import com.pzd.security.CustomUserDetails;
 import com.pzd.security.UserDetailsServiceImpl;
 import com.pzd.services.UserService;

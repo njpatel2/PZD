@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pzd.dao.CategoryDTO;
-import com.pzd.dao.ProductDTO;
+import com.pzd.DTO.CategoryDTO;
+import com.pzd.DTO.ProductDTO;
 import com.pzd.services.CategoryServiceImpl;
 import com.pzd.services.ProductServiceImpl;
 

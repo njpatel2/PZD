@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pzd.dao.CategoryDTO;
+import com.pzd.DTO.CategoryDTO;
 import com.pzd.entities.Category;
 import com.pzd.repository.CategoryRepository;
 
