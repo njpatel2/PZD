@@ -1,6 +1,9 @@
 package com.pzd.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,26 +23,24 @@ public class CartServiceImpl implements CartService {
 	private CartRepository cartRepository;
 
 	@Override
-	public ArrayList<CartDTO> getAllCartItemsOfUser(int userId) {
+	public ArrayList<HashMap<String, String>> getAllCartItemsOfUser(int userId) {
 
-		ArrayList<Cart> CartProducts = cartRepository.getAllCartItemsOfUser(userId);
+		ArrayList<Object[]> CartProducts = cartRepository.getAllCartItemsOfUser(userId);
+
+		ArrayList<HashMap<String, String>> listOfCartItems = new ArrayList<>();
+		
 
 		ArrayList<CartDTO> products = new ArrayList<>();
-		for (Cart cart : CartProducts) {
-//			CategoryDTO categorydto = new CategoryDTO(cart.getProduct().getCategory().getCategoryTitle()
-//					,cart.getProduct().getCategory().getCategoryDescription());
-//			
-
-//			ProductDTO productDto = new ProductDTO(cart.getProduct().getpName(),cart.getProduct().getpDesc(),cart.getProduct().getpPhoto(), 
-//					cart.getProduct().getpPrice(),cart.getProduct().getpDiscount(), 1,categorydto);
-
-//			CartDTO cartDTO = new CartDTO(cart.getProduct() ,cart.getProductQuatity());
-
-			// Add the CartDTO object to the list
-			products.add(new CartDTO(cart.getProduct(), cart.getProductQuatity()));
+		for (Object[] objects : CartProducts) {
+			HashMap<String, String> cartItems = new HashMap<>();
+			cartItems.put("productName", (String) objects[0]);
+			cartItems.put("productImage", (String) objects[1]);
+			cartItems.put("productPrice", Float.toString((Float) objects[2]));
+			cartItems.put("productQuantity", Integer.toString((Integer) objects[3]));
+			cartItems.put("productId", Integer.toString((Integer) objects[4]));
+			listOfCartItems.add(cartItems);
 		}
-
-		return products;
+		return listOfCartItems;
 	}
 
 	@Override
@@ -48,9 +49,10 @@ public class CartServiceImpl implements CartService {
 		// check if the product is available or not in cart
 		Cart product = cartRepository.getSingleProductFromCart(userId, productId);
 		if (product != null) {
-			cartRepository.updateCartProductQuantity(userId, productId, quantity);
+			int totalQuantity = product.getProductQuatity() + quantity;
+			cartRepository.updateCartProductQuantity(totalQuantity, userId, productId);
 		} else {
-			Cart c = new Cart(new User(userId),new Product(productId),quantity);
+			Cart c = new Cart(new User(userId), new Product(productId), quantity);
 			cartRepository.save(c);
 		}
 
@@ -58,10 +60,11 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public float getTotalCartPrice(int userId) {
-		ArrayList<Cart> cartItems = cartRepository.getAllCartItemsOfUser(userId);
+		ArrayList<Object[]> cartItems = cartRepository.getAllCartItemsOfUser(userId);
 		float totalPrice = 0;
-		for (Cart cart : cartItems) {
-			totalPrice = totalPrice + (cart.getProduct().getpPrice() * cart.getProductQuatity());
+		
+		for (Object[] objects : cartItems) {
+			totalPrice = totalPrice + (Float.parseFloat(objects[2].toString()) *Integer.parseInt( objects[3].toString()));
 		}
 		return totalPrice;
 	}
@@ -69,13 +72,13 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public void deleteProductFromCart(int userId, int productId) {
 
-		cartRepository.deleteProductFromCart(userId, productId);
+		cartRepository.deleteProductFromCart(productId,userId);
 
 	}
 
 	public void updateCartProductQuantity(int userId, int productId, int quantity) {
 
-		cartRepository.updateCartProductQuantity(userId, productId, quantity);
+		cartRepository.updateCartProductQuantity(quantity, userId, productId);
 
 	}
 

@@ -8,21 +8,29 @@
 </head>
 <body>
 
-
-	<div class="col-lg-4 d-flex ftco-animate fadeInUp ftco-animated">
-		<div class="services-wrap d-flex">
-			<a href="#" class="img"
-				style="background-image: url(/images/drink-1.jpeg);"></a>
-			<div class="text p-4">
-				<h3>Red Bull</h3>
-				<p>this is type 1 soft drink</p>
-				<p class="price">
-					<span>$ 12</span><a href="#"
-						class="ml-2 btn btn-white btn-outline-white" id="8"
-						onclick="OrderItem(8)">Order</a>
-				</p>
-			</div>
-		</div>
-	</div>
+	<tr class="on-hover-change-color" id="product6">
+		<td data-th="Product"><div class="row">
+				<div class="col-sm-2 box box2 text-left">
+					<img src="/images/pizza-1.jpg" alt=""
+						class="img-fluid d-none d-md-block rounded mb-2 shadow">
+				</div>
+				<div class="col-md-9 text-left mt-sm-2">
+					<h4>Pizza-1</h4>
+				</div>
+				<input type="hidden" name="productId" value="6">
+			</div></td>
+		<td data-th="Price" style="color: rgb(255, 255, 255);">$ 20.0</td>
+		<td data-th="Quantity" style="color: rgb(255, 255, 255);"><input
+			type="text" id="6" name="productQuantity" value="18" required="true"
+			min="1" class="form-control form-control-sm text-center"
+			onchange="updateCartProductQuantity(this.id)"></td>
+		<td data-th="" class="actions"><div class="text-center">
+				<button type="button" id="6"
+					class="btn btn-white border-secondary bg-white btn-md mb-2 rounded"
+					onclick="deleteProductFromCart(this.id)">
+					<i class="fa fa-trash-o" style="font-size: 31px; color: red;"></i>
+				</button>
+			</div></td>
+	</tr>
 </body>
 </html>

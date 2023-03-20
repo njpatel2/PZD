@@ -253,7 +253,8 @@ AOS.init({
 					isRight = !isRight
 				}
 				anchor.setAttribute('style', 'background-image: url(/images/' + productList[i].pPhoto + ');');
-
+				/*anchor.onclick = showOrderItemPopUp(this);*/
+	
 				//anchor.style.backgroundImage = productList[i].pPhoto;
 
 				// create the text div element
@@ -273,18 +274,18 @@ AOS.init({
 				priceOrder.classList.add("price");
 
 				var price = document.createElement("span");
-				price.textContent = '$ ' + productList[i].pPrice;
+				price.textContent = '$ ' + productList[i].pPrice +'  ';
 
-				var orderButton = document.createElement("a");
+				/*var orderButton = document.createElement("a");
 				orderButton.href = "#";
 				orderButton.classList.add("ml-2", "btn", "btn-white", "btn-outline-white");
 				orderButton.id = productList[i].pId;
-				orderButton.setAttribute('onclick', 'OrderItem(' + productList[i].pId + ')');
-				orderButton.textContent = "Order";
+				orderButton.setAttribute('onclick', 'addToCart(' + productList[i].pId + ')');
+				orderButton.textContent = "Order";*/
 
 				// append the elements to the parent elements
 				priceOrder.appendChild(price);
-				priceOrder.appendChild(orderButton);
+				/*priceOrder.appendChild(orderButton);*/
 
 				textDiv.appendChild(pizzaName);
 				textDiv.appendChild(description);

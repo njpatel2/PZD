@@ -2,39 +2,46 @@
  * 
  */
 
+//code for showing item on ui is written in main.js to apply animation	
+
 $(document).ready(function() {
-  debugger;
-  //showProducts();
 });
 
-function showOrderItemPopUp(selectedProduct){
+function showOrderItemPopUp(selectedProduct) {
 	debugger;
 	var xx = selectedProduct;
-		$('#orderItemModel').modal('show');
-		const id = selectedProduct.getAttribute('id');
-		 var imgURL = selectedProduct.querySelector(".img").style.backgroundImage;
-        const productName = selectedProduct.querySelector("h3").textContent;
-        const productDescription = selectedProduct.querySelector("p:nth-of-type(1)").textContent;
-        const productPrice = selectedProduct.querySelector(".price span").textContent;
-       
-imgURL = imgURL.replace('url("', '').replace('")', '');
-console.log(imgURL); // Output: /images/pizza-1.jpg
-        
-        const modal = document.getElementById("orderItemModel");
-        modal.querySelector(".product-image img").src = imgURL;
-modal.querySelector(".product-info h2").textContent = productName;
-modal.querySelector(".product-info p").textContent = productDescription;
-modal.querySelector(".price span").textContent = productPrice;
+	$('#orderItemModel').modal('show');
+	const id = selectedProduct.getAttribute('id');
+	var imgURL = selectedProduct.querySelector(".img").style.backgroundImage;
+	const productName = selectedProduct.querySelector("h3").textContent;
+	const productDescription = selectedProduct.querySelector("p:nth-of-type(1)").textContent;
+	const productPrice = selectedProduct.querySelector(".price span").textContent;
 
-document.querySelector('.plus-btn').addEventListener('click', function() {
-	  document.getElementById('quantity').value++;
-	});
+	imgURL = imgURL.replace('url("', '').replace('")', '');
+	console.log(imgURL); // Output: /images/pizza-1.jpg
 
-	document.querySelector('.minus-btn').addEventListener('click', function() {
-	  if (document.getElementById('quantity').value > 1) {
-	    document.getElementById('quantity').value--;
-	  }
-	});
+	const modal = document.getElementById("orderItemModel");
+	modal.querySelector(".product-image img").src = imgURL;
+	modal.querySelector(".product-info h2").textContent = productName;
+	modal.querySelector(".product-info p").textContent = productDescription;
+	modal.querySelector(".price span").textContent = productPrice;
+	modal.querySelector('input[name="productId"]').textContent = id;
+
+	document.querySelector('.plus-btn').removeEventListener('click', incrementQuantity);
+	document.querySelector('.plus-btn').addEventListener('click', incrementQuantity);
+
+	document.querySelector('.minus-btn').removeEventListener('click', decrementQuantity);
+	document.querySelector('.minus-btn').addEventListener('click', decrementQuantity);
+
+	function incrementQuantity() {
+		document.getElementById('orderItemModelQuantity').value++;
+	}
+
+	function decrementQuantity() {
+		if (document.getElementById('orderItemModelQuantity').value > 1) {
+			document.getElementById('orderItemModelQuantity').value--;
+		}
+	}
 }
 
 

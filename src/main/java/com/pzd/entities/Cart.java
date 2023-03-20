@@ -23,6 +23,11 @@ public class Cart {
 	private int productQuatity;
 
 
+	public Cart() {
+		super();
+	}
+
+
 	public Cart(User user, Product product, int productQuatity) {
 		super();
 		this.user = user;

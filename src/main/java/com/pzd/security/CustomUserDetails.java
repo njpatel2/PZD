@@ -11,23 +11,20 @@ import org.springframework.stereotype.Service;
 import com.pzd.entities.User;
 
 //@Service
-public class CustomUserDetails implements UserDetails{
+public class CustomUserDetails implements UserDetails {
 
-	
 	private User user;
-	
-	public CustomUserDetails(User user)
-	{
-		super ();
+
+	public CustomUserDetails(User user) {
+		super();
 		this.user = user;
 	}
-	
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole());
-		
+
 		return List.of(simpleGrantedAuthority);
 	}
 
@@ -39,7 +36,11 @@ public class CustomUserDetails implements UserDetails{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return user.getEmail();
+		return user.getName();
+	}
+
+	public int getUserId() {
+		return user.getId();
 	}
 
 	@Override
@@ -65,6 +66,5 @@ public class CustomUserDetails implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
 
 }

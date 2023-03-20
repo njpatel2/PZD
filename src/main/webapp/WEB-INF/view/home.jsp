@@ -18,7 +18,7 @@
 
 
 <script type="text/javascript" src="/js/home.js"></script>
-
+<script type="text/javascript" src="/js/Cart.js"></script>
 <script type="text/javascript"  src="/js/main.js"></script>
 <style>
 .quantity {
@@ -91,11 +91,19 @@
     line-height: 1.5;
 } 
  .order-button{
-    font-size: 1.25rem;
+    font-size: 1.0rem;
     padding: 0.75rem 1.5rem;
-    line-height: 0.9;
+    line-height: 0.7;
 }
-
+.btn:hover {
+	transform: scale(1.2); /* increase the size of the button on hover */
+}
+.btn {
+	border-radius: 5px;
+	/* adjust the value to change the amount of rounding */
+	transition: all 0.3s ease-in-out;
+	/* add a transition for smooth size change on hover */
+}
 </style>
 
 </head>
@@ -357,11 +365,12 @@
 					<h5 class="modal-title" id="orderItemModelTitle"> Add to Cart 
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+						aria-label="Close" id="closeOrderItemModel">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
+				<input type="hidden" name="productId">
 					<form id = "addCategoryForm">
 						<div class="product-image">
 				  <img src="" alt="Product Image">
@@ -372,14 +381,16 @@
 				  <label for="quantity">Quantity:</label>
 				  <div class="quantity">
 					<button class="minus-btn" type="button" name="button">-</button>
-					<input type="number" id="quantity" name="quantity" min="1" value="1">
+					<input type="number" id="orderItemModelQuantity" name="quantity" min="1" value="1">
 					<button class="plus-btn" type="button" name="button">+</button>
 				  </div>
 				  </div>
 					</form>
 					<p class="price">
-								<span>$ 20</span> <a href="#"
-									class="ml-2 btn btn-white btn-outline-white order-button">Order</a>
+								<span>$ 20 </span>
+								 <button class="ml-2 btn btn-white btn-outline-white order-button" onclick="addToCart(document.getElementById('orderItemModel').querySelector('input[name=\'productId\']').textContent)">
+								 Add to Cart</button>
+
 							</p>
 				</div>
 

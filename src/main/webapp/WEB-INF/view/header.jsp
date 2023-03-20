@@ -6,8 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZEK6sU6ZsGwVuH2mkQGjN"
-	crossorigin="anonymous">
+	>
 
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/commonc.css">
@@ -83,7 +82,7 @@
 						<li class="nav-item"><a href="/admin/admin" class="nav-link">Admin</a></li>
 					</c:if>
 					<li class="nav-item"><a href="/cart/cart"><img class="hover-effect"
-							src="/gif/cart.png" width="60px"></img><span id="totalBill" class="hover-effect">0.00$</span></a></li>
+							src="/gif/cart.png" width="60px"></img><span id="totalBill" class="hover-effect">0.00 $</span></a></li>
 					<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
 			</ul>
 
