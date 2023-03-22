@@ -6,13 +6,16 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 import com.pzd.entities.User;
 
 //@Service
 public class CustomUserDetails implements UserDetails {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private User user;
 
 	public CustomUserDetails(User user) {
@@ -37,6 +40,10 @@ public class CustomUserDetails implements UserDetails {
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return user.getName();
+	}
+	public String getUserEmail() {
+		// TODO Auto-generated method stub
+		return user.getEmail();
 	}
 
 	public int getUserId() {

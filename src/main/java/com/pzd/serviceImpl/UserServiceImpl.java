@@ -1,4 +1,4 @@
-package com.pzd.services;
+package com.pzd.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.pzd.DTO.UserRegistrationDTO;
 import com.pzd.entities.User;
 import com.pzd.repository.UserRepository;
+import com.pzd.service.UserService;
 
 
 @Service

@@ -1,4 +1,4 @@
-package com.pzd.services;
+package com.pzd.service;
 
 import com.pzd.DTO.UserRegistrationDTO;
 import com.pzd.entities.User;

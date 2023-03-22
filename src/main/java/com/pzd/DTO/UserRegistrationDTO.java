@@ -1,7 +1,5 @@
 package com.pzd.DTO;
 
-import javax.persistence.Column;
-
 public class UserRegistrationDTO {
 
 	private String name;

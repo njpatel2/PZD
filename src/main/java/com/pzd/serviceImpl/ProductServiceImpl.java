@@ -1,21 +1,19 @@
-package com.pzd.services;
+package com.pzd.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.SpringBeanContainer;
 import org.springframework.stereotype.Service;
 
 import com.pzd.DTO.CategoryDTO;
 import com.pzd.DTO.ProductDTO;
-import com.pzd.entities.Cart;
 import com.pzd.entities.Category;
 import com.pzd.entities.Product;
-import com.pzd.repository.CartRepository;
 import com.pzd.repository.CategoryRepository;
 import com.pzd.repository.ProductRepository;
+import com.pzd.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -26,9 +24,6 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	@Autowired
-	private CartRepository cartRepository;
-
 	@Override
 	public void addProduct(ProductDTO productDTO) {
 		try {

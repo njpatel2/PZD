@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.pzd.DTO.ProductDTO;
 import com.pzd.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {

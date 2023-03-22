@@ -1,20 +1,16 @@
-package com.pzd.services;
+package com.pzd.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pzd.DTO.CartDTO;
-import com.pzd.DTO.CategoryDTO;
-import com.pzd.DTO.ProductDTO;
 import com.pzd.entities.Cart;
 import com.pzd.entities.Product;
 import com.pzd.entities.User;
 import com.pzd.repository.CartRepository;
+import com.pzd.service.CartService;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -28,9 +24,7 @@ public class CartServiceImpl implements CartService {
 		ArrayList<Object[]> CartProducts = cartRepository.getAllCartItemsOfUser(userId);
 
 		ArrayList<HashMap<String, String>> listOfCartItems = new ArrayList<>();
-		
 
-		ArrayList<CartDTO> products = new ArrayList<>();
 		for (Object[] objects : CartProducts) {
 			HashMap<String, String> cartItems = new HashMap<>();
 			cartItems.put("productName", (String) objects[0]);
@@ -62,9 +56,10 @@ public class CartServiceImpl implements CartService {
 	public float getTotalCartPrice(int userId) {
 		ArrayList<Object[]> cartItems = cartRepository.getAllCartItemsOfUser(userId);
 		float totalPrice = 0;
-		
+
 		for (Object[] objects : cartItems) {
-			totalPrice = totalPrice + (Float.parseFloat(objects[2].toString()) *Integer.parseInt( objects[3].toString()));
+			totalPrice = totalPrice
+					+ (Float.parseFloat(objects[2].toString()) * Integer.parseInt(objects[3].toString()));
 		}
 		return totalPrice;
 	}
@@ -72,7 +67,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public void deleteProductFromCart(int userId, int productId) {
 
-		cartRepository.deleteProductFromCart(productId,userId);
+		cartRepository.deleteProductFromCart(productId, userId);
 
 	}
 

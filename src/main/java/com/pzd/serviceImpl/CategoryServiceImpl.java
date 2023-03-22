@@ -1,6 +1,5 @@
-package com.pzd.services;
+package com.pzd.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.pzd.DTO.CategoryDTO;
 import com.pzd.entities.Category;
 import com.pzd.repository.CategoryRepository;
+import com.pzd.service.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -38,6 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryList;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void deleteCategory(int id) {
 		categoryRepository.delete(categoryRepository.getById(id));

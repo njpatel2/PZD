@@ -5,27 +5,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pzd.DTO.CartDTO;
-import com.pzd.entities.Cart;
 import com.pzd.security.CustomUserDetails;
-import com.pzd.services.CartServiceImpl;
-import com.pzd.services.ProductServiceImpl;
+import com.pzd.serviceImpl.CartServiceImpl;
 
 @RestController
 @RequestMapping("/cart")
 public class CartController {
-
-	@Autowired
-	private ProductServiceImpl productServiceImpl;
 
 	@Autowired
 	private CartServiceImpl cartServiceImpl;
@@ -33,25 +25,21 @@ public class CartController {
 	@RequestMapping("/cart")
 	public ModelAndView adminMainPage() {
 		ModelAndView mv = new ModelAndView("Cart");
-		CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//		String userName = userDetails.getUsername();
-
-//		mv.addObject("userName", userName);
 		return mv;
 	}
-	
+
 	// get all cart items ,
 	// perameters : user id
 	// returns: cart
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/getAllCartItems")
 	@ResponseBody
 	public ArrayList<HashMap<String, String>> getAllCartItems() {
 
 //		HashMap<String, String> CartItems = new HashMap<>();
-ArrayList<HashMap<String, String>> CartItems = new ArrayList<>();
+		ArrayList<HashMap<String, String>> CartItems = new ArrayList<>();
 		try {
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			int userId = userDetails.getUserId();
 			CartItems = cartServiceImpl.getAllCartItemsOfUser(userId);
 		} catch (Exception e) {
@@ -68,10 +56,11 @@ ArrayList<HashMap<String, String>> CartItems = new ArrayList<>();
 	public void addToCart(@RequestBody Map<String, Object> payload) {
 
 		try {
-			int productId = Integer.parseInt(  (String) payload.get("productId"));
-			int quantity = Integer.parseInt(  (String) payload.get("quantity"));
+			int productId = Integer.parseInt((String) payload.get("productId"));
+			int quantity = Integer.parseInt((String) payload.get("quantity"));
 
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			int userId = userDetails.getUserId();
 
 			cartServiceImpl.addToCart(userId, productId, quantity);
@@ -88,7 +77,8 @@ ArrayList<HashMap<String, String>> CartItems = new ArrayList<>();
 	public float getTotalCartPrice() {
 		float totalPrice;
 		try {
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			int userId = userDetails.getUserId();
 			totalPrice = cartServiceImpl.getTotalCartPrice(userId);
 		} catch (Exception e) {
@@ -97,39 +87,40 @@ ArrayList<HashMap<String, String>> CartItems = new ArrayList<>();
 		return totalPrice;
 	}
 
-	//delete from cart
-	//product id ,user id
+	// delete from cart
+	// product id ,user id
 	@RequestMapping("/deleteProductFromCart")
 	@ResponseBody
 	public void deleteProductFromCart(@RequestBody Map<String, Object> payload) {
 
 		try {
-			int productId = Integer.parseInt(  (String) payload.get("productId"));
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			int productId = Integer.parseInt((String) payload.get("productId"));
+			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			int userId = userDetails.getUserId();
-			cartServiceImpl.deleteProductFromCart(userId,productId);
+			cartServiceImpl.deleteProductFromCart(userId, productId);
 		} catch (Exception e) {
 			throw e;
-		} 
+		}
 	}
-	
-	//update the quantity
+
+	// update the quantity
 	@RequestMapping("/updateCartProductQuantity")
 	@ResponseBody
 	public void updateCartProductQuantity(@RequestBody Map<String, Object> payload) {
 
 		try {
-			int productId = Integer.parseInt(  (String) payload.get("productId"));
-			int quantity = Integer.parseInt(  (String) payload.get("quantity"));
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			int productId = Integer.parseInt((String) payload.get("productId"));
+			int quantity = Integer.parseInt((String) payload.get("quantity"));
+			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			int userId = userDetails.getUserId();
-			cartServiceImpl.updateCartProductQuantity(userId,productId,quantity);
+			cartServiceImpl.updateCartProductQuantity(userId, productId, quantity);
 		} catch (Exception e) {
 			throw e;
-		} 
+		}
 	}
-	
-	
-	//checkout 
+
+	// checkout
 	//
 }

@@ -1,11 +1,9 @@
 package com.pzd.DTO;
 
-import com.pzd.entities.Category;
-
 public class ProductDTO {
 
 	private int pId;
-	
+
 	private String pName;
 	private String pDesc;
 	private String pPhoto;
@@ -14,7 +12,6 @@ public class ProductDTO {
 	private int pQuantity;
 	private CategoryDTO category;
 
-	
 	public ProductDTO(int pId, String pName, String pDesc, String pPhoto, float pPrice, float pDiscount, int pQuantity,
 			CategoryDTO category) {
 		super();

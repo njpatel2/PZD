@@ -1,12 +1,7 @@
-package com.pzd.services;
+package com.pzd.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import com.pzd.DTO.CartDTO;
-import com.pzd.entities.Cart;
 
 public interface CartService {
 	

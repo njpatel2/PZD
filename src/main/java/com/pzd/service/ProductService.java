@@ -1,11 +1,9 @@
-package com.pzd.services;
+package com.pzd.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.pzd.DTO.ProductDTO;
-import com.pzd.entities.Cart;
-import com.pzd.entities.Product;
 
 public interface ProductService {
 	

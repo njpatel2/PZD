@@ -1,7 +1,6 @@
 package com.pzd.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -10,7 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pzd.DTO.CategoryDTO;
 import com.pzd.DTO.ProductDTO;
-import com.pzd.services.CategoryServiceImpl;
-import com.pzd.services.ProductServiceImpl;
+import com.pzd.serviceImpl.CategoryServiceImpl;
+import com.pzd.serviceImpl.ProductServiceImpl;
 
 @RestController
 @RequestMapping("/admin")
@@ -62,6 +60,7 @@ public class AdminController {
 			productDTO.setCategory(categoryDTO);
 			productDTO.setpQuantity(pQuantity);
 
+			@SuppressWarnings("deprecation")
 			String path = request.getRealPath("images") + File.separator;
 			System.out.println(path);
 

@@ -1,10 +1,8 @@
-package com.pzd.services;
+package com.pzd.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.pzd.DTO.CategoryDTO;
-import com.pzd.entities.Category;
 
 public interface CategoryService {
 
