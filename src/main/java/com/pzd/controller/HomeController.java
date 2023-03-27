@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pzd.DTO.UserRegistrationDTO;
 import com.pzd.mail.EmailSenderService;
-import com.pzd.security.CustomUserDetails;
+import com.pzd.security.CustomUser;
 
 @RestController
 @RequestMapping("/")
@@ -44,6 +44,7 @@ public class HomeController {
 		successmsg = "";
 		return mv;
 	}
+	
 
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
@@ -72,9 +73,7 @@ public class HomeController {
 		try {
 			registrationDao.setPassword(passwordEncoder.encode(registrationDao.getPassword()));
 			System.out.println(registrationDao.getPassword());
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-			emails.sendSimpleEmail(userDetails.getUserEmail(),request);
+			emails.sendSimpleEmail(registrationDao.getEmail(),request);
 			userService.save(registrationDao);
 			successmsg = "Successfully registered";
 		} catch (Exception e) {
@@ -92,4 +91,20 @@ public class HomeController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping("/getRegistrationPage")
+	public ModelAndView getRegistrationPage() {
+		ModelAndView mv = new ModelAndView("reg");
+		return mv;
+	}
+	
+	/*
+	 * @RequestMapping("/user")
+	 * 
+	 * @ResponseBody public Principal user(Principal principal) { return principal;
+	 * }
+	 */
+
+	
+	
 }

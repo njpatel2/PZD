@@ -7,18 +7,40 @@ public class UserRegistrationDTO {
 	private String password;
 	private String role;
 	private int contactNumber;
-//	private boolean enabled;
+	private String provider;
+	private String address;
+	
+	
 
 	public UserRegistrationDTO() {
 	}
 
-	public UserRegistrationDTO(String name, String email, String password, String role, int contactNumber) {
+	public UserRegistrationDTO(String name, String email, String password, String role, int contactNumber, String address) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.role = role;
 		this.contactNumber = contactNumber;
+		this.address = address;
+	}
+	
+	
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getName() {
@@ -64,7 +86,9 @@ public class UserRegistrationDTO {
 	@Override
 	public String toString() {
 		return "UserRegistrationDTO [name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", contactNumber=" + contactNumber + "]";
+				+ ", contactNumber=" + contactNumber + ", provider=" + provider + ", address=" + address + "]";
 	}
+
+	
 
 }

@@ -5,14 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pzd.security.CustomUserDetails;
+import com.pzd.security.CustomUser;
 import com.pzd.serviceImpl.CartServiceImpl;
 
 @RestController
@@ -28,6 +30,8 @@ public class CartController {
 		return mv;
 	}
 
+	// on checkout place tha page to get the address. and save it to the databse.
+
 	// get all cart items ,
 	// perameters : user id
 	// returns: cart
@@ -35,13 +39,10 @@ public class CartController {
 	@ResponseBody
 	public ArrayList<HashMap<String, String>> getAllCartItems() {
 
-//		HashMap<String, String> CartItems = new HashMap<>();
 		ArrayList<HashMap<String, String>> CartItems = new ArrayList<>();
 		try {
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-			int userId = userDetails.getUserId();
-			CartItems = cartServiceImpl.getAllCartItemsOfUser(userId);
+			CartItems = cartServiceImpl.getAllCartItemsOfUser(
+					((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		} catch (Exception e) {
 			throw e;
 		}
@@ -59,11 +60,9 @@ public class CartController {
 			int productId = Integer.parseInt((String) payload.get("productId"));
 			int quantity = Integer.parseInt((String) payload.get("quantity"));
 
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-			int userId = userDetails.getUserId();
-
-			cartServiceImpl.addToCart(userId, productId, quantity);
+			cartServiceImpl.addToCart(
+					((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(),
+					productId, quantity);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -77,10 +76,10 @@ public class CartController {
 	public float getTotalCartPrice() {
 		float totalPrice;
 		try {
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-			int userId = userDetails.getUserId();
-			totalPrice = cartServiceImpl.getTotalCartPrice(userId);
+
+			totalPrice = cartServiceImpl.getTotalCartPrice(
+					((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
+
 		} catch (Exception e) {
 			throw e;
 		}
@@ -95,13 +94,13 @@ public class CartController {
 
 		try {
 			int productId = Integer.parseInt((String) payload.get("productId"));
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-			int userId = userDetails.getUserId();
-			cartServiceImpl.deleteProductFromCart(userId, productId);
+			cartServiceImpl.deleteProductFromCart(
+					((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(),
+					productId);
 		} catch (Exception e) {
 			throw e;
 		}
+
 	}
 
 	// update the quantity
@@ -112,10 +111,9 @@ public class CartController {
 		try {
 			int productId = Integer.parseInt((String) payload.get("productId"));
 			int quantity = Integer.parseInt((String) payload.get("quantity"));
-			CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-			int userId = userDetails.getUserId();
-			cartServiceImpl.updateCartProductQuantity(userId, productId, quantity);
+			cartServiceImpl.updateCartProductQuantity(
+					((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(),
+					productId, quantity);
 		} catch (Exception e) {
 			throw e;
 		}

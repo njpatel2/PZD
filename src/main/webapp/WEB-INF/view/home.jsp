@@ -19,61 +19,64 @@
 
 <script type="text/javascript" src="/js/home.js"></script>
 <script type="text/javascript" src="/js/Cart.js"></script>
-<script type="text/javascript"  src="/js/main.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
 <style>
 .quantity {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
 }
 
 .quantity input[type="number"] {
-  -moz-appearance: textfield;
-  margin: 0;
-  width: 40px;
-  font-size: 14px;
-  border: none;
-  text-align: center;
+	-moz-appearance: textfield;
+	margin: 0;
+	width: 40px;
+	font-size: 14px;
+	border: none;
+	text-align: center;
 }
 
 .quantity input[type="number"]:focus {
-  outline: none;
+	outline: none;
 }
 
 .quantity button {
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-  border-radius: 50%;
-  border: none;
-  color: #000;
-  font-weight: bold;
-  text-align: center;
-  font-size: 18px;
-  line-height: 1.5;
-  cursor: pointer;
-  margin: 0 10px;
-  transition: background-color 0.3s ease;
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
+	border-radius: 50%;
+	border: none;
+	color: #000;
+	font-weight: bold;
+	text-align: center;
+	font-size: 18px;
+	line-height: 1.5;
+	cursor: pointer;
+	margin: 0 10px;
+	transition: background-color 0.3s ease;
 }
 
 .quantity button:hover {
-  background-color: #ccc;
+	background-color: #ccc;
 }
 
 .product-image img {
-  max-width: 100%;
+	max-width: 100%;
 }
+
 .product-image {
-    text-align: center;
+	text-align: center;
 }
+
 .product-info {
-  text-align: center;
+	text-align: center;
 }
 
 .product-info h2 {
-  margin-top: 0;
+	margin-top: 0;
 }
+
 .modal-header .modal-title {
 	color: black;
 }
@@ -81,23 +84,37 @@
 .modal-body {
 	background-color: #101315;
 }
-.price {
-    float: right;
+
+.box-price {
+	float: right;
+	font-size: 1.25rem;
+	padding: 0.75rem 1.5rem;
+	line-height: 1.5;
+	color: #fac564;
+	transition: transform 0.2s ease-in-out; /* add transition effect */
+}
+
+.box-price:hover {
+	transform: scale(1.25); /* increase size by 10% */
 }
 
 .price {
-    font-size: 1.25rem;
-    padding: 0.75rem 1.5rem;
-    line-height: 1.5;
-} 
- .order-button{
-    font-size: 1.0rem;
-    padding: 0.75rem 1.5rem;
-    line-height: 0.7;
+	float: right;
+	font-size: 1.25rem;
+	padding: 0.75rem 1.5rem;
+	line-height: 1.5;
 }
+
+.order-button {
+	font-size: 1.0rem;
+	padding: 0.75rem 1.5rem;
+	line-height: 0.7;
+}
+
 .btn:hover {
 	transform: scale(1.2); /* increase the size of the button on hover */
 }
+
 .btn {
 	border-radius: 5px;
 	/* adjust the value to change the amount of rounding */
@@ -122,8 +139,8 @@
 		</div>
 		<div class="container-wrap" id="productsListParent">
 			<div class="row no-gutters d-flex" id="productsList">
-				
-			
+
+
 				<!--
 				<div class="col-lg-4 d-flex ftco-animate" id ="product1" onclick="showOrderItemPopUp()">
 					<div class="services-wrap d-flex">
@@ -354,44 +371,45 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<div class=" modal fade" id="orderItemModel" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true" onclick = "">
+		aria-hidden="true" onclick="">
 		<div class="modal-dialog modal-dialog-centered model-lg"
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header  ">
-					<h5 class="modal-title" id="orderItemModelTitle"> Add to Cart 
-					</h5>
+					<h5 class="modal-title" id="orderItemModelTitle">Add to Cart</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close" id="closeOrderItemModel">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-				<input type="hidden" name="productId">
-					<form id = "addCategoryForm">
+					<input type="hidden" name="productId">
+					<form id="addCategoryForm">
 						<div class="product-image">
-				  <img src="" alt="Product Image">
-				</div>
-				<div class="product-info">
-				  <h2>Product Name</h2>
-				  <p>Product Description</p>
-				  <label for="quantity">Quantity:</label>
-				  <div class="quantity">
-					<button class="minus-btn" type="button" name="button">-</button>
-					<input type="number" id="orderItemModelQuantity" name="quantity" min="1" value="1">
-					<button class="plus-btn" type="button" name="button">+</button>
-				  </div>
-				  </div>
+							<img src="" alt="Product Image">
+						</div>
+						<div class="product-info">
+							<h2>Product Name</h2>
+							<p>Product Description</p>
+							<label for="quantity">Quantity:</label>
+							<div class="quantity">
+								<button class="minus-btn" type="button" name="button">-</button>
+								<input type="number" id="orderItemModelQuantity" name="quantity"
+									min="1" value="1">
+								<button class="plus-btn" type="button" name="button">+</button>
+							</div>
+						</div>
 					</form>
 					<p class="price">
-								<span>$ 20 </span>
-								 <button class="ml-2 btn btn-white btn-outline-white order-button" onclick="addToCart(document.getElementById('orderItemModel').querySelector('input[name=\'productId\']').textContent)">
-								 Add to Cart</button>
+						<span>$ 20 </span>
+						<button class="ml-2 btn btn-white btn-outline-white order-button"
+							onclick="addToCart(document.getElementById('orderItemModel').querySelector('input[name=\'productId\']').textContent)">
+							Add to Cart</button>
 
-							</p>
+					</p>
 				</div>
 
 			</div>

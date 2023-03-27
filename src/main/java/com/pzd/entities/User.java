@@ -7,10 +7,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties.Provider;
 
 
 @Entity(name ="Users")
@@ -20,7 +24,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(unique = true)
+	@Column
 	private String name;
 	
 	@Column(unique = true)
@@ -34,9 +38,30 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Cart> cart = new ArrayList<>();
 
+	private String provider;
+	
+	private String address;
 	
 	
-	User(){};
+ 
+    public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getProvider() {
+        return provider;
+    }
+ 
+    public void setProvider(String string) {
+        this.provider = string;
+    }
+	
+	
+	public User(){};
 	
 	
 	
@@ -54,16 +79,16 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.role = role;
-//		this.enabled = enabled;
 	}
 
-	public User(String name, String email, String password, String role, int contactNumber) {
+	public User(String name, String email, String password, String role, int contactNumber, String address) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.role = role;
 		this.contactNumber = contactNumber;
+		this.address = address;
 	}
 
 	
@@ -136,8 +161,11 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ ", contactNumber=" + contactNumber + ", cart=" + cart + "]";
+				+ ", contactNumber=" + contactNumber + ", cart=" + cart + ", provider=" + provider + ", address="
+				+ address + "]";
 	}
+
+	
 
 	
 	

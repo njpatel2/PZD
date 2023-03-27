@@ -270,10 +270,11 @@ AOS.init({
 				description.textContent = productList[i].pDesc;
 
 				// create the p element for the price and order button
-				var priceOrder = document.createElement("p");
-				priceOrder.classList.add("price");
+				/*var priceOrder = document.createElement("p");
+				priceOrder.classList.add("box-price");*/
 
 				var price = document.createElement("span");
+				price.classList.add("box-price");
 				price.textContent = '$ ' + productList[i].pPrice +'  ';
 
 				/*var orderButton = document.createElement("a");
@@ -284,12 +285,12 @@ AOS.init({
 				orderButton.textContent = "Order";*/
 
 				// append the elements to the parent elements
-				priceOrder.appendChild(price);
+				//priceOrder.appendChild(price);
 				/*priceOrder.appendChild(orderButton);*/
 
 				textDiv.appendChild(pizzaName);
 				textDiv.appendChild(description);
-				textDiv.appendChild(priceOrder);
+				textDiv.appendChild(price);
 
 				innerDiv.appendChild(anchor);
 				innerDiv.appendChild(textDiv);

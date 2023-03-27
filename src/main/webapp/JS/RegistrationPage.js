@@ -8,16 +8,19 @@ function sendDataToController() {
 	debugger;
 
 var sus = null;
+var email= $("#email").val();
+	var	password= $("#password").val();
+	var	role= $("#role").val();
+
 	$.ajax({
 		type: "POST",
 		url: "/registration",
 		async: false,
 		data: JSON.stringify({
-			name: $("#username").val(),
-			password: $("#password").val(),
+			name: $("#name").val(),
 			email: $("#email").val(),
+			password: $("#password").val(),
 			role: $("#role").val(),
-			contactNumber: $("#contactNumber").val()
 		}),
 		contentType: "application/json",
 		success: function(data) {

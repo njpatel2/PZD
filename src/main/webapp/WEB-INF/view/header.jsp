@@ -83,7 +83,9 @@
 					</c:if>
 					<li class="nav-item"><a href="/cart/cart"><img class="hover-effect"
 							src="/gif/cart.png" width="60px"></img><span id="totalBill" class="hover-effect">0.00 $</span></a></li>
-					<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+					<li class="nav-item"><a href="/user/getProfile" class="nav-link hover-effect">Profile</a></li>
+					<li class="nav-item"><a href="/logout" class="nav-link hover-effect">Logout</a></li>
+					
 			</ul>
 
 			</div>

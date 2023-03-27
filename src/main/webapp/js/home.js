@@ -15,7 +15,7 @@ function showOrderItemPopUp(selectedProduct) {
 	var imgURL = selectedProduct.querySelector(".img").style.backgroundImage;
 	const productName = selectedProduct.querySelector("h3").textContent;
 	const productDescription = selectedProduct.querySelector("p:nth-of-type(1)").textContent;
-	const productPrice = selectedProduct.querySelector(".price span").textContent;
+	const productPrice = selectedProduct.querySelector(".box-price").textContent;
 
 	imgURL = imgURL.replace('url("', '').replace('")', '');
 	console.log(imgURL); // Output: /images/pizza-1.jpg
