@@ -6,7 +6,7 @@ public class UserRegistrationDTO {
 	private String email;
 	private String password;
 	private String role;
-	private int contactNumber;
+	private long contactNumber;
 	private String provider;
 	private String address;
 	
@@ -15,7 +15,7 @@ public class UserRegistrationDTO {
 	public UserRegistrationDTO() {
 	}
 
-	public UserRegistrationDTO(String name, String email, String password, String role, int contactNumber, String address) {
+	public UserRegistrationDTO(String name, String email, String password, String role, long contactNumber, String address) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -75,11 +75,11 @@ public class UserRegistrationDTO {
 		this.role = role;
 	}
 
-	public int getContactNumber() {
+	public long getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 

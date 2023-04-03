@@ -4,6 +4,7 @@
 
 $(document).ready(function() {
 	debugger;
+	getCountOfCustomerProductCategory();
 });
 
 //get list of category(id,name)
@@ -40,6 +41,51 @@ function addCategory() {
 	document.getElementById("addCategoryForm").reset();
 	//debugger;
 	$('#addCategoryModel').modal('show');
+}
+
+function doAjaxCall(callUrl, callType, callData) {
+	debugger;
+	var returnData;
+	$.ajax({
+		type: callType,
+		url: callUrl,
+		async: false,
+		data: callData,
+		contentType: "application/json",
+		success: function(data) {
+			returnData = data;
+			debugger;
+
+		},
+		error: function(e) {
+			console.log(e);
+		},
+		done: function(e) {
+			console.log("DONE");
+		}
+	});
+	/*event.preventDefault();*/
+	debugger;
+	return returnData;
+}
+
+
+function getCountOfCustomerProductCategory()
+{
+	var sendData = JSON.stringify();
+	var result = doAjaxCall('/admin/getCountOfCustomerProductCategory', 'GET', sendData);
+	document.getElementById("userCount").innerHTML = result.userCount;
+	document.getElementById("productCount").innerHTML = result.productCount;
+	document.getElementById("categoryCount").innerHTML = result.categoryCount;
+	
+}
+
+function getCustomerList()
+{
+	var sendData = JSON.stringify();
+	var result = doAjaxCall('/admin/getCustomerList', 'GET', sendData);
+	
+
 }
 function addCategoryToDatabase() {
 	debugger;

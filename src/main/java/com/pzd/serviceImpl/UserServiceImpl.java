@@ -145,7 +145,7 @@ public class UserServiceImpl extends DefaultOAuth2UserService implements UserSer
 		
 		userDetails.put("name", user.getName());
 		userDetails.put("email", user.getEmail());
-		userDetails.put("contact", Integer.toString(user.getContactNumber()));
+		userDetails.put("contact", Long.toString(user.getContactNumber()));
 		userDetails.put("address", user.getAddress());
 		userDetails.put("itemsInCart", Integer.toString(user.getCart().size()));
 		
@@ -153,8 +153,35 @@ public class UserServiceImpl extends DefaultOAuth2UserService implements UserSer
 	}
 
 	@Override
-	public void updateUserByUserEmail(String email,String name,int contact, String address) {
+	public void updateUserByUserEmail(String email,String name,long contact, String address) {
 		userRepository.updateUserByEmail(email, name, contact, address);
 	}
 
+	@Override
+	public int getCustomerCount() {
+		
+//		userRepository.getCustomerCount();
+		return userRepository.getCustomerCount();
+	}
+
+	@Override
+	public ArrayList<String> getCustomerList() {
+		ArrayList<String> userList = null;
+		
+		userList = userRepository.getCustomerNameList();
+		return userList;
+	}
+	@Override
+	public HashMap<String,Integer> getCountOfCustomerProductCategory() {
+		
+		String result = userRepository.getCountOfCustomerProductCategory();
+		String[] spillteResult = result.split(",");
+		HashMap<String, Integer> hmap = new HashMap<>();
+		
+		hmap.put("userCount", Integer.parseInt(spillteResult[0]));
+		hmap.put("productCount", Integer.parseInt(spillteResult[1]));
+		hmap.put("categoryCount", Integer.parseInt(spillteResult[2]));
+		
+		return hmap;
+	}
 }

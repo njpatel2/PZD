@@ -52,7 +52,27 @@ function getAllCartItems() {
 		// Create a table row element
 		var tableRow = document.createElement("tr");
 		tableRow.classList.add("on-hover-change-color");
-		tableRow.id = 'product'+result[i].productId;
+		tableRow.id = 'product' + result[i].productId;
+
+
+
+		var pImage = document.createElement("td");
+		pImage.setAttribute("data-th", "image");
+
+		// Create a column div element for the product image
+		var imageDiv = document.createElement("div");
+		/*imageDiv.classList.add("col-sm-3", "box", "box2", "text-left");*/
+
+		var productImage = document.createElement("img");
+		productImage.setAttribute("src", "/images/" + result[i].productImage);
+		productImage.setAttribute("alt", "");
+		productImage.classList.add("img-fluid", "d-none", "d-md-block", "rounded", "mb-2", "shadow", "custom-img-size");
+
+
+		imageDiv.appendChild(productImage);
+		pImage.appendChild(imageDiv);
+
+
 
 		// Create a table data element for the product information
 		var productData = document.createElement("td");
@@ -62,21 +82,11 @@ function getAllCartItems() {
 		var rowDiv = document.createElement("div");
 		rowDiv.classList.add("row");
 
-		// Create a column div element for the product image
-		var imageDiv = document.createElement("div");
-		imageDiv.classList.add("col-sm-3", "box", "box2", "text-left");
 
-		// Create an image element for the product image
-		var image = document.createElement("img");
-		image.setAttribute("src", "/images/" + result[i].productImage);
-		image.setAttribute("alt", "");
-		image.classList.add("img-fluid", "d-none", "d-md-block", "rounded", "mb-2", "shadow");
-
-		// Add the image element to the image div
-		imageDiv.appendChild(image);
 
 		// Create a column div element for the product name
 		var nameDiv = document.createElement("div");
+		/*nameDiv.classList.add("col-md-9", "text-left", "mt-sm-2","d-flex","align-items-center");*/
 		nameDiv.classList.add("col-md-9", "text-left", "mt-sm-2");
 
 		// Create a heading element for the product name
@@ -93,20 +103,62 @@ function getAllCartItems() {
 		productIdInput.setAttribute("value", result[i].productId);
 
 		// Add the image div, name div, and product ID input to the row div
-		rowDiv.appendChild(imageDiv);
+		/*rowDiv.appendChild(imageDiv);*/
 		rowDiv.appendChild(nameDiv);
 		rowDiv.appendChild(productIdInput);
 
 		// Add the row div to the product data element
 		productData.appendChild(rowDiv);
-		tableRow.appendChild(productData);
+		
 		// Create a table data element for the product price
-		var priceData = document.createElement("td");
+		/*var priceData = document.createElement("td");
 		priceData.setAttribute("data-th", "Price");
 		priceData.style.color = "#fff";
 		priceData.textContent = '$' + result[i].productPrice;
-		tableRow.appendChild(priceData);
-		// Create a table data element for the product quantity
+		tableRow.appendChild(priceData);*/
+
+		// create the table cell element
+		var tableCell = document.createElement("td");
+		tableCell.setAttribute("data-th", "Price");
+		tableCell.setAttribute("style", "color: white;");
+
+		// create the price span element
+		const priceSpan = document.createElement("span");
+		priceSpan.classList.add("mr-2", "text-center", "white-text");
+		priceSpan.innerText = "$492.00";
+
+		// create the input container div
+		const inputContainer = document.createElement("div");
+		inputContainer.classList.add("d-flex", "align-items-center", "flex-wrap", "input-container");
+
+		// create the input element
+		const inputElement = document.createElement("input");
+		inputElement.setAttribute("type", "text");
+		inputElement.setAttribute("class", "form-control form-control-sm text-center mb-2");
+		inputElement.setAttribute("name", "quantity");
+		inputElement.setAttribute("value", "1");
+		inputElement.setAttribute("required", "required");
+		inputElement.setAttribute("min", "1");
+		inputElement.setAttribute("onchange", "updateCartProductQuantity()");
+		inputElement.setAttribute("id", "quantity-input");
+
+		// create the delete button element
+
+
+		// add the input element and the delete button to the input container div
+		inputContainer.appendChild(inputElement);
+		/*inputContainer.appendChild(deleteButton);*/
+
+		// add the price span element and the input container div to the table cell
+		tableCell.appendChild(priceSpan);
+		tableCell.appendChild(inputContainer);
+
+		// add the table cell to the table row or table body element
+		// e.g., let tableRow = document.createElement("tr"); tableRow.appendChild(tableCell);
+		// or, let tableBody = document.createElement("tbody"); tableBody.appendChild(tableRow);
+
+
+		/*// Create a table data element for the product quantity
 		var quantityData = document.createElement("td");
 		quantityData.setAttribute("data-th", "Quantity");
 		quantityData.style.color = "#fff";
@@ -143,8 +195,38 @@ function getAllCartItems() {
 		deleteButton.innerHTML = '<i class="fa fa-trash-o" style="font-size: 31px; color: red;"></i>';
 
 		actionsDiv.appendChild(deleteButton);
-		actionsData.appendChild(actionsDiv);
-		tableRow.appendChild(actionsData);
+		actionsData.appendChild(actionsDiv);*/
+
+		var delbtn = document.createElement("td");
+		delbtn.setAttribute("class", "delbtn");
+
+		const deleteButton = document.createElement("button");
+		deleteButton.setAttribute("class", "btn btn-white border-secondary bg-white btn-md mb-2 ml-md-auto rounded");
+		deleteButton.setAttribute("onclick", "deleteProductFromCart(this)");
+
+		const deleteIcon = document.createElement("i");
+		deleteIcon.setAttribute("class", "fa fa-trash-o");
+		deleteIcon.setAttribute("style", "font-size: 24px; color: red;");
+
+		deleteButton.appendChild(deleteIcon);
+		delbtn.appendChild(deleteButton);
+
+		var subTotal = document.createElement("td");
+		subTotal.setAttribute("data-th", "subTotal");
+
+		// Create a row div element for the product information
+		const subTotalValue = document.createElement("span");
+		subTotalValue.classList.add( "text-right", "white-text");
+		subTotalValue.innerText = "$492.00";
+
+		subTotal.appendChild(subTotalValue);
+		
+		tableRow.appendChild(pImage);
+		tableRow.appendChild(productData);
+		tableRow.appendChild(tableCell);
+		tableRow.appendChild(delbtn);
+		tableRow.appendChild(subTotal);
+		/*tableRow.appendChild(actionsData);*/
 		/*mainContainer.appendChild(tableRow);*/
 		document.getElementById('cartItemsDiv').appendChild(tableRow);
 	}
@@ -170,10 +252,10 @@ function addToCart(productId) {
 	inputFields.forEach((input) => {
 		input.value = '';
 	});
-	document.getElementById("closeOrderItemModel").click();	
-	
+	document.getElementById("closeOrderItemModel").click();
+
 	document.getElementById('orderItemModelQuantity').value = '1';
-	
+
 	/*$('#orderItemModel').modal('hide');*/
 	getTotalCartPrice();
 }
@@ -203,7 +285,7 @@ function deleteProductFromCart(productId) {
 
 function updateCartProductQuantity(productId) {
 	debugger;
-	var quantity = document.getElementById("product"+productId).children[2].querySelector("input[name='productQuantity']").value;
+	var quantity = document.getElementById("product" + productId).children[2].querySelector("input[name='productQuantity']").value;
 
 	var sendData = JSON.stringify({
 		productId: productId,

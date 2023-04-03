@@ -3,6 +3,7 @@ package com.pzd.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import com.pzd.DTO.CategoryDTO;
 import com.pzd.DTO.ProductDTO;
 import com.pzd.serviceImpl.CategoryServiceImpl;
 import com.pzd.serviceImpl.ProductServiceImpl;
+import com.pzd.serviceImpl.UserServiceImpl;
 
 @RestController
 @RequestMapping("/admin")
@@ -31,6 +33,9 @@ public class AdminController {
 
 	@Autowired
 	private CategoryServiceImpl categoryServiceImpl;
+	
+	@Autowired
+	private UserServiceImpl userServiceImpl;
 	
 	@RequestMapping("/admin")
 	public ModelAndView adminMainPage() {
@@ -138,5 +143,31 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		return categoryList;
+	}
+	
+	@RequestMapping("/getCustomerList")
+	@ResponseBody
+	public ArrayList<String>  getCustomerList() {
+		ArrayList<String> customerList = null;
+		try {
+			customerList = userServiceImpl.getCustomerList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return customerList;
+	}
+	
+	@RequestMapping("/getCountOfCustomerProductCategory")
+	@ResponseBody
+	public HashMap<String, Integer> getCountOfCustomerProductCategory() {
+		HashMap<String, Integer> systemDetails = null;
+		try {
+			systemDetails = userServiceImpl.getCountOfCustomerProductCategory();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return systemDetails;
 	}
 }

@@ -33,7 +33,7 @@ public class User {
 	
 	private String role;
 	
-	private int contactNumber;
+	private long contactNumber;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Cart> cart = new ArrayList<>();
@@ -81,7 +81,7 @@ public class User {
 		this.role = role;
 	}
 
-	public User(String name, String email, String password, String role, int contactNumber, String address) {
+	public User(String name, String email, String password, String role, long contactNumber, String address) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -92,7 +92,7 @@ public class User {
 	}
 
 	
-	public User(String name, String email, String password, String role, int contactNumber, List<Cart> cart) {
+	public User(String name, String email, String password, String role, long contactNumber, List<Cart> cart) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -142,11 +142,11 @@ public class User {
 		this.role = role;
 	}
 
-	public int getContactNumber() {
+	public long getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 

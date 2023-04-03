@@ -18,6 +18,13 @@ public interface UserService {
 
 	public HashMap<String, String> getUserProfileDetails(String email);
 
-	public void updateUserByUserEmail(String email, String name, int contact, String address); 
+	public void updateUserByUserEmail(String email, String name, long contact, String address);
+
+	int getCustomerCount();
+
+	ArrayList<String> getCustomerList();
+
+	HashMap<String, Integer> getCountOfCustomerProductCategory();
+
 
 }

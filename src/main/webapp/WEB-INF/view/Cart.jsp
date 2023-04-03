@@ -18,6 +18,9 @@
  <script type="text/javascript" src="/js/Cart.js"></script>
 <%@include file="header.jsp"%>
 <style>
+.white-text {
+  color: white;
+}
 table {
 	border-collapse: separate;
 	border-spacing: 0px 15px;
@@ -29,7 +32,7 @@ table th, table td {
 	/* border: 1px solid white; */
 	padding: 10px;
 	text-align: left;
-	color: #fff;
+	color: white;
 }
 
 table th {
@@ -40,15 +43,21 @@ table th {
 
 td[data-th="Price"] {
 	font-size: 25px;
+	color : white !important;
+	    text-align: center;
 }
-
+td[data-th="subTotal"] {
+	font-size: 25px;
+	color : white !important;
+	    text-align: right;
+}
 input[type="text"] {
 	background-color: #313a40 !important;
 }
 
 .font-style-for-cart {
-	color: #fff;
-	font-size: 25px !important;
+	color: white !important;
+	font-size: 23px !important;
 }
 
 tr:hover {
@@ -87,6 +96,25 @@ tr:hover {
 .box2 img {
 	object-fit: contain;
 }
+#quantity-input {
+  width: 90px;
+  height: 45px !important;
+}
+.delbtn {
+  padding-top: 59px !important;
+}
+ .input-container {
+        display: flex !important;
+        align-items: center;
+    }
+
+    .input-container input {
+        margin-right: 5px; /* add some space on the right side of the input box */
+    }
+.custom-img-size {
+  max-width: 100%;
+  height: auto;
+}
 </style>
 </head>
 <body>
@@ -108,11 +136,13 @@ tr:hover {
 						class="table table-condensed table-responsive">
 						<thead>
 							<tr>
+							<th class=" font-style-for-cart" style="width: 15%;"></th>
 								<th class=" font-style-for-cart"
-									style="width: 60%; padding-left: 139px;">Product</th>
-								<th class=" font-style-for-cart" style="width: 12%;">Price</th>
-								<th class=" font-style-for-cart" style="width: 10%">Quantity</th>
-								<th class=" font-style-for-cart" style="width: 16%"></th>
+									style="width: 50%;">Product</th>
+									
+								<th class=" font-style-for-cart" style="width: 10%;">Price</th>
+								<th class=" font-style-for-cart" style="width: 2%;"></th>
+								<th class=" font-style-for-cart" style="width: 23% ; text-align: right;">Sub Total</th>
 							</tr>
 
 						</thead>
@@ -132,11 +162,17 @@ tr:hover {
 										<input type="hidden" name="productId">
 									</div>
 								</td>
-								<td data-th="Price" style="color: #fff;">$49.00</td>
-								<td data-th="Quantity" style="color: #fff;"><input
+								<td data-th="Price" style="color: #fff;">$49.00<br/>
+								<input
 									type="text" class="form-control form-control-sm text-center"
 									name="quantity" value="1" required min="1"
-									onchange="updateCartProductQuantity()"></td>
+									onchange="updateCartProductQuantity()">
+									<div class="text-center">
+										<button
+											class="btn btn-white border-secondary bg-white btn-md mb-2 rounded" onclick="deleteProductFromCart(this)">
+											<i class="fa fa-trash-o" style="font-size: 31px; color: red;"></i>
+										</button>
+									</div></td> 
 								<td class="actions" data-th="">
 									<div class="text-center">
 										<button
@@ -145,18 +181,48 @@ tr:hover {
 										</button>
 									</div>
 								</td>
-							</tr> -->
+							</tr> 
+							<tr class="on-hover-change-color">
+  <td data-th="Product">
+    <div class="row">
+      <div class="col-sm-2 box box2 text-left">
+        <img src="/images/pizza-1.jpg" alt=""
+          class="img-fluid d-none d-md-block rounded mb-2 shadow">
+      </div>
+      <div class="col-md-9 text-left mt-sm-2">
+        <h4>Product Name</h4>
+      </div>
+      <input type="hidden" name="productId">
+    </div>
+  </td>
+  <td data-th="Price" style="color: #fff;">	
+    <span class="mr-2 center">$492.00</span>
+
+    <div class="d-flex align-items-center flex-wrap input-container">
+      <input type="text" class="form-control form-control-sm text-center mb-2"
+        name="quantity" value="1" required min="1" onchange="updateCartProductQuantity()" id="quantity-input">
+      <button class="btn btn-white border-secondary bg-white btn-md mb-2 ml-md-auto rounded" onclick="deleteProductFromCart(this)">
+        <i class="fa fa-trash-o" style="font-size: 24px; color: red;"></i>
+      </button>
+    </div>
+    </td>
+ 
+</tr>
+				 -->			
 						</tbody>
 					</table>
 					<div class="float-right text-right">
-						<h4>Total:</h4>
-						<h1 id="totalPriceOfCart">$ 99.00</h1>
+						<!-- <h4>Total:</h4><h1 id="totalPriceOfCart">$ 99.00</h1> -->
+						<h4 style="display: inline-block;">Total : </h4>
+						<span> </span>
+						<h1 id="totalPriceOfCart" style="display: inline-block; margin-left: 10px;">$ 99.00</h1>
+						
 					</div>
 				</div>
 			</div>
 			<div class="row mt-4 d-flex align-items-center">
 				<div class="col-sm-6 order-md-2 text-right">
-					<a href="/cart/order" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
+					<a href="/cart/order" class="btn btn-primary mb-4 btn-lg pl-5 pr-5" style="    margin-right: 39px;">Checkout</a>
 				</div>
 				<div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
 					<a href="/home"> <i class="fas fa-arrow-left mr-2"></i>

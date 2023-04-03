@@ -65,7 +65,7 @@ public class UserController {
 		try {
 			String name = (String) payload.get("name");
 			String email = (String) payload.get("email");
-			int contact = Integer.parseInt((String) payload.get("contact"));
+			Long contact = Long.parseLong((String) payload.get("contact"));
 
 			String address = (String) payload.get("address");
 

@@ -18,9 +18,11 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
 	rel="stylesheet" />
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <%@include file="header.jsp"%>
+<script type="text/javascript" src="/js/Cart.js"></script>
 <script type="text/javascript" src="/js/admin.js"></script>
 <style>
 .col-md-4 {
@@ -51,6 +53,8 @@ body {
 
 .card:hover {
 	background-color: #1f2529;
+	transition: all 0.2s ease-in-out;
+	transform: scale(1.15);
 }
 
 .modal-header .modal-title {
@@ -87,43 +91,70 @@ body {
 	<div class="container mt-3">
 		<h1>Dashboard</h1>
 		<div class="row">
-			<div class=" col-lg-3 col-md-4 ftco-animate text-center"
-				onclick="myFunction()">
+			<!-- <div class=" col-lg-3 col-md-4 ftco-animate text-center"
+				onclick="getCustomerList()">
 				<div class="card">
 					<div class="card-body">
 						<div>
 							<img src="/gif/user.gif" alt="Animated GIF" style="width: 50px;">
 						</div>
 						<h5 class="card-title">Customers</h5>
-						<p class="card-text">50</p>
+						<p class="card-text" id="userCount">50</p>
 						<a href="#" class="btn btn-primary">View</a>
 					</div>
 				</div>
-			</div>
-			<div class=" col-lg-3 col-md-4 ftco-animate text-center"
-				onclick="myFunction()">
-				<div class="card">
+			</div> -->
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12 ftco-animate"
+				onclick="getCustomerList()">
+				<div class="card rounded-lg">
 					<div class="card-body">
-						<h5 class="card-title">Products</h5>
-						<p class="card-text">100</p>
-						<a href="#" class="btn btn-primary">View</a>
-					</div>
-				</div>
-			</div>
-			<div class=" col-lg-3 col-md-4 ftco-animate text-center"
-				onclick="myFunction()">
-				<div class="card">
-					<div class="card-body">
-						<div>
-							<img src="/gif/category.gif" alt="Animated GIF"
-								style="width: 50px;">
+						<div class="text-center">
+							<img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom">
 						</div>
-						<h5 class="card-title">Categories</h5>
-						<p class="card-text">20</p>
-						<a href="#" class="btn btn-primary">View</a>
+						<h5 class="card-title text-center mt-3">Customers</h5>
+						<p class="card-text text-center" id="userCount">50</p>
+						<div class="text-center">
+							<a href="#" class="btn btn-primary rounded-pill mt-3"
+								style="background-color: transparent; color: #f9a825;">View</a>
+						</div>
 					</div>
 				</div>
 			</div>
+
+<div class="col-lg-3 col-md-4 col-sm-6 col-12 ftco-animate"
+				onclick="myFunction()">
+				<div class="card rounded-lg">
+					<div class="card-body">
+						<div class="text-center">
+							<img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom">
+						</div>
+						<h5 class="card-title text-center mt-3">Products</h5>
+						<p class="card-text text-center" id="productCount">50</p>
+						<div class="text-center">
+							<a href="#" class="btn btn-primary rounded-pill mt-3"
+								style="background-color: transparent; color: #f9a825;">View</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12 ftco-animate"
+				onclick="myFunction()">
+				<div class="card rounded-lg">
+					<div class="card-body">
+						<div class="text-center">
+							<img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom">
+						</div>
+						<h5 class="card-title text-center mt-3">Categories</h5>
+						<p class="card-text text-center" id="categoryCount">50</p>
+						<div class="text-center">
+							<a href="#" class="btn btn-primary rounded-pill mt-3"
+								style="background-color: transparent; color: #f9a825;">View</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
 			<div class=" col-lg-5 col-md-4 ftco-animate text-center"
 				onclick="addProduct()">
 				<div class="card">
@@ -152,7 +183,7 @@ body {
 			</div>
 			<div class=" col-lg-5 col-md-4 ftco-animate text-center"
 				onclick="addCategory()">
-				<div class="card" >
+				<div class="card">
 					<div class="card-body">
 						<div>
 							<img src="/gif/add-product.gif" alt="Animated GIF"
@@ -179,7 +210,7 @@ body {
 		</div>
 	</div>
 	<!-- add category model start -->
-	
+
 	<div class="modal fade" id="addCategoryModel" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
 		aria-hidden="true">
@@ -195,7 +226,7 @@ body {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id = "addCategoryForm">
+					<form id="addCategoryForm">
 						<div class="form-group">
 							<label for="categoryName">Category Name</label> <input
 								type="text" class="form-control" id="categoryName"
@@ -219,7 +250,7 @@ body {
 			</div>
 		</div>
 	</div>
-	
+
 	<!--  add category model end -->
 
 	<!-- add product model start -->
@@ -238,12 +269,10 @@ body {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id = "addProductForm">
+					<form id="addProductForm">
 						<div class="form">
 							<label for="category">Choose a Category of Product:</label>
-							<div id="listOfCategories">
-							
-							</div>
+							<div id="listOfCategories"></div>
 						</div>
 						<br>
 						<div class="form-group">
@@ -289,9 +318,9 @@ body {
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- add product model end -->
-	
+
 	<!-- delete category start -->
 	<div class="modal fade" id="removeCategoryModel" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -300,16 +329,16 @@ body {
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header  ">
-					<h5 class="modal-title" id="removeCategoryModelTitle">Remove Category</h5>
+					<h5 class="modal-title" id="removeCategoryModelTitle">Remove
+						Category</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id = "removeCategoryForm">
-						<div id = "CategoryListContainer">
-						  </div>				
+					<form id="removeCategoryForm">
+						<div id="CategoryListContainer"></div>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary"
@@ -323,7 +352,7 @@ body {
 		</div>
 	</div>
 	<!-- delete category end -->
-	
+
 	<!-- delete product start -->
 	<div class="modal fade" id="removeProductModel" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -332,20 +361,19 @@ body {
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header  ">
-					<h5 class="modal-title" id="removeProductModelTitle">Remove Product</h5>
+					<h5 class="modal-title" id="removeProductModelTitle">Remove
+						Product</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id = "removeProductForm">
-						<div id = "listOfCategoriesToRemoveProduct">
-						  </div>	
-						
-						  <div id = "listOfProducts">
-						  </div>	
-						   <br/>			
+					<form id="removeProductForm">
+						<div id="listOfCategoriesToRemoveProduct"></div>
+
+						<div id="listOfProducts"></div>
+						<br />
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-primary"
@@ -359,9 +387,9 @@ body {
 		</div>
 	</div>
 	<!-- delete product end -->
-	
-	
-	
+
+
+
 	<%@include file="footer.jsp"%>
 
 
