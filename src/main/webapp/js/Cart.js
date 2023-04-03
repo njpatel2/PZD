@@ -103,19 +103,11 @@ function getAllCartItems() {
 		productIdInput.setAttribute("value", result[i].productId);
 
 		// Add the image div, name div, and product ID input to the row div
-		/*rowDiv.appendChild(imageDiv);*/
 		rowDiv.appendChild(nameDiv);
 		rowDiv.appendChild(productIdInput);
 
 		// Add the row div to the product data element
 		productData.appendChild(rowDiv);
-		
-		// Create a table data element for the product price
-		/*var priceData = document.createElement("td");
-		priceData.setAttribute("data-th", "Price");
-		priceData.style.color = "#fff";
-		priceData.textContent = '$' + result[i].productPrice;
-		tableRow.appendChild(priceData);*/
 
 		// create the table cell element
 		var tableCell = document.createElement("td");
@@ -125,7 +117,7 @@ function getAllCartItems() {
 		// create the price span element
 		const priceSpan = document.createElement("span");
 		priceSpan.classList.add("mr-2", "text-center", "white-text");
-		priceSpan.innerText = "$492.00";
+		priceSpan.innerText = '$' + (result[i].productPrice*1).toFixed(2);
 
 		// create the input container div
 		const inputContainer = document.createElement("div");
@@ -136,14 +128,11 @@ function getAllCartItems() {
 		inputElement.setAttribute("type", "text");
 		inputElement.setAttribute("class", "form-control form-control-sm text-center mb-2");
 		inputElement.setAttribute("name", "quantity");
-		inputElement.setAttribute("value", "1");
+		inputElement.setAttribute("value", result[i].productQuantity);
 		inputElement.setAttribute("required", "required");
 		inputElement.setAttribute("min", "1");
-		inputElement.setAttribute("onchange", "updateCartProductQuantity()");
+		inputElement.setAttribute("onchange", "updateCartProductQuantity(" + result[i].productId +','+ result[i].productPrice+ ")");
 		inputElement.setAttribute("id", "quantity-input");
-
-		// create the delete button element
-
 
 		// add the input element and the delete button to the input container div
 		inputContainer.appendChild(inputElement);
@@ -153,56 +142,13 @@ function getAllCartItems() {
 		tableCell.appendChild(priceSpan);
 		tableCell.appendChild(inputContainer);
 
-		// add the table cell to the table row or table body element
-		// e.g., let tableRow = document.createElement("tr"); tableRow.appendChild(tableCell);
-		// or, let tableBody = document.createElement("tbody"); tableBody.appendChild(tableRow);
-
-
-		/*// Create a table data element for the product quantity
-		var quantityData = document.createElement("td");
-		quantityData.setAttribute("data-th", "Quantity");
-		quantityData.style.color = "#fff";
-
-		// Create a quantity input element
-		var quantityInput = document.createElement("input");
-		quantityInput.setAttribute("type", "text");
-		quantityInput.setAttribute("id",result[i].productId);
-		quantityInput.setAttribute("name", "productQuantity");
-		quantityInput.setAttribute("value", result[i].productQuantity);
-		quantityInput.setAttribute("required", "true");
-		quantityInput.setAttribute("min", "1");
-		quantityInput.setAttribute("class", "form-control form-control-sm text-center");
-		quantityInput.setAttribute("onchange", "updateCartProductQuantity(this.id)");
-
-		// Add the quantity input element to the quantity data element
-		quantityData.appendChild(quantityInput);
-		tableRow.appendChild(quantityData);
-		// Create a table data element for the product actions
-		var actionsData = document.createElement("td");
-		actionsData.setAttribute("data-th", "");
-		actionsData.classList.add("actions");
-
-		// Create a div element for the product actions
-		var actionsDiv = document.createElement("div");
-		actionsDiv.classList.add("text-center");
-
-		// Create a button element for deleting the product from the cart
-		var deleteButton = document.createElement("button");
-		deleteButton.setAttribute("type", "button");
-		deleteButton.setAttribute("id", result[i].productId);
-		deleteButton.setAttribute("class", "btn btn-white border-secondary bg-white btn-md mb-2 rounded");
-		deleteButton.setAttribute("onclick", "deleteProductFromCart(this.id)");
-		deleteButton.innerHTML = '<i class="fa fa-trash-o" style="font-size: 31px; color: red;"></i>';
-
-		actionsDiv.appendChild(deleteButton);
-		actionsData.appendChild(actionsDiv);*/
 
 		var delbtn = document.createElement("td");
 		delbtn.setAttribute("class", "delbtn");
 
 		const deleteButton = document.createElement("button");
 		deleteButton.setAttribute("class", "btn btn-white border-secondary bg-white btn-md mb-2 ml-md-auto rounded");
-		deleteButton.setAttribute("onclick", "deleteProductFromCart(this)");
+		deleteButton.setAttribute("onclick", "deleteProductFromCart(" + result[i].productId + ")");
 
 		const deleteIcon = document.createElement("i");
 		deleteIcon.setAttribute("class", "fa fa-trash-o");
@@ -216,18 +162,17 @@ function getAllCartItems() {
 
 		// Create a row div element for the product information
 		const subTotalValue = document.createElement("span");
-		subTotalValue.classList.add( "text-right", "white-text");
-		subTotalValue.innerText = "$492.00";
+		subTotalValue.classList.add("text-right", "white-text");
+		subTotalValue.setAttribute("id","subTotal"+result[i].productId);
+		subTotalValue.innerText = '$' + (result[i].subTotal*1).toFixed(2);
 
 		subTotal.appendChild(subTotalValue);
-		
+
 		tableRow.appendChild(pImage);
 		tableRow.appendChild(productData);
 		tableRow.appendChild(tableCell);
 		tableRow.appendChild(delbtn);
 		tableRow.appendChild(subTotal);
-		/*tableRow.appendChild(actionsData);*/
-		/*mainContainer.appendChild(tableRow);*/
 		document.getElementById('cartItemsDiv').appendChild(tableRow);
 	}
 
@@ -283,9 +228,10 @@ function deleteProductFromCart(productId) {
 	getTotalCartPrice();
 }
 
-function updateCartProductQuantity(productId) {
+function updateCartProductQuantity(productId,price) {
 	debugger;
-	var quantity = document.getElementById("product" + productId).children[2].querySelector("input[name='productQuantity']").value;
+
+	var quantity = document.getElementById("quantity-input").value;
 
 	var sendData = JSON.stringify({
 		productId: productId,
@@ -293,6 +239,7 @@ function updateCartProductQuantity(productId) {
 
 	});
 	var result = doAjaxCall('/cart/updateCartProductQuantity', 'POST', sendData);
+	document.getElementById('subTotal'+productId).innerHTML = '$'+(quantity*price).toFixed(2);
 	getTotalCartPrice();
 }
 function roughcode() {

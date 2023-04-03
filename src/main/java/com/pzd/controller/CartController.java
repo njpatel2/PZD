@@ -93,7 +93,7 @@ public class CartController {
 	public void deleteProductFromCart(@RequestBody Map<String, Object> payload) {
 
 		try {
-			int productId = Integer.parseInt((String) payload.get("productId"));
+			int productId = Integer.parseInt((String) payload.get("productId").toString());
 			cartServiceImpl.deleteProductFromCart(
 					((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(),
 					productId);
@@ -109,8 +109,8 @@ public class CartController {
 	public void updateCartProductQuantity(@RequestBody Map<String, Object> payload) {
 
 		try {
-			int productId = Integer.parseInt((String) payload.get("productId"));
-			int quantity = Integer.parseInt((String) payload.get("quantity"));
+			int productId = Integer.parseInt((String) payload.get("productId").toString());
+			int quantity = Integer.parseInt((String) payload.get("quantity").toString());
 			cartServiceImpl.updateCartProductQuantity(
 					((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(),
 					productId, quantity);

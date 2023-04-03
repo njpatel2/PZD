@@ -32,6 +32,7 @@ public class CartServiceImpl implements CartService {
 			cartItems.put("productPrice", Float.toString((Float) objects[2]));
 			cartItems.put("productQuantity", Integer.toString((Integer) objects[3]));
 			cartItems.put("productId", Integer.toString((Integer) objects[4]));
+			cartItems.put("subTotal", Float.toString((Float) objects[2]*(Integer) objects[3]));
 			listOfCartItems.add(cartItems);
 		}
 		return listOfCartItems;
