@@ -2,10 +2,84 @@
  * 
  */
 
+var audio = new Audio('/audio/alert.mp3');
+var flag = false;
+var inter = null;
+var inter2 = null;
+function myFunction() {
+	console.log("Hello world!");
+}
+
+function showAlert(data) {
+	debugger;
+	$('#alertModel').modal('show');
+
+	var body = data.body;
+	var details = JSON.parse(body);
+
+
+	var username = details.username;
+	var orderId = details.orderDetails;
+
+	var alertModel = document.querySelector('#alertModel');
+
+	$("#alertModel").on('hide.bs.modal', function() {
+		debugger;
+		stopAlertAudio();
+		console.log('The modal is about to be hidden.');
+	});
+
+	flag = false;
+	playAlertAudio();
+	inter = setInterval(playAlertAudio, 5000);
+	var usernameSpan = document.querySelector('#username');
+	var orderIdSpan = document.querySelector('#orderId');
+
+	usernameSpan.textContent = username;
+	orderIdSpan.textContent = orderId;
+
+
+}
+
+
 $(document).ready(function() {
+
 	debugger;
 	getCountOfCustomerProductCategory();
+	$(function() {
+		var socket = new SockJS('/websocket');
+		var stompClient = Stomp.over(socket);
+
+		stompClient.connect({}, function(frame) {
+			console.log('Connected: ' + frame);
+			stompClient.subscribe('/topic/receivedAlert', function(message) {
+				debugger;
+				var alertMessage = JSON.parse(message.body).content;
+				showAlert(message);
+
+			});
+		});
+
+
+	});
 });
+
+function playAlertAudio() {
+	debugger;
+	if (!flag) {
+
+		audio.play();
+	}
+
+}
+function stopAlertAudio() {
+	debugger;
+	flag = true;
+	audio.pause();
+	audio.currentTime = 0;
+	clearInterval(inter);
+}
+
 
 //get list of category(id,name)
 function getCategorieList() {
@@ -43,6 +117,7 @@ function addCategory() {
 	$('#addCategoryModel').modal('show');
 }
 
+
 function doAjaxCall(callUrl, callType, callData) {
 	debugger;
 	var returnData;
@@ -70,21 +145,19 @@ function doAjaxCall(callUrl, callType, callData) {
 }
 
 
-function getCountOfCustomerProductCategory()
-{
+function getCountOfCustomerProductCategory() {
 	var sendData = JSON.stringify();
 	var result = doAjaxCall('/admin/getCountOfCustomerProductCategory', 'GET', sendData);
 	document.getElementById("userCount").innerHTML = result.userCount;
 	document.getElementById("productCount").innerHTML = result.productCount;
 	document.getElementById("categoryCount").innerHTML = result.categoryCount;
-	
+
 }
 
-function getCustomerList()
-{
+function getCustomerList() {
 	var sendData = JSON.stringify();
 	var result = doAjaxCall('/admin/getCustomerList', 'GET', sendData);
-	
+
 
 }
 function addCategoryToDatabase() {
@@ -159,50 +232,50 @@ function displayCategoryDropdown() {
 	debugger;
 	var select = getCategotydropdown();
 
-document.getElementById('listOfCategories').innerHTML = '';
+	document.getElementById('listOfCategories').innerHTML = '';
 	document.getElementById('listOfCategories').appendChild(select);
 
 }
 //insert the new product to database
 function addProductToDatabase() {
-	
+
 	var selectElement = document.getElementById("category");
 	var selectedOption = selectElement.querySelector("option:checked");
 	var selectedOptionId = selectedOption.id;
 	debugger;
-	
-	var formData = new FormData();
-formData.append('pName', $("#product_name").val());
-formData.append('pDesc', $("#product_description").val());
-formData.append('pPrice', $("#product_price").val());
-formData.append('pDiscount', $("#product_discount").val());
-formData.append('categoryId', selectedOptionId);
-formData.append('pQuantity', $("#product_count").val());
-formData.append('pPhoto', document.getElementById("product_photo").files[0]);
 
-$.ajax({
-	type: "POST",
-	url: "/admin/addProduct",
-	 enctype: 'multipart/form-data',
-	data: formData,
-	contentType: false,
-	processData: false,
-	success: function(data) {
-		console.log(data);
-		debugger;
-		// handle success
-	},
-	error: function(e) {
-		// handle error
-		console.log(e);
-		debugger;
-	},
-	done: function(e) {
-		console.log(e);
-		debugger;
-		// handle completion
-	}
-});
+	var formData = new FormData();
+	formData.append('pName', $("#product_name").val());
+	formData.append('pDesc', $("#product_description").val());
+	formData.append('pPrice', $("#product_price").val());
+	formData.append('pDiscount', $("#product_discount").val());
+	formData.append('categoryId', selectedOptionId);
+	formData.append('pQuantity', $("#product_count").val());
+	formData.append('pPhoto', document.getElementById("product_photo").files[0]);
+
+	$.ajax({
+		type: "POST",
+		url: "/admin/addProduct",
+		enctype: 'multipart/form-data',
+		data: formData,
+		contentType: false,
+		processData: false,
+		success: function(data) {
+			console.log(data);
+			debugger;
+			// handle success
+		},
+		error: function(e) {
+			// handle error
+			console.log(e);
+			debugger;
+		},
+		done: function(e) {
+			console.log(e);
+			debugger;
+			// handle completion
+		}
+	});
 
 	event.preventDefault();
 
@@ -314,7 +387,7 @@ function removeProduct() {
 //get the product list from database and show them as a radio list
 function showProductsForSelectedCategory() {
 	document.getElementById('listOfProducts').innerHTML = '';
-debugger;
+	debugger;
 	var selectElement = document.getElementById("category");
 	var selectedOption = selectElement.querySelector("option:checked");
 	var selectedOptionId = selectedOption.id;
@@ -362,7 +435,7 @@ debugger;
 			console.log(key + ": " + value);
 		}
 	}
-document.getElementById('listOfProducts').innerHTML = '';
+	document.getElementById('listOfProducts').innerHTML = '';
 	document.getElementById('listOfProducts').appendChild(radioDiv);
 }
 // delete the product from database

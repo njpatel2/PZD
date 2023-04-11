@@ -2,6 +2,10 @@
  * 
  */
 
+var stompClient = null;
+var socket = null;
+
+/*export{stompClient , socket};*/
 
 $(document).ready(function() {
 
@@ -9,9 +13,73 @@ $(document).ready(function() {
 		getAllCartItems();
 
 	}
-	getTotalCartPrice();
 
+	getTotalCartPrice();
+	connect();
 });
+
+function connect(){
+	
+	 socket = new SockJS('/websocket');
+	 stompClient = Stomp.over(socket);
+
+		stompClient.connect({}, function(frame) {
+			console.log('Connected: ' + frame);
+		});
+	
+}
+
+function sendAlert(){
+	var message = {
+				'username': 1,
+				'orderDetails': 1
+			};
+	stompClient.send('/app/admin/alert', {}, JSON.stringify(message), function() {
+				console.log('Message sent'); // add this line
+			});
+}
+/*function confirmUserDetails(){
+	debugger;
+	var sendData = JSON.stringify({
+		contact:  $("#contactNumber").val(),
+		address: $("#address").val(),
+	});
+	debugger;
+	var encodedData = encodeURIComponent(sendData);
+	var returnData;
+	$.ajax({
+		type: 'POST',
+		url: '/user/confirmUserDetails',
+		async: false,
+		data: {data: encodedData},
+		contentType: "application/json",
+		success: function(data) {
+			returnData = data;
+			debugger;
+
+		},
+		error: function(e) {
+			console.log(e);
+		},
+		done: function(e) {
+			console.log("DONE");
+		}
+	});
+	debugger;
+	/*var result = doAjaxCall('/user/confirmUserDetails', 'GET', encodedData);
+}*/
+
+function getUserDetails(){
+	
+	$('#confirmDetailsModel').modal('show');
+	
+		var sendData = JSON.stringify();
+	var result = doAjaxCall('/user/getUserDetails', 'GET', sendData);
+debugger;	
+	document.getElementById("contactNumber").value =result.contact;
+	document.getElementById("address").value = result.address;
+	
+}
 
 function doAjaxCall(callUrl, callType, callData) {
 	debugger;
@@ -117,7 +185,7 @@ function getAllCartItems() {
 		// create the price span element
 		const priceSpan = document.createElement("span");
 		priceSpan.classList.add("mr-2", "text-center", "white-text");
-		priceSpan.innerText = '$' + (result[i].productPrice*1).toFixed(2);
+		priceSpan.innerText = '$' + (result[i].productPrice * 1).toFixed(2);
 
 		// create the input container div
 		const inputContainer = document.createElement("div");
@@ -125,13 +193,13 @@ function getAllCartItems() {
 
 		// create the input element
 		const inputElement = document.createElement("input");
-		inputElement.setAttribute("type", "text");
+		inputElement.setAttribute("type", "number");
 		inputElement.setAttribute("class", "form-control form-control-sm text-center mb-2");
 		inputElement.setAttribute("name", "quantity");
 		inputElement.setAttribute("value", result[i].productQuantity);
 		inputElement.setAttribute("required", "required");
 		inputElement.setAttribute("min", "1");
-		inputElement.setAttribute("onchange", "updateCartProductQuantity(" + result[i].productId +','+ result[i].productPrice+ ")");
+		inputElement.setAttribute("onchange", "updateCartProductQuantity(" + result[i].productId + ',' + result[i].productPrice + ")");
 		inputElement.setAttribute("id", "quantity-input");
 
 		// add the input element and the delete button to the input container div
@@ -163,8 +231,8 @@ function getAllCartItems() {
 		// Create a row div element for the product information
 		const subTotalValue = document.createElement("span");
 		subTotalValue.classList.add("text-right", "white-text");
-		subTotalValue.setAttribute("id","subTotal"+result[i].productId);
-		subTotalValue.innerText = '$' + (result[i].subTotal*1).toFixed(2);
+		subTotalValue.setAttribute("id", "subTotal" + result[i].productId);
+		subTotalValue.innerText = '$' + (result[i].subTotal * 1).toFixed(2);
 
 		subTotal.appendChild(subTotalValue);
 
@@ -228,7 +296,7 @@ function deleteProductFromCart(productId) {
 	getTotalCartPrice();
 }
 
-function updateCartProductQuantity(productId,price) {
+function updateCartProductQuantity(productId, price) {
 	debugger;
 
 	var quantity = document.getElementById("quantity-input").value;
@@ -239,7 +307,7 @@ function updateCartProductQuantity(productId,price) {
 
 	});
 	var result = doAjaxCall('/cart/updateCartProductQuantity', 'POST', sendData);
-	document.getElementById('subTotal'+productId).innerHTML = '$'+(quantity*price).toFixed(2);
+	document.getElementById('subTotal' + productId).innerHTML = '$' + (quantity * price).toFixed(2);
 	getTotalCartPrice();
 }
 function roughcode() {

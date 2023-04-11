@@ -40,4 +40,15 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 			+ "")
 	public String getCountOfCustomerProductCategory();
 
+	
+	@Transactional
+	@Modifying
+	@Query("update Users u set u.password = :password where u.email = :email")
+	public void updatePassword(@Param("email") String email, @Param("password") String password);
+	
+	@Transactional
+	@Modifying
+	@Query("update Users u set u.contactNumber = :contactNumber , u.address = :address where u.email = :email")
+	public void updateUserContactAndAddress(@Param("email") String email,@Param("contactNumber") long contact,@Param("address") String addresss);
+
 }

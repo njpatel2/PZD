@@ -82,7 +82,7 @@
 				</div>
 				<div class="col-lg-8">
 					<div class="card mb-6 user-info">
-						<div class="card-body">
+						<div class="card-body" style="color:black;">
 							<div class="row">
 								<div class="col-sm-3">
 									<p class="mb-0">Full Name</p>

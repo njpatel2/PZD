@@ -43,7 +43,63 @@ function showOrderItemPopUp(selectedProduct) {
 		}
 	}
 }
+function doAjaxCall(callUrl, callType, callData) {
+	debugger;
+	var returnData;
+	$.ajax({
+		type: callType,
+		url: callUrl,
+		async: false,
+		data: callData,
+		contentType: "application/json",
+		success: function(data) {
+			returnData = data;
+			debugger;
 
+		},
+		error: function(e) {
+			console.log(e);
+		},
+		done: function(e) {
+			console.log("DONE");
+		}
+	});
+	/*event.preventDefault();*/
+	debugger;
+	return returnData;
+}
+function sendForgotPasswordEmail(){
+	debugger;
+	var email = $('#email').val();
+	
+	var sendData = JSON.stringify({
+		email: email
+	});
+	
+	var result = doAjaxCall('/sendForgotPasswordEmail', 'POST', sendData);
+	
+	var sendBtn = document.getElementById("sendButton");
+        sendBtn.textContent = "Resend";
+    var otpField = document.getElementById("otpField");
+        otpField.style.display = "block";
+    var otpField = document.getElementById("verifyButton");
+        otpField.style.display = "block";
+	
+}
+
+function verifyOTP(){
+	var OTP = $('#OTP').val();
+	
+	
+	var sendData = JSON.stringify({
+		OTP: OTP
+	});
+	
+	var result = doAjaxCall('/sendForgotPasswordEmail', 'POST', sendData);
+	
+	if(result = 'Verified successfully'){
+	}
+}
 
 
 

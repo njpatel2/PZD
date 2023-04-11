@@ -33,10 +33,10 @@ public class EmailSenderService {
 	 * @param toEmail
 	 * @param httpRequest
 	 */
-	public void sendSimpleEmail(String toEmail, HttpServletRequest request) {
+	public void sendRegistrationEmail(String toEmail, HttpServletRequest request) {
 		MimeMessage message;
 		try {
-			message = makeMessage(request);
+			message = makeRegistrationMessage(request);
 			message.setFrom("gamemaker22799@gmail.com");
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
 			message.setSubject("Welcome");
@@ -66,7 +66,7 @@ public class EmailSenderService {
 		return session;
 	}
 
-	public static MimeMessage makeMessage(HttpServletRequest request) {
+	public static MimeMessage makeRegistrationMessage(HttpServletRequest request) {
 		MimeMessage message = null;
 		try {
 			Session sessionForEmail = getSessionForMail();
@@ -75,6 +75,53 @@ public class EmailSenderService {
 
 			BodyPart messageBodyPart = new MimeBodyPart();
 			String htmlText = "<H1>Welcome to Crazy Italian Pizza</H1><img src=\"cid:image\">";
+
+			messageBodyPart.setContent(htmlText, "text/html");
+			multipart.addBodyPart(messageBodyPart);
+
+			messageBodyPart = new MimeBodyPart();
+			@SuppressWarnings("deprecation")
+			String path = request.getRealPath("images") + File.separator;
+			DataSource fds = new FileDataSource(path + "pizzalogo.jpg");
+
+			messageBodyPart.setDataHandler(new DataHandler(fds));
+			messageBodyPart.setHeader("Content-ID", "<image>");
+
+			multipart.addBodyPart(messageBodyPart);
+
+			message.setContent(multipart);
+		} catch (MailException e) {
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+
+		return message;
+
+	}
+	
+	public void sendForgotPasswordEmail(String toEmail, HttpServletRequest request, int OTP) {
+		MimeMessage message;
+		try {
+			message = makeForgotPasswordMessage(request, OTP);
+			message.setFrom("gamemaker22799@gmail.com");
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+			message.setSubject("Welcome");
+			mailSender.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	public static MimeMessage makeForgotPasswordMessage(HttpServletRequest request, int OTP) {
+		MimeMessage message = null;
+		try {
+			Session sessionForEmail = getSessionForMail();
+			message = new MimeMessage(sessionForEmail);
+			MimeMultipart multipart = new MimeMultipart("related");
+
+			BodyPart messageBodyPart = new MimeBodyPart();
+			String htmlText = "<H1>Crazy Italian Pizza</H1><img src=\"cid:image\"><H3> Shell Acton - "+OTP+" </H3>";
 
 			messageBodyPart.setContent(htmlText, "text/html");
 			multipart.addBodyPart(messageBodyPart);

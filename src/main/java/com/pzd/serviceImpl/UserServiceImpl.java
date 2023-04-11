@@ -151,6 +151,19 @@ public class UserServiceImpl extends DefaultOAuth2UserService implements UserSer
 		
 		return userDetails;
 	}
+	
+	@Override
+	public HashMap<String,String> getUserDetails(String email) {
+		
+		HashMap<String,String>  userDetails = new HashMap();
+		
+		User user = userRepository.findByEmail(email);
+		
+		userDetails.put("contact", Long.toString(user.getContactNumber()));
+		userDetails.put("address", user.getAddress());
+		
+		return userDetails;
+	}
 
 	@Override
 	public void updateUserByUserEmail(String email,String name,long contact, String address) {
@@ -183,5 +196,19 @@ public class UserServiceImpl extends DefaultOAuth2UserService implements UserSer
 		hmap.put("categoryCount", Integer.parseInt(spillteResult[2]));
 		
 		return hmap;
+	}
+
+	@Override
+	public void updatePassword(String email, String password) {
+		
+		userRepository.updatePassword(email, password);
+		
+	}
+
+	@Override
+	public void updateUserContactAndAddress(String email,long contact, String address) {
+		
+		userRepository.updateUserContactAndAddress(email,contact,address);
+		
 	}
 }

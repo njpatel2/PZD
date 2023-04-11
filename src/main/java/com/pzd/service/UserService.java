@@ -26,5 +26,12 @@ public interface UserService {
 
 	HashMap<String, Integer> getCountOfCustomerProductCategory();
 
+	void updatePassword(String attribute, String password);
+
+	HashMap<String, String> getUserDetails(String email);
+
+
+	void updateUserContactAndAddress(String email, long contact, String address);
+
 
 }

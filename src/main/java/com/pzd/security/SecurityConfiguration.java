@@ -14,7 +14,10 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -34,6 +37,9 @@ public class SecurityConfiguration {
 
 	@Autowired
 	private UserServiceImpl userServiceImpl;
+	
+	@Autowired
+	private CustomSessionAuthenticationStrategy customSessionAuthenticationStrategy;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -81,10 +87,30 @@ public class SecurityConfiguration {
 						response.sendRedirect("/home");
 					}
 				})
-				.and().csrf().disable();
+				
+				.and()
+				.sessionManagement()
+                .sessionAuthenticationStrategy(customSessionAuthenticationStrategy)
+                .and().csrf().disable();
+		
+//		http
+//        .sessionManagement()
+//        .sessionFixation().migrateSession()
+//        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//        .invalidSessionUrl("/login?expired")
+//        .maximumSessions(1)
+//            .sessionRegistry(sessionRegistry())
+//            .and()
+//        .and()
+//        .exceptionHandling()
+//        .accessDeniedPage("/403");
+		
 		return http.build();
 	}
-
+	 @Bean
+	    public SessionRegistry sessionRegistry() {
+	        return new SessionRegistryImpl();
+	    }
 //	 @Bean
 //	    public OAuth2UserService<OAuth2UserRequest, OAuth2User> googleOAuth2UserService() {
 //	        return new GoogleOAuth2UserService();

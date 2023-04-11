@@ -54,6 +54,11 @@
 <!-- <script src="/js/google-map.js"></script> -->
 <!-- <script type="text/javascript"  src="/js/main.js"></script> -->
 <script type="text/javascript" src="/js/header.js"></script>
+<!-- <script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 <style type="text/css">
 .hover-effect:hover {
@@ -86,7 +91,6 @@
 							src="/gif/cart.png" width="60px"></img><span id="totalBill" class="hover-effect">0.00 $</span></a></li>
 					<li class="nav-item"><a href="/user/getProfile" class="nav-link hover-effect">Profile</a></li>
 					<li class="nav-item"><a href="/logout" class="nav-link hover-effect">Logout</a></li>
-					
 			</ul>
 
 			</div>

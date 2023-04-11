@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="form-link">
-                            <a href="#" class="forgot-pass">Forgot password?</a>
+                            <a href="/getForgotPasswordPage" class="forgot-pass">Forgot password?</a>
                         </div>
 
                         <div class="field button-field">

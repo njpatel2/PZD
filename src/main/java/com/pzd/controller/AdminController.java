@@ -33,16 +33,16 @@ public class AdminController {
 
 	@Autowired
 	private CategoryServiceImpl categoryServiceImpl;
-	
+
 	@Autowired
 	private UserServiceImpl userServiceImpl;
-	
+
 	@RequestMapping("/admin")
 	public ModelAndView adminMainPage() {
-		ModelAndView mv = new ModelAndView("admin");;
+		ModelAndView mv = new ModelAndView("admin");
+		;
 		return mv;
 	}
-
 
 	@RequestMapping("/addProduct")
 	@ResponseBody
@@ -52,10 +52,10 @@ public class AdminController {
 			@RequestParam("pQuantity") int pQuantity, HttpServletRequest request) {
 
 		try {
-			
+
 			CategoryDTO categoryDTO = new CategoryDTO();
 			categoryDTO.setId(categoryId);
-			
+
 			ProductDTO productDTO = new ProductDTO();
 			productDTO.setpName(pName);
 			productDTO.setpDesc(pDesc);
@@ -144,10 +144,10 @@ public class AdminController {
 		}
 		return categoryList;
 	}
-	
+
 	@RequestMapping("/getCustomerList")
 	@ResponseBody
-	public ArrayList<String>  getCustomerList() {
+	public ArrayList<String> getCustomerList() {
 		ArrayList<String> customerList = null;
 		try {
 			customerList = userServiceImpl.getCustomerList();
@@ -156,18 +156,18 @@ public class AdminController {
 		}
 		return customerList;
 	}
-	
+
 	@RequestMapping("/getCountOfCustomerProductCategory")
 	@ResponseBody
 	public HashMap<String, Integer> getCountOfCustomerProductCategory() {
 		HashMap<String, Integer> systemDetails = null;
 		try {
 			systemDetails = userServiceImpl.getCountOfCustomerProductCategory();
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return systemDetails;
 	}
+
 }

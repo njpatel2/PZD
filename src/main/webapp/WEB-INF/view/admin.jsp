@@ -8,13 +8,11 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	>
 <!-- Fontawesome CSS -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-	integrity="sha512-QnGe+vNwF8YG4Wad7CjxunmfNbz+v6Ksw+YrHJcMLeh6CJjwOnO2+uKKP6E/lF6fg/hGkyCUjK6ZtyKMq3E2Q=="
-	crossorigin="anonymous" />
+	/>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
 	rel="stylesheet" />
@@ -24,6 +22,11 @@
 <%@include file="header.jsp"%>
 <script type="text/javascript" src="/js/Cart.js"></script>
 <script type="text/javascript" src="/js/admin.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 <style>
 .col-md-4 {
 	margin-top: 30px;
@@ -318,6 +321,7 @@ body {
 			</div>
 		</div>
 	</div>
+	<audio src="/audio/alert.mp3" id="alertAudio"></audio>
 
 	<!-- add product model end -->
 
@@ -387,7 +391,33 @@ body {
 		</div>
 	</div>
 	<!-- delete product end -->
+	
+	<!-- show alert model -->
+	<div class=" modal fade" id="alertModel" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true" onclick="myFunction()">
+		<div class="modal-dialog modal-dialog-centered model-lg"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header  ">
+					<h5 class="modal-title" id="alertModelTitle">New Order Received</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" id="closealertModel">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+					<div>
+					  <p>Username: <span id="username"></span></p>
+					  <p>Order ID: <span id="orderId"></span></p>
+					</div>
+				</div>
 
+			</div>
+		</div>
+	</div>
+<!-- show alert model end -->
 
 
 	<%@include file="footer.jsp"%>
