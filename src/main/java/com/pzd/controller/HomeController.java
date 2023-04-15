@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pzd.DTO.UserRegistrationDTO;
 import com.pzd.mail.EmailSenderService;
 import com.pzd.security.CustomUser;
+import com.pzd.service.UserService;
 
 @RestController
 @RequestMapping("/")
@@ -32,7 +32,7 @@ public class HomeController {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	private com.pzd.service.UserService userService;
+	private UserService userService;
 
 	@Autowired
 	private EmailSenderService emails;
@@ -154,6 +154,21 @@ public class HomeController {
 	@ResponseBody
 	public ModelAndView thankyou() {
 		ModelAndView mv = new ModelAndView("Thankyou");
+
+		return mv;
+	}
+	
+	@RequestMapping("/Orders")
+	@ResponseBody
+	public ModelAndView Orders() {
+		ModelAndView mv = new ModelAndView("Order");
+
+		return mv;
+	}
+	@RequestMapping("/jqxGrid")
+	@ResponseBody
+	public ModelAndView jqxGrid() {
+		ModelAndView mv = new ModelAndView("jqxGrid");
 
 		return mv;
 	}

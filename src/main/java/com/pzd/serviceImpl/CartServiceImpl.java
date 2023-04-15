@@ -3,9 +3,11 @@ package com.pzd.serviceImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pzd.DTO.CartDTO;
 import com.pzd.entities.Cart;
 import com.pzd.entities.Product;
 import com.pzd.entities.User;
@@ -19,9 +21,9 @@ public class CartServiceImpl implements CartService {
 	private CartRepository cartRepository;
 
 	@Override
-	public ArrayList<HashMap<String, String>> getAllCartItemsOfUser(int userId) {
+	public ArrayList<HashMap<String, String>> getAllCartItemsOfUserToPopulateOnUi(int userId) {
 
-		ArrayList<Object[]> CartProducts = cartRepository.getAllCartItemsOfUser(userId);
+		ArrayList<Object[]> CartProducts = cartRepository.getAllCartItemsOfUserToPopulateOnUi(userId);
 
 		ArrayList<HashMap<String, String>> listOfCartItems = new ArrayList<>();
 
@@ -55,7 +57,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public float getTotalCartPrice(int userId) {
-		ArrayList<Object[]> cartItems = cartRepository.getAllCartItemsOfUser(userId);
+		ArrayList<Object[]> cartItems = cartRepository.getAllCartItemsOfUserToPopulateOnUi(userId);
 		float totalPrice = 0;
 
 		for (Object[] objects : cartItems) {
@@ -76,6 +78,30 @@ public class CartServiceImpl implements CartService {
 
 		cartRepository.updateCartProductQuantity(quantity, userId, productId);
 
+	}
+
+	public ArrayList<CartDTO>  getAllCartItemsOfUser(int userId) {
+		
+		ArrayList<Cart> CartProducts = cartRepository.getAllCartItemsByUserId(userId);
+		
+		ArrayList<CartDTO> cartDTOs = new ArrayList<>();
+		
+		for (Cart CartProduct : CartProducts) {
+			
+			CartDTO cartDto = new CartDTO();
+			
+			BeanUtils.copyProperties(CartProduct, cartDto);
+			cartDTOs.add(cartDto);
+		}
+		
+		
+		
+		return cartDTOs;
+	}
+
+	public void deleteProductFromCartByUserId(int userId) {
+
+		cartRepository.deleteAllByUserId(userId);
 	}
 
 }

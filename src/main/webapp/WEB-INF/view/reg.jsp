@@ -1,69 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>registration</title>
-   <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/commonc.css">
-    <script type="text/javascript" src="/js/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
-     <script type="text/javascript" src="/js/RegistrationPage.js"></script>
-     <link rel="stylesheet" href="/css/LoginStyle.css">
-        <!-- Boxicons CSS -->
-        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <%@include file="header.jsp" %>
-     </head>
+<meta charset="UTF-8">
+<title>registration</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/commonc.css">
+<link rel="stylesheet" href="/css/LoginStyle.css">
+
+<script type="text/javascript" src="/js/RegistrationPage.js"></script>
+
+<!-- Boxicons CSS -->
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'
+	rel='stylesheet'>
+<%@include file="header.jsp"%>
+</head>
 <body>
-<h2 class="text-center" id = "successMessage1">${successMessage}</h2>
- <section class="login-container forms">
-<div class="form signup">
-                <div class="form-content">
-                    <header>Signup</header>
-                    <form name="form" id="form" method="post" onsubmit="sendDataToController()">
-                    
-                     <div class="field input-field">
-                            <input type="text" name="name" id="name"   placeholder="Name" class="input">
-                        </div>
-                        <div class="field input-field">
-                            <input type="email" name="email" id="email"   placeholder="Email" class="input">
-                        </div>
+	<h2 class="text-center" id="successMessage1">${successMessage}</h2>
+	<section class="login-container forms">
+		<div class="form signup">
+			<div class="form-content">
+				<header>Signup</header>
+				<form name="form" id="form" method="post"
+					onsubmit="sendDataToController()">
 
-                        <div class="field input-field">
-                            <input type="password" name="password" id="password"  placeholder="Create password" class="password">
-                            <i class='bx bx-hide eye-icon'></i>
-                        </div>
+					<div class="field input-field">
+						<input type="text" name="name" id="name" placeholder="Name"
+							class="input">
+					</div>
+					<div class="field input-field">
+						<input type="email" name="email" id="email" placeholder="Email"
+							class="input">
+					</div>
 
-                        <div class="field input-field">
-                            <input type="password"  name="password" id="password"  placeholder="Confirm password" class="password">
-                            <i class='bx bx-hide eye-icon'></i>
-                        </div>
-                        <input type="hidden" name = "role" id="role" class="form-control form-control-lg" value="ROLE_USER"/>
+					<div class="field input-field">
+						<input type="password" name="password" id="password"
+							placeholder="Create password" class="password"> <i
+							class='bx bx-hide eye-icon'></i>
+					</div>
 
-                        <div class="field button-field">
-                            <button>Signup</button>
-                        </div>
-                    </form>
+					<div class="field input-field">
+						<input type="password" name="password" id="password"
+							placeholder="Confirm password" class="password"> <i
+							class='bx bx-hide eye-icon'></i>
+					</div>
+					<input type="hidden" name="role" id="role"
+						class="form-control form-control-lg" value="ROLE_USER" />
 
-                    <div class="form-link">
-                        <span>Already have an account? <a href="/login" class="">Login</a></span>
-                    </div>
-                </div>
+					<div class="field button-field">
+						<button>Signup</button>
+					</div>
+				</form>
 
-                <div class="line"></div>
+				<div class="form-link">
+					<span>Already have an account? <a href="/login" class="">Login</a></span>
+				</div>
+			</div>
 
-                <div class="media-options">
-                    <a href="/oauth2/authorization/google" class="field google">
-                        <img src="images/google.png" alt="" class="google-img">
-                        <span>Login with Google</span>
-                    </a>
-                </div>
+			<div class="line"></div>
 
-            </div>
-            </section>
-            
-   <!--  <div class="container">
+			<div class="media-options">
+				<a href="/oauth2/authorization/google" class="field google"> <img
+					src="images/google.png" alt="" class="google-img"> <span>Login
+						with Google</span>
+				</a>
+			</div>
+
+		</div>
+	</section>
+
+	<!--  <div class="container">
       <div class="col-md-4 col-md-offset-4">
         <form name="form" id="form" method="post" class="form-login" onsubmit="sendDataToController()" >
           <h2 class="text-center">Register</h2>
@@ -92,7 +99,7 @@
 
 
 
-<!-- <section class="vh-100" style="background-color: #508bfc;">
+	<!-- <section class="vh-100" style="background-color: #508bfc;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -140,8 +147,8 @@
   </div>
 </section> -->
 
-<!-- JavaScript -->
-      <script src="/js/LoginScript.js"></script>
-    <%@include file="footer.jsp" %>
+	<!-- JavaScript -->
+	<script src="/js/LoginScript.js"></script>
+	<%@include file="footer.jsp"%>
 </body>
 </html>

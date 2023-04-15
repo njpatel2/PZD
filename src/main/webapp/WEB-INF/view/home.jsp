@@ -14,12 +14,14 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do"
 	rel="stylesheet">
-<%@include file="header.jsp"%>
 
+<%@include file="header.jsp"%>
 
 <script type="text/javascript" src="/js/home.js"></script>
 <script type="text/javascript" src="/js/Cart.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+
+
 <style>
 .quantity {
 	display: flex;

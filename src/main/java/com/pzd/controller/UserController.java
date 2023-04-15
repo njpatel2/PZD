@@ -18,7 +18,6 @@ import com.pzd.entities.AlertMessage;
 import com.pzd.entities.User;
 import com.pzd.mail.EmailSenderService;
 import com.pzd.security.CustomUser;
-import com.pzd.service.UserService;
 import com.pzd.serviceImpl.ProductServiceImpl;
 import com.pzd.serviceImpl.UserServiceImpl;
 
@@ -107,7 +106,7 @@ public class UserController {
 	@ResponseBody
 	public ModelAndView confirmUserDetails(@RequestParam("contactNumber") String contact, @RequestParam("address") String address, HttpServletRequest request) {
 
-		ModelAndView mv = new ModelAndView("Thankyou");
+		ModelAndView mv = new ModelAndView();
 		try {
 			// Decode the URL-encoded data
 
@@ -130,9 +129,11 @@ public class UserController {
 						Long.parseLong(contact), address);
 			}
 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		mv.setViewName("forward:/orders/placeOrder");
 		return mv;
 	}
 

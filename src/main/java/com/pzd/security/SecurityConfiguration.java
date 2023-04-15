@@ -49,6 +49,7 @@ public class SecurityConfiguration {
 				.antMatchers("/user/**").authenticated()
 				.antMatchers("/cart/**").authenticated()
 				.antMatchers("/home").authenticated()
+				.antMatchers("/orders/**").authenticated()
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/Dologin").usernameParameter("email").defaultSuccessUrl("/home", true)

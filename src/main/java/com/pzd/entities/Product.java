@@ -30,6 +30,9 @@ public class Product {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Cart> cart = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<OrderDetails> orderDetails;
+	
 	public Product() {
 		super();
 	}

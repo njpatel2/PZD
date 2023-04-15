@@ -7,17 +7,13 @@
 <title>Insert title here</title>
 
 
-<script type="text/javascript" src="/js/jquery-3.3.1.slim.min.js"></script>
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-3jKoQxCuKJ+LfV7Pd6W5k5jJNF6N/EyRw2e26G91+GL7zpu/AO/KZvO9qJh02YPxMsdOcQRrGhJjKUBH1zTpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
- -->
-
+<script type="text/javascript" src="/js/jquery-3.3.1.slim.min.js"></script>
 <script type="text/javascript" src="/js/Cart.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 
@@ -108,7 +104,7 @@ tr:hover {
 	object-fit: contain;
 }
 
-#quantity-input {
+input[name="quantity"] {
 	width: 90px;
 	height: 45px !important;
 }

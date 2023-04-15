@@ -15,7 +15,11 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 
 	@Transactional
 	@Query("SELECT c.product.pName , c.product.pPhoto, c.product.pPrice , c.productQuatity ,c.product.pId FROM cart c WHERE c.user.id = :userId")
-	ArrayList<Object[]> getAllCartItemsOfUser(@Param("userId") int userId);
+	ArrayList<Object[]> getAllCartItemsOfUserToPopulateOnUi(@Param("userId") int userId);
+	
+	@Transactional
+	@Query("FROM cart c WHERE c.user.id = :userId")
+	ArrayList<Cart> getAllCartItemsByUserId(@Param("userId") int userId);
 
 //	@Modifying
 //	@Query("insert into cart (product_p_id, product_quatity, user_id) values (userId, productId, quantity)")
@@ -35,5 +39,11 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 	@Query("UPDATE cart c SET c.productQuatity = :quantity WHERE c.user.id = :userId AND c.product.pId = :productId")
 	void updateCartProductQuantity(@Param("quantity") int quantity, @Param("userId") int userId,
 			@Param("productId") int productId);
+
+	
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM cart c WHERE c.user.id = :userId")
+	void deleteAllByUserId(@Param("userId") int userId);
 
 }

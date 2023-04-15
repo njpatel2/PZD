@@ -6,10 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 
-<link href="/css/all.min.css" rel="stylesheet" />
-<script type="text/javascript" src="/js/jquery-3.3.1.slim.min.js"></script>
 
-<%@include file="header.jsp"%>
 </head>
 <body>
 
@@ -89,6 +86,5 @@
 			</div>
 		</div>
 	</section>
-	<%@include file="footer.jsp"%>
 </body>
 </html>

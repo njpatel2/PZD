@@ -10,6 +10,9 @@ import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.context.annotation.Bean;
 
+import com.pzd.controller.IdGenerator;
+import com.pzd.service.OrderService;
+
 @SpringBootApplication
 public class SpringrestApplication {
 
@@ -52,5 +55,11 @@ public class SpringrestApplication {
 	        return connector;
 	    }
 
+	    
+//	    @Bean
+//	    public IdGenerator idGenerator(OrderService orderService) {
+//	        return new IdGenerator(orderService);
+//	    }
+	    
 }
  

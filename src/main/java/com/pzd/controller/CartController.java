@@ -41,7 +41,7 @@ public class CartController {
 
 		ArrayList<HashMap<String, String>> CartItems = new ArrayList<>();
 		try {
-			CartItems = cartServiceImpl.getAllCartItemsOfUser(
+			CartItems = cartServiceImpl.getAllCartItemsOfUserToPopulateOnUi(
 					((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		} catch (Exception e) {
 			throw e;

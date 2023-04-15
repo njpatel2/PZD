@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <title>Login - Pizza Delivery App</title>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     
     <script type="text/javascript" src="/js/RegistrationPage.js"></script>
      <link rel="stylesheet" href="/css/LoginStyle.css">
         <!-- Boxicons CSS -->
-        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+        
     <%@include file="header.jsp" %>
   </head>
   <body>

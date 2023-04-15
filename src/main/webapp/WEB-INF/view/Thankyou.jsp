@@ -37,5 +37,9 @@
 		</div>
 		<h2 class="text-center">Thank you for shopping with us</h2>
 	</div>
+	
+	
+	
+		<%@include file="footer.jsp"%>
 </body>
 </html>

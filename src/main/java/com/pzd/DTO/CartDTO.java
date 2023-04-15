@@ -1,5 +1,6 @@
 package com.pzd.DTO;
 
+import com.pzd.entities.Orders;
 import com.pzd.entities.Product;
 import com.pzd.entities.User;
 

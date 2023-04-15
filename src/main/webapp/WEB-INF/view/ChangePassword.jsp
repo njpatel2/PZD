@@ -7,14 +7,14 @@
 <title>Change Password</title>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/commonc.css">
-<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/RegistrationPage.js"></script>
 <link rel="stylesheet" href="/css/LoginStyle.css">
-<script type="text/javascript" src="/js/home.js"></script>
-<!-- Boxicons CSS -->
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'
 	rel='stylesheet'>
+
+<script type="text/javascript" src="/js/RegistrationPage.js"></script>
+<script type="text/javascript" src="/js/home.js"></script>
+<!-- Boxicons CSS -->
+
 <%@include file="header.jsp"%>
 
 </head>
@@ -52,5 +52,6 @@
 
 		</div>
 	</section>
+	<%@include file="footer.jsp"%>
 </body>
 </html>

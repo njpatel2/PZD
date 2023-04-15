@@ -200,7 +200,7 @@ function getAllCartItems() {
 		inputElement.setAttribute("required", "required");
 		inputElement.setAttribute("min", "1");
 		inputElement.setAttribute("onchange", "updateCartProductQuantity(" + result[i].productId + ',' + result[i].productPrice + ")");
-		inputElement.setAttribute("id", "quantity-input");
+		inputElement.setAttribute("id", "quantity-input-"+result[i].productId);
 
 		// add the input element and the delete button to the input container div
 		inputContainer.appendChild(inputElement);
@@ -299,7 +299,7 @@ function deleteProductFromCart(productId) {
 function updateCartProductQuantity(productId, price) {
 	debugger;
 
-	var quantity = document.getElementById("quantity-input").value;
+	var quantity = document.getElementById("quantity-input-"+productId).value;
 
 	var sendData = JSON.stringify({
 		productId: productId,

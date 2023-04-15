@@ -15,11 +15,9 @@
 	href="/css/UserProfileStyle.css"
 	rel="stylesheet"> -->
 <%@include file="header.jsp"%>
-<script type="text/javascript" src="/js/User.js"></script>
 <script type="text/javascript" src="/js/Cart.js"></script>
+<script type="text/javascript" src="/js/User.js"></script>
 
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 <style>
@@ -171,6 +169,7 @@
           <input type="hidden" name = "role" id="role" class="form-control form-control-lg" value="ROLE_USER"/>
           
           <input type="submit" value="Update">
+          </form>
 				</div>
 
 			</div>
