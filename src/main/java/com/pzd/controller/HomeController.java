@@ -179,5 +179,10 @@ public class HomeController {
 	 * @ResponseBody public Principal user(Principal principal) { return principal;
 	 * }
 	 */
+	@RequestMapping("/testJsp")
+	public ModelAndView testJsp() {
+		ModelAndView mv = new ModelAndView("testJsp");
+		return mv;
+	}
 
 }

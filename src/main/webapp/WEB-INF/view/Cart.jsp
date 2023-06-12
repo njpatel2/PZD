@@ -270,7 +270,7 @@ input[name="quantity"] {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form name="form" id="form" method="post" class="form-login updateProfileModel" action="/user/confirmUserDetails"><!-- onsubmit="confirmUserDetails()" --> 
+					<form name="form" id="form" method="post" class="form-login updateProfileModel" action="/user/confirmUserDetails" onsubmit="sendAlert()"><!-- onsubmit="confirmUserDetails()" --> 
 			         
 			
 			          <label for="contact">Contact Number:</label>

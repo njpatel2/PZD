@@ -77,6 +77,7 @@ var orderDetails = (function() {
 			}
 		};
 
+		/* var colonneinfo = [];*/
 		var url = '/orders/getOrderDetails';
 		var source = {
 			datatype: "json",
@@ -131,7 +132,6 @@ var orderDetails = (function() {
 				}
 			});
 		console.log(adapter.records)
-		
 		$("#orderDetailsJqxGrid").jqxGrid({
 			width: '100%',
 			height: 'auto',
@@ -186,11 +186,40 @@ function populateOrderDetailsModal(orderId) {
 }
 
 var Orders = (function() {
-
+	/*var previousCustomCols = [];
+	var groupByName = "";
+	var groupby = "";
+	var getCommonObjects = function(){
+		var aPromise = $ajax.get("/secure/list/Order/getCommonObjects");
+		aPromise.done(function(data){
+			var json = $select.createJson(data,'strkey','value');
+			$select.remove("OrderGrpby");
+			$select.append("OrderGrpby",json,false);
+			
+			$('#OrderGrpby').val('OrderDate');
+			$('#OrderGrpby').selectpicker('refresh');
+			console.log(data)
+			loader.hide();
+			}
+		).error(function(date){
+			loader.hide();
+			console.log("-----------Error-------------");
+			console.log("/secure/list/Order/getCommonObjects");
+		});
+	};*/
 	var getOrder = function() {
 		bindOrderGrid();
 
 	}
+	/*var setGroupBy = function(arg){
+		groupby = arg
+	};
+	
+	var setGroupByName = function(arg){
+		groupByName = arg
+	};*/
+
+
 	var bindOrderGrid = function() {
 
 		var cellRendererForOpen = function(row, columnfield, value, defaulthtml, columnproperties, rowdata) {
@@ -203,17 +232,108 @@ var Orders = (function() {
 				}
 			}
 		};
+		var dateSortFn = function (date1, date2) {
+    var date1Parts = date1.split('-');
+    var date2Parts = date2.split('-');
+    var time1 = date1Parts[1].split(':');
+    var time2 = date2Parts[1].split(':');
+    var jsDate1 = new Date(date1Parts[2], date1Parts[0] - 1, date1Parts[1], time1[0], time1[1], 0, 0);
+    var jsDate2 = new Date(date2Parts[2], date2Parts[0] - 1, date2Parts[1], time2[0], time2[1], 0, 0);
+    debugger;
+    return jsDate1.getTime() - jsDate2.getTime();
+};
 
-
+		/* var colonneinfo = [];*/
 		var url = '/orders/getPendingOrders';
 		var source = {
 			datatype: "json",
 			id: 'id',
 			url: url,
 			root: 'results',
-			/*sortcolumn: "date",
-			sortdirection: 'desc',*/
+			sortcolumn: "date",
+			sortdirection: 'desc',
+			/*sort: function() {
+				// update the grid and send a request to the server.
+				debugger;
+				$("#orderJqxGrid").jqxGrid('updatebounddata', 'sort');
+
+			},
+			filter: function() {
+				// update the grid and send a request to the server.
+				$("#orderJqxGrid").jqxGrid('updatebounddata', 'filter');
+			},
+			beforeprocessing: function(data) {
+				/*console.log("Step : 5");
+				if(!jQuery.isEmptyObject(data) && data.message!=undefined && data.message.length>0){
+					message.error([data.message]);
+				}else{
+					$(".failureId").hide();
+				}*/
+				/*source.totalrecords = data.total;
+				data.results = buildCustomColumns.setCustomColumns(colonneinfo,previousCustomCols,data);*/
+				/*previousCustomCols = buildCustomColumns.getPreviousColumns();*/
+				/*return data.results;*/
+				/*return data;
+			}*/
 		};
+		/*$("#orderJqxGrid").bind("sort", function(event) {
+			var sortinformation = event.args.sortinformation;
+			var sortdirection = sortinformation.sortdirection;
+			var sortcolumn = sortinformation.sortcolumn;
+		});*/
+		/**
+		 * Group HTML renderer function
+		 */
+		/*var groupsrenderer = function (text, group, expanded) {
+			var grpName = group.split('-')[1];
+			if(grpName == "" || grpName == undefined){
+				grpName = "None";
+			}
+			var div = '<div class="jqx-grid-groups-row" style="position: absolute;">';
+			var a = "<span>" + groupByName + ": </span>";
+			var b = '<span class="jqx-grid-groups-row-details">' + grpName + '</span></div>';
+			return div + a + b;
+		}*/
+
+		/*$("#orderJqxGrid").on("bindingcomplete", function (event) {
+			
+			setLocalizationObj("#orderJqxGrid");
+			$('.jqx-grid-groupby-icon').parents('li').remove();
+			loader.hide();
+			var groups = $("#orderJqxGrid").jqxGrid('groups');
+			console.log(groups);
+			if(groups.length == 0) {	
+				
+				$("#orderJqxGrid").jqxGrid('hidecolumn', 'groupValue');
+				$('#orderJqxGrid').jqxGrid('insertgroup', 0, 'groupValue');
+				$("#orderJqxGrid").jqxGrid('gotopage', 0);
+				
+	//				console.log("Group by Column" + $('#orderJqxGrid').jqxGrid('iscolumngroupable', 'groupValue'));
+//			
+//				if(groupby == 'OrderDate' || (groupby != 'subject' && groupby != 'workFlowStepName' &&
+//						groupby != 'OrderTypeName')){
+//					setTimeout(function(){
+//						$("#orderJqxGrid").jqxGrid('hidecolumn', 'groupValue');
+//						 $("#orderJqxGrid").jqxGrid('gotopage', 0);
+//						
+//					}, 20);
+//					$("#orderJqxGrid").jqxGrid('insertgroup', 0, 'groupValue');
+//				}else{
+//					setTimeout(function(){
+//						$('#orderJqxGrid').jqxGrid('insertgroup', 0, 'groupValue');
+//						$('#orderJqxGrid').jqxGrid('sortby', groupby, 'asc');
+//						 $("#orderJqxGrid").jqxGrid('gotopage', 0);
+//					}, 20);
+//				}
+			}
+				setTimeout(function(){
+					$('#orderJqxGrid').jqxGrid('expandallgroups');
+//					$(".jqx-grid-groups-row").each(function(k, v){
+//						$($(v).find("span")[0]).html(groupByName + ": ");
+//					});
+				}, 20);
+		});*/
+
 
 		$("#orderJqxGrid").jqxGrid("clear");
 		//commented to introduce retrylimit NOD-13489
@@ -259,58 +379,31 @@ var Orders = (function() {
 				}
 			});
 		console.log(adapter.records)
-		var dateSortFn = function(date1, date2) {
-			var date1Parts = date1.split('-');
-			var date2Parts = date2.split('-');
-			var time1 = date1Parts[1].split(':');
-			var time2 = date2Parts[1].split(':');
-			var jsDate1 = new Date(date1Parts[2], date1Parts[0] - 1, date1Parts[1], time1[0], time1[1], 0, 0);
-			var jsDate2 = new Date(date2Parts[2], date2Parts[0] - 1, date2Parts[1], time2[0], time2[1], 0, 0);
-			debugger;
-			console.log(jsDate1.getTime() - jsDate2.getTime());
-			return jsDate1.getTime() - jsDate2.getTime();
-		};
-		/*$("#orderJqxGrid").on("filter", function() {
-			debugger;
-			var filterinformation = $("#orderJqxGrid").jqxGrid("getfilterinformation");
-			var filtervalue = filterinformation[0].filter.getfilters()[0].value;
-			console.log(filtervalue);
-		});*/
-		var customFilter = function(filterValue, rowData, dataField) {
-			debugger;
-    // Convert the rowData to a string for easier substring search
-    var rowString = JSON.stringify(rowData.username).toLowerCase();
-
-    // Check if the filterValue is present as a substring in the rowString
-    return rowString.indexOf(filterValue.toLowerCase()) >= 0;
-};
-
 		$("#orderJqxGrid").jqxGrid({
 			width: '90%',
 			height: 'auto',
-			pagermode: 'default',
+			//theme: "dark",
+			 pagermode:'default',
 			rowsheight: 40,
 			columnsheight: 40,
 			columnsresize: true,
 			pageable: true,
+			/*selectionmode: 'singlecell',*/
 			source: adapter,
 			pagesize: 10,
+			/*virtualmode: true,*/
 			autoheight: true,
+			/*rendergridrows: function() {
+				debugger;
+				return adapter.records;
+			},*/
+			//	columnsmenu: false, 
 			editable: false,
 			sortable: true,
-			sortmode: 'multiple',
-			filterable: true,
-			filtermode: 'custom',
-			filter: customFilter,
-			updatefilterconditions: function(type, filterConditions) {
-    filterConditions.push({ text: 'Custom Filter', value: 'custom' });
-},
-			/*filter: function(value, filterValue) {
-				debugger;
-				console.log(filterValue.toString().toLowerCase());
-				return value.toString().toLowerCase().indexOf(filterValue.toString().toLowerCase()) >= 0;
-			},*/
-			/*updatefilterconditions: function(type, defaultconditions) {
+    sortmode: 'multiple',
+    filterable: true,
+    filtermode: 'default',
+			updatefilterconditions: function(type, defaultconditions) {
 				var stringcomparisonoperators = ['CONTAINS'];
 				var numericcomparisonoperators = ['CONTAINS'];
 				var datecomparisonoperators = ['CONTAINS'];
@@ -325,50 +418,66 @@ var Orders = (function() {
 					case 'booleanfilter':
 						return booleancomparisonoperators;
 				}
-			},*/
+			},
 			showfilterrow: true,
+			/*groupsrenderer : groupsrenderer,*/
+			/*
+			groupsexpandedbydefault: true,
+			showgroupsheader: false,*/
 			showsortcolumnbackground: true,
 			groupable: true,
 			columns: [
-				{ text: 'Order No.', datafield: 'id', width: 100, type: 'string' },
-				{ text: 'Customer Name', datafield: 'username', width: 500, type: 'string' },
+				{ text: 'Id', datafield: 'id', width: 100 },
+				{ text: 'Customer Name', datafield: 'username', width: 500 },
 				{ text: 'Price', datafield: 'price', width: 180 },
-				{ text: 'Date', datafield: 'date', width: 300 },
-				{
-					text: 'Completed?',
-					datafield: 'completed',
-					width: 134,
-					cellsalign: 'right',
-					columntype: 'button',
-					cellsrenderer: function(row, column, value, defaultHtml, columnSettings, rowData) {
-						var buttonId = 'btn_' + rowData.id;
-						var buttonHtml = '<button id="' + buttonId + '">Open Modal</button>';
-						return buttonHtml;
-					}
-				}
+				/*{ text: 'Date', datafield: 'date', width: 300 },*/
+				{ text: 'Date', datafield: 'date', cellsformat: 'dd-MM-yyyy HH:mm', cellsalign: 'right', align: 'right', sortable: true, sorttype: 'custom', 
+          sortdirection: 'asc', sorting: dateSortFn },
+				{ text: 'Completed?', datafield: 'completed', width: 134, cellsalign: 'right' }
 			]
 		});
 	}
 
+	/* $("#orderJqxGrid").on('groupexpand', function (event) {
+			setTimeout(function(){
+				$(".jqx-grid-groups-row").each(function(k, v){
+				$($(v).find("span")[0]).html(groupByName + ": ");
+				});
+			}, 10);  
+			});
+		 
+		 $('#orderJqxGrid').on('groupcollapse', function (event)  { 
+			setTimeout(function(){
+				$(".jqx-grid-groups-row").each(function(k, v){
+					$($(v).find("span")[0]).html(groupByName + ": ");
+				});}, 10); 
+			
+		});*/
 	return {
+		/*getCommonObjects : getCommonObjects,*/
 		getOrder: getOrder
+		/*setGroupBy : setGroupBy,
+		setGroupByName : setGroupByName*/
 	}
 
 })();
-$('#orderJqxGrid').on('cellclick', function(event) {
-	debugger;
-	if (event.args.datafield === 'id') {
-		var buttonId = 'btn_' + event.args.row.id;
-		if (event.args.originalEvent.target.id === buttonId) {
-			// call your function to open the modal
-			openModal(event.args.row.id);
-		}
-	}
-});
+
 
 
 $(document).ready(function() {
 
+	/*var subjectProfileMessage = localStorage.getItem('subjectProfileMessage');
+	if(subjectProfileMessage != null){
+		message.success(subjectProfileMessage);
+		localStorage.removeItem('subjectProfileMessage')
+	}
+	
+	
+	$('.selectpicker').selectpicker();
+	Orders.getCommonObjects();
+	Orders.setGroupBy("OrderDate");
+	Orders.setGroupByName("Order Date");
+	 loader.hide();*/
 
 	$(function() {
 		var socket = new SockJS('/websocket');
@@ -390,23 +499,61 @@ $(document).ready(function() {
 
 	var previousGroupBy = "";
 	console.log("Step : 0");
+	/*$("#OrderGrpby").change(function(){
+		console.log("Step : 1");
+		console.log($(this).val());
+		
+		$('#orderJqxGrid').jqxGrid('cleargroups');
+		
+		previousGroupBy = $(this).val();
+		var tmpS = $("#orderJqxGrid").jqxGrid('source');
+		
+		tmpS._source.sortcolumn = $(this).val();
+		tmpS._source.sortorder='asc';
+		
+		$("#orderJqxGrid").jqxGrid('refreshdata');
+		Orders.setGroupByName($(this).find("option:selected").text());
+		Orders.setGroupBy($(this).val());
+		
+		tmpS._source.url =serverURL + '/secure/list/Order/getOrderList?groupby='+$(this).val();
+		$("#orderJqxGrid").jqxGrid('source', tmpS);
+	});
+	$("#linkFieldChooser").click(function(){
+		customFields.getcustomFields('CUSTOME_FIELDS_OrderS_BASED');
+	});
+	$("#sortOptionChooserOrder").click(function(){
+		gridSortOptions.openUserSortOptions('Order');
+	});*/
+
+
+	/*$("#btnSaveCustomFields").click(function(){
+		var reloadGrid = function(){
+			$('#orderJqxGrid').jqxGrid('cleargroups');
+			
+			previousGroupBy = $("#OrderGrpby").val();
+			var tmpS = $("#orderJqxGrid").jqxGrid('source');
+			
+			tmpS._source.sortcolumn = $("#OrderGrpby").val();
+			tmpS._source.sortorder='asc';
+			
+			$("#orderJqxGrid").jqxGrid('refreshdata');
+			Orders.setGroupByName($("#OrderGrpby").find("option:selected").text());
+			Orders.setGroupBy($("#OrderGrpby").val());
+			
+			tmpS._source.url =serverURL + '/secure/list/Order/getOrderList?groupby='+$("#OrderGrpby").val();
+			$("#orderJqxGrid").jqxGrid('source', tmpS);
+		}
+		customFields.savecustomFields('CUSTOME_FIELDS_OrderS_BASED',reloadGrid);
+	});*/
 
 	$("#orderJqxGrid").on('rowclick', function(event) {
 		debugger;
 		if (!event.args.rightclick) {
-
-
-			if (event.args.columnindex = "Completed?") {
-				debugger
-
-			}
-			else {
-				rowindex = event.args.rowindex;
-				if (rowindex >= 0) {
-					/*loader.show();*/
-					rowdata = $("#orderJqxGrid").jqxGrid('getrowdata', rowindex);
-					populateOrderDetailsModal(rowdata.id);
-				}
+			rowindex = event.args.rowindex;
+			if (rowindex >= 0) {
+				/*loader.show();*/
+				rowdata = $("#orderJqxGrid").jqxGrid('getrowdata', rowindex);
+				populateOrderDetailsModal(rowdata.id);
 			}
 		}
 	});

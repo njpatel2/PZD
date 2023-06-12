@@ -27,6 +27,7 @@ public class CartServiceImpl implements CartService {
 
 		ArrayList<HashMap<String, String>> listOfCartItems = new ArrayList<>();
 
+		
 		for (Object[] objects : CartProducts) {
 			HashMap<String, String> cartItems = new HashMap<>();
 			cartItems.put("productName", (String) objects[0]);
@@ -34,7 +35,7 @@ public class CartServiceImpl implements CartService {
 			cartItems.put("productPrice", Float.toString((Float) objects[2]));
 			cartItems.put("productQuantity", Integer.toString((Integer) objects[3]));
 			cartItems.put("productId", Integer.toString((Integer) objects[4]));
-			cartItems.put("subTotal", Float.toString((Float) objects[2]*(Integer) objects[3]));
+			cartItems.put("subTotal", Float.toString((Float) objects[2] * (Integer) objects[3]));
 			listOfCartItems.add(cartItems);
 		}
 		return listOfCartItems;
@@ -80,22 +81,20 @@ public class CartServiceImpl implements CartService {
 
 	}
 
-	public ArrayList<CartDTO>  getAllCartItemsOfUser(int userId) {
-		
+	public ArrayList<CartDTO> getAllCartItemsOfUser(int userId) {
+
 		ArrayList<Cart> CartProducts = cartRepository.getAllCartItemsByUserId(userId);
-		
+
 		ArrayList<CartDTO> cartDTOs = new ArrayList<>();
-		
+
 		for (Cart CartProduct : CartProducts) {
-			
+
 			CartDTO cartDto = new CartDTO();
-			
+
 			BeanUtils.copyProperties(CartProduct, cartDto);
 			cartDTOs.add(cartDto);
 		}
-		
-		
-		
+
 		return cartDTOs;
 	}
 

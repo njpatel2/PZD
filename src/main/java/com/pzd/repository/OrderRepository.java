@@ -20,7 +20,7 @@ public interface OrderRepository extends JpaRepository<Orders, Integer> {
 //	public void getAllPendingOrders();
 	
 	@Transactional
-	@Query("FROM Orders o WHERE o.isCompleted = :isCompleted")
+	@Query("FROM Orders o WHERE o.isCompleted = :isCompleted order by o.id desc")
 	List<Orders> getAllPendingOrders(@Param("isCompleted") boolean isCompleted);
 
 }

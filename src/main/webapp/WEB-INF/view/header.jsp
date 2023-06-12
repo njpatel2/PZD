@@ -78,6 +78,8 @@
 					</c:if>
 					<li class="nav-item"><a href="/logout"
 						class="nav-link hover-effect">Logout</a></li>
+					<li class="nav-item"><a href="/testJsp"
+						class="nav-link hover-effect">testJsp</a></li>
 
 				</ul>
 

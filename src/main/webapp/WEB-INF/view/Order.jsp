@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title id='Description'>This example shows how to create a Grid
-	from Array data.</title>
+<title id='Description'>Orders</title>
 <%@include file="header.jsp"%>
 <link rel="stylesheet" href="/jqwidgets/styles/jqx.base.css">
 <link rel="stylesheet" href="/jqwidgets/styles/jqx.dark.css" type="text/css" />
@@ -17,6 +16,7 @@
 <script type="text/javascript" src="/jqwidgets/jqxmenu.js"></script>
 <script type="text/javascript" src="/jqwidgets/jqxgrid.js"></script>
 <script type="text/javascript" src="/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.grouping.js"></script>
 
 <script type="text/javascript" src="/jqwidgets/jqxgrid.pager.js"></script>
 <script type="text/javascript" src="/jqwidgets/jqxgrid.filter.js"></script>
@@ -85,7 +85,32 @@
 			</div>
 		</div>
 	</div>
+<!-- show alert model -->
+	<div class=" modal fade" id="alertModel" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true" onclick="myFunction()">
+		<div class="modal-dialog modal-dialog-centered model-lg"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header  ">
+					<h5 class="modal-title" id="alertModelTitle">New Order Received</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" id="closealertModel">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+					<div>
+					  <p>Username: <span id="username"></span></p>
+					  <p>Order ID: <span id="orderId"></span></p>
+					</div>
+				</div>
 
+			</div>
+		</div>
+	</div>
+<!-- show alert model end -->
 	<%@include file="footer.jsp"%>
 </body>
 </html>

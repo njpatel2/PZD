@@ -51,6 +51,7 @@ public class SecurityConfiguration {
 				.antMatchers("/home").authenticated()
 				.antMatchers("/orders/**").authenticated()
 				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/websocket/**").permitAll()
 				.and()
 				.formLogin().loginPage("/login").loginProcessingUrl("/Dologin").usernameParameter("email").defaultSuccessUrl("/home", true)
 				.and()

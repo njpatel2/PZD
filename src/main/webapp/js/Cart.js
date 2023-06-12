@@ -30,6 +30,7 @@ function connect(){
 }
 
 function sendAlert(){
+	debugger;
 	var message = {
 				'username': 1,
 				'orderDetails': 1
