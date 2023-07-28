@@ -7,15 +7,16 @@
 <title>Admin Page - eCommerce Website</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	>
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!-- Fontawesome CSS -->
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-	/>
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
 	rel="stylesheet" />
+	<link rel="stylesheet" href="/jqwidgets/styles/jqx.base.css">
+<link rel="stylesheet" href="/jqwidgets/styles/jqx.dark.css"
+	type="text/css" />
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
@@ -23,9 +24,36 @@
 <script type="text/javascript" src="/js/Cart.js"></script>
 <script type="text/javascript" src="/js/admin.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+	<script type="text/javascript" src="/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.grouping.js"></script>
+
+<script type="text/javascript" src="/jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="/jqwidgets/jqxdropdownlist.js"></script>
+<link rel="stylesheet" href="/css/jqxGrid.css" type="text/css" />
+
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do"
+	rel="stylesheet">
 <style>
 .col-md-4 {
 	margin-top: 30px;
@@ -59,18 +87,23 @@ body {
 	transform: scale(1.15);
 }
 
-.modal-header .modal-title {
+ .modal-header .modal-title {
 	color: black;
 }
 
 .modal-body {
 	background-color: #101315;
-}
+} 
 
 .categories {
 	background-color: #101315;
 	color: white;
 }
+span {
+  color: #000000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;}
 /* select#category {
   background-color: #101315;
   color: white;
@@ -107,28 +140,28 @@ body {
 				</div>
 			</div> -->
 			<div class="col-lg-3 col-md-4 col-sm-6 col-12 ftco-animate"
-				onclick="getCustomerList()">
+				onclick="populatecustomerDetailsModal()">
 				<div class="card rounded-lg">
 					<div class="card-body">
 						<div class="text-center">
-							<img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom">
+							<!-- <img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom"> -->
 						</div>
 						<h5 class="card-title text-center mt-3">Customers</h5>
 						<p class="card-text text-center" id="userCount">50</p>
 						<div class="text-center">
-							<a href="#" class="btn btn-primary rounded-pill mt-3"
+							<a class="btn btn-primary rounded-pill mt-3"
 								style="background-color: transparent; color: #f9a825;">View</a>
 						</div>
 					</div>
 				</div>
 			</div>
 
-<div class="col-lg-3 col-md-4 col-sm-6 col-12 ftco-animate"
-				onclick="myFunction()">
+			<div class="col-lg-3 col-md-4 col-sm-6 col-12 ftco-animate"
+				onclick="populateProductDetailsModal()">
 				<div class="card rounded-lg">
 					<div class="card-body">
 						<div class="text-center">
-							<img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom">
+							<!-- <img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom"> -->
 						</div>
 						<h5 class="card-title text-center mt-3">Products</h5>
 						<p class="card-text text-center" id="productCount">50</p>
@@ -144,7 +177,7 @@ body {
 				<div class="card rounded-lg">
 					<div class="card-body">
 						<div class="text-center">
-							<img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom">
+							<!-- <img src="/gif/user.gif" alt="Animated GIF" class="w-50 zoom"> -->
 						</div>
 						<h5 class="card-title text-center mt-3">Categories</h5>
 						<p class="card-text text-center" id="categoryCount">50</p>
@@ -155,15 +188,15 @@ body {
 					</div>
 				</div>
 			</div>
-			
-			
+
+
 			<div class=" col-lg-5 col-md-4 ftco-animate text-center"
 				onclick="addProduct()">
 				<div class="card">
 					<div class="card-body">
 						<div>
-							<img src="/gif/add-product.gif" alt="Animated GIF"
-								style="width: 50px;">
+							<!-- <img src="/gif/add-product.gif" alt="Animated GIF"
+								style="width: 50px;"> -->
 						</div>
 						<h5 class="card-title">Add Product</h5>
 						<a href="#" class="btn btn-primary">Add</a>
@@ -175,8 +208,8 @@ body {
 				<div class="card">
 					<div class="card-body">
 						<div>
-							<img src="/gif/remove-product.gif" alt="Animated GIF"
-								style="width: 50px;">
+							<!-- <img src="/gif/remove-product.gif" alt="Animated GIF"
+								style="width: 50px;"> -->
 						</div>
 						<h5 class="card-title">Remove Product</h5>
 						<a href="#" class="btn btn-primary">Remove</a>
@@ -188,8 +221,8 @@ body {
 				<div class="card">
 					<div class="card-body">
 						<div>
-							<img src="/gif/add-product.gif" alt="Animated GIF"
-								style="width: 50px;">
+							<!-- <img src="/gif/add-product.gif" alt="Animated GIF"
+								style="width: 50px;"> -->
 						</div>
 						<h5 class="card-title">Add category</h5>
 						<a href="#" class="btn btn-primary">Add</a>
@@ -201,8 +234,8 @@ body {
 				<div class="card">
 					<div class="card-body">
 						<div>
-							<img src="/gif/remove-product.gif" alt="Animated GIF"
-								style="width: 50px;">
+							<!-- <img src="/gif/remove-product.gif" alt="Animated GIF"
+								style="width: 50px;"> -->
 						</div>
 						<h5 class="card-title">Remove category</h5>
 						<a href="#" class="btn btn-primary">Remove</a>
@@ -390,35 +423,113 @@ body {
 		</div>
 	</div>
 	<!-- delete product end -->
-	
+
 	<!-- show alert model -->
-	<div class=" modal fade" id="alertModel" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
-		aria-hidden="true" onclick="myFunction()">
+	<div class=" modal fade" id="alertModel" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+		onclick="myFunction()">
 		<div class="modal-dialog modal-dialog-centered model-lg"
 			role="document">
 			<div class="modal-content">
 				<div class="modal-header  ">
-					<h5 class="modal-title" id="alertModelTitle">New Order Received</h5>
+					<h5 class="modal-title" id="alertModelTitle">New Order
+						Received</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close" id="closealertModel">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					
+
 					<div>
-					  <p>Username: <span id="username"></span></p>
-					  <p>Order ID: <span id="orderId"></span></p>
+						<p>
+							Username: <span id="username"></span>
+						</p>
+						<p>
+							Order ID: <span id="orderId"></span>
+						</p>
 					</div>
 				</div>
 
 			</div>
 		</div>
 	</div>
-<!-- show alert model end -->
+	<!-- show alert model end -->
 
+	<!-- <div class=" modal fade" id="customerDetailsModel" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+		onclick="myFunction()">
+		<div class="modal-dialog modal-dialog-centered model-lg"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header  ">
+					<h5 class="modal-title" style="color: black" id="customerDetailsModelTitle">Customer Details</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" id="closecustomerDetailsModel">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
 
+					<div id='jqxWidget' style="font-size: 13px; font-family: Verdana;">
+						<div id="customerDetailsJqxGrid"></div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div> -->
+	
+	<div class=" modal fade" id="customerDetailsModel" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true" onclick="">
+		<div class="modal-dialog modal-dialog-centered model-lg"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header  ">
+					<h5 class="modal-title" style="color: black"
+						id="customerDetailsModalTitle">Customer Details</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" id="closeCustomerDetailsModel">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id='jqxWidget' style="font-size: 13px; font-family: Verdana;">
+						<div id="customerDetailsJqxGrid"></div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<div class=" modal fade" id="productDetailsModel" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true" onclick="">
+		<div class="modal-dialog modal-dialog-centered model-lg"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header  ">
+					<h5 class="modal-title" style="color: black"
+						id="productDetailsModalTitle">Product Details</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" id="closeProductDetailsModel">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id='jqxWidget' style="font-size: 13px; font-family: Verdana;">
+						<div id="productDetailsJqxGrid"></div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
 	<%@include file="footer.jsp"%>
 
 

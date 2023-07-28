@@ -12,12 +12,24 @@
 }
 
 
-#jqxGrid .jqx-grid-cell {
-	color: rgb(148, 198, 255);
+#orderJqxGrid.jqx-grid-cell .custom-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+#orderJqxGrid .jqx-grid-cell {
+	background : white !important;
 	font-size: 12px;
 }
 
-/* .specialtext {
+#orderJqxGrid .jqx-button{
+	border-color: #ffffff;
+    background: #ffffff;
+}
+/*
+
+.specialtext {
 	color: orange !important;
 }
 
@@ -67,4 +79,4 @@
 .jqx-grid-statusbar span {
 	color: rgb(148, 198, 255);
 	font-size: 12px;
-}  */
+}   */

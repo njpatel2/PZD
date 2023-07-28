@@ -21,6 +21,10 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Inte
 	@Query("FROM OrderDetails o WHERE o.Order.OrderId = :orderId")
 	ArrayList<OrderDetails> getByOrderId(@Param("orderId") long orderId);
 
+//	@Transactional
+//	@Query("update OrderDetails set  o.Order.OrderId = :orderId")
+//	void changeStatusToCompleted(@Param("orderId") long orderId);
+
 	
 //	@Transactional
 //	@Query(insert into)

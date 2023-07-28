@@ -2,9 +2,12 @@ package com.pzd.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pzd.DTO.CategoryDTO;
@@ -66,10 +69,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ArrayList<ProductDTO> getProductList()
+	public ArrayList<ProductDTO> getProductList(int categoryId, int page)
 	{
+		Pageable pageable = PageRequest.of(page, 1);
 
-		ArrayList<Product> list = productRepository.findOrderByCategoryId();
+		ArrayList<Product> list = productRepository.findOrderByCategoryId(categoryId, pageable);
 		ArrayList<ProductDTO> productDTO = new ArrayList<>();
 		for (Product product : list) {
 			ProductDTO dto = new ProductDTO();
@@ -94,6 +98,47 @@ public class ProductServiceImpl implements ProductService {
 		return productDTO;
 		
 	}
+	@Override
+	public ArrayList<HashMap<String, String>> getProductDetails()
+	{
+
+		ArrayList<String> productList = productRepository.getProductList();
+		ArrayList<HashMap<String, String>> productListForGrid = new ArrayList<>();
+		
+		for (String u : productList) {
+			String[] s = u.split(",");
+			HashMap<String, String> singleProduct = new HashMap<>();
+			
+			singleProduct.put("id", s[0]);
+			singleProduct.put("name", s[1]);
+			singleProduct.put("price", s[2]);
+			singleProduct.put("discount",  s[3]);
+			singleProduct.put("quantity",  s[4]);
+			singleProduct.put("category",  s[5]);
+			
+			productListForGrid.add(singleProduct);
+		}
+		return productListForGrid;
+		
+	}
+
+	@Override
+	public ArrayList<HashMap<String, String>> getCategoryIdList() {
+			
+		
+		ArrayList<Object[]> nn = categoryRepository.getCategoryIDlist();
+		ArrayList<HashMap<String, String>> ListOfCategories = new ArrayList<>();
+		for (Object[] object : nn) {
+			HashMap<String, String> category = new HashMap<>();
+			
+			category.put("categoryId", object[0].toString());
+			category.put("categoryTitle", (String)object[1]);
+			ListOfCategories.add(category);
+		}
+		
+		return ListOfCategories;
+	}
+
 
 	
 }

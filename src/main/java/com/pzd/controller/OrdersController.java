@@ -113,6 +113,17 @@ public class OrdersController {
 		return orderDetailsService.getOrderDetailsByOrderId(orderId);
 		
 	}
+	@RequestMapping("/changeStatusToCompleted")
+	@ResponseBody
+	public void changeStatusToCompleted(
+			@RequestBody Map<String, Object> payload,
+			HttpServletRequest request) {
+		
+		long orderId = Long.parseLong(payload.get("orderId").toString());
+
+		orderService.changeStatusToCompleted(orderId);
+		
+	}
 	
 	
 

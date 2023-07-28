@@ -20,7 +20,9 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import com.pzd.DTO.OrderDTO;
 import com.pzd.DTO.UserRegistrationDTO;
+import com.pzd.entities.Orders;
 import com.pzd.entities.User;
 import com.pzd.repository.UserRepository;
 import com.pzd.security.CustomUser;
@@ -178,11 +180,31 @@ public class UserServiceImpl extends DefaultOAuth2UserService implements UserSer
 	}
 
 	@Override
-	public ArrayList<String> getCustomerList() {
+	public ArrayList<HashMap<String, String>> getCustomerList() {
 		ArrayList<String> userList = null;
-		
+		HashMap < ArrayList< String>, String> userDetails = new HashMap<>();
+//		ArrayList<ArrayList< String>>  = new ArrayList<>();
+		ArrayList<HashMap<String, String>> userList2 = new ArrayList<>();
 		userList = userRepository.getCustomerNameList();
-		return userList;
+		for (String u : userList) {
+			
+			String[] s = u.split(",");
+			HashMap<String, String> singleUser = new HashMap<>();
+			
+			singleUser.put("id", s[0]);
+			singleUser.put("username", s[1]);
+			singleUser.put("email",  s[2]);
+			singleUser.put("contact",  s[3]);
+			if(s[4].contains("ADMIN")) {
+				singleUser.put("role","Admin");
+			}
+			else {
+				singleUser.put("role","User");
+			}
+			
+			userList2.add(singleUser);
+		}
+		return userList2;
 	}
 	@Override
 	public HashMap<String,Integer> getCountOfCustomerProductCategory() {

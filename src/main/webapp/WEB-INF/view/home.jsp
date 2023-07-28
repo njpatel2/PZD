@@ -123,6 +123,11 @@
 	transition: all 0.3s ease-in-out;
 	/* add a transition for smooth size change on hover */
 }
+.menu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem !important;
+}
 </style>
 
 </head>
@@ -130,9 +135,19 @@
 
 
 	<section class="ftco-section">
+	
 		<div class="container">
+	
 			<div class="row justify-content-center mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate text-center">
+				<div class="nav ftco-animate nav-pills fadeInUp ftco-animated menu" id="menuItems" role="tablist" aria-orientation="vertical">
+		              <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" onclick="getItem()" role="tab" aria-controls="v-pills-1" aria-selected="true">Pizza</a>
+
+		              <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Drinks</a>
+
+		              <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Vapes</a>
+
+		             </div>
 					<h2 class="mb-4">Hot Pizza Meals</h2>
 					<p>Far far away, behind the word mountains, far from the
 						countries Vokalia and Consonantia, there live the blind texts.</p>

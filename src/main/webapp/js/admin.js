@@ -154,12 +154,166 @@ function getCountOfCustomerProductCategory() {
 
 }
 
-function getCustomerList() {
+/*function getCustomerList() {
 	var sendData = JSON.stringify();
 	var result = doAjaxCall('/admin/getCustomerList', 'GET', sendData);
 
 
+
+}*/
+
+var customerDetails = (function() {
+
+	var getcustomerDetails = function() {
+		bindcustomerDetailsGrid();
+
+	}
+	var bindcustomerDetailsGrid = function() {
+
+		var cellRendererForOpen = function(row, columnfield, value, defaulthtml, columnproperties, rowdata) {
+			if ($("#customerDetailsJqxGrid").jqxGrid('getrowdata', row) != undefined) {
+				var theStatus = rowdata.isOpened;
+				if (theStatus == false) {
+					return ' <div style="padding-top:10px;padding-left: 8px;"><img style="width:15px;" src="' + baseURL + '/img/hourGlassIcn.png">  ' + rowdata.invId + '  </div>'
+				} else if (theStatus == true) {
+					return ' <div style="padding-top:10px;padding-left: 8px;"><img style="width:15px;" src="' + baseURL + '/img/searchIcn.png">  ' + rowdata.invId + '  </div>'
+				}
+			}
+		};
+
+		var url = '/admin/getCustomerDetails';
+		var source = {
+			datatype: "json",
+			id: 'id',
+			url: url,
+			root: 'results',
+		};
+		var sendData = JSON.stringify({
+			orderId: OrderId,
+		});
+		/*$("#customerDetailsJqxGrid").jqxGrid("clear");*/
+		var adapter = new $.jqx.dataAdapter(source,
+			{
+				loadServerData: function(postdata, source, callback) {
+					$.ajax({
+						dataType: "json",
+						cache: false,
+						type: "GET",
+						url: source.url,
+						/*data: sendData,
+						data: JSON.stringify({
+							orderId: OrderId,
+							postdata: postdata
+						}),*/
+						tryCount: 0,
+						retryLimit: 2,
+						/*data: postdata,*/
+						contentType: "application/json",
+						success: function(data, status, xhr) {
+							debugger;
+							var records = encodeXMLEscapeCharsForJQXGrid(data, data);
+							adapter.loadjson(null, records, source);
+							debugger;
+							callback({ records: adapter.records });
+							debugger;
+						},
+						error: function(xhr, textStatus, errorThrown) {
+
+							if (textStatus == 'error' || textStatus == 'timeout') {
+								this.tryCount++;
+								function showMessage() {
+									setTimeout(function() {
+										$('.showError').show();
+									}, 10000);
+								}
+								if (this.tryCount < this.retryLimit) {
+									$.ajax(this);
+									return;
+								}
+								return showMessage();
+							}
+						}
+					});
+				}
+			});
+		console.log(adapter.records)
+
+		$("#customerDetailsJqxGrid").jqxGrid({
+			width: '100%',
+			height: 'auto',
+			rowsheight: 60,
+			columnsheight: 40,
+			columnsresize: true,
+			pageable: true,
+			source: adapter,
+			pagesize: 10,
+			virtualmode: true,
+			autoheight: true,
+			rendergridrows: function() {
+				debugger;
+				return adapter.records;
+			},
+			editable: false,
+			sortable: true,
+			sorttogglestates: 0,
+			filterable: true,
+			showfilterrow: true,
+			showsortcolumnbackground: true,
+			groupable: true,
+
+			columns: [
+				{ text: 'Id', datafield: 'id', width: 50 },
+				{ text: 'username', datafield: 'username', width: 100 },
+				{ text: 'email', datafield: 'email', width: 130 },
+				{ text: 'contact', datafield: 'contact', width: 100 },
+				{ text: 'role', datafield: 'role', width: 80 },
+
+			]
+		});
+	}
+	return {
+		getcustomerDetails: getcustomerDetails
+	}
+
+})();
+
+function populatecustomerDetailsModal(orderId) {
+	/*open modal*/
+debugger;
+	$('#customerDetailsModel').modal('show');
+
+	OrderId = orderId;
+	customerDetails.getcustomerDetails();
+
+	/*bind grid data*/
 }
+function encodeXMLEscapeCharsForJQXGrid(records, original) {
+	var data = new Array();
+	data = original;
+	// 	update the loaded records to escape special characters 
+	for (var i = 0; i < records.length; i++) {
+		for (var key in records[i]) {
+			if (records[i].hasOwnProperty(key) && records[i][key] != null && records[i][key].constructor === String) {
+				records[i][key] = encodeXMLEscapeChars(records[i][key]);
+			}
+		}
+	}
+	return records;
+}
+function encodeXMLEscapeChars(value) {
+	var outPut = value;
+	if ($.trim(outPut) != "") {
+		outPut = outPut.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+		outPut = outPut.replace(/&(?!(amp;)|(lt;)|(gt;)|(quot;)|(#39;)|(apos;))/g, "&amp;");
+		outPut = outPut.replace(/([^\\])((\\\\)*)\\(?![\\/{])/g, "$1\\\\$2");  //replaces odd backslash(\\) with even.
+	} else {
+		outPut = "";
+	}
+
+	return outPut;
+}
+
+
 function addCategoryToDatabase() {
 	debugger;
 	var category_Title = $("#categoryName").val();
@@ -461,4 +615,130 @@ function RemoveProductFromDatabase() {
 			console.log("DONE");
 		}
 	});
+}
+
+var productDetails = (function() {
+
+	var getproductDetails = function() {
+		bindproductDetailsGrid();
+
+	}
+	var bindproductDetailsGrid = function() {
+
+		var cellRendererForOpen = function(row, columnfield, value, defaulthtml, columnproperties, rowdata) {
+			if ($("#productDetailsJqxGrid").jqxGrid('getrowdata', row) != undefined) {
+				var theStatus = rowdata.isOpened;
+				if (theStatus == false) {
+					return ' <div style="padding-top:10px;padding-left: 8px;"><img style="width:15px;" src="' + baseURL + '/img/hourGlassIcn.png">  ' + rowdata.invId + '  </div>'
+				} else if (theStatus == true) {
+					return ' <div style="padding-top:10px;padding-left: 8px;"><img style="width:15px;" src="' + baseURL + '/img/searchIcn.png">  ' + rowdata.invId + '  </div>'
+				}
+			}
+		};
+
+		var url = '/admin/getProductDetails';
+		var source = {
+			datatype: "json",
+			id: 'id',
+			url: url,
+			root: 'results',
+		};
+		var sendData = JSON.stringify({
+			orderId: OrderId,
+		});
+		/*$("#productDetailsJqxGrid").jqxGrid("clear");*/
+		var adapter = new $.jqx.dataAdapter(source,
+			{
+				loadServerData: function(postdata, source, callback) {
+					$.ajax({
+						dataType: "json",
+						cache: false,
+						type: "GET",
+						url: source.url,
+						/*data: sendData,
+						data: JSON.stringify({
+							orderId: OrderId,
+							postdata: postdata
+						}),*/
+						tryCount: 0,
+						retryLimit: 2,
+						/*data: postdata,*/
+						contentType: "application/json",
+						success: function(data, status, xhr) {
+							debugger;
+							var records = encodeXMLEscapeCharsForJQXGrid(data, data);
+							adapter.loadjson(null, records, source);
+							debugger;
+							callback({ records: adapter.records });
+							debugger;
+						},
+						error: function(xhr, textStatus, errorThrown) {
+
+							if (textStatus == 'error' || textStatus == 'timeout') {
+								this.tryCount++;
+								function showMessage() {
+									setTimeout(function() {
+										$('.showError').show();
+									}, 10000);
+								}
+								if (this.tryCount < this.retryLimit) {
+									$.ajax(this);
+									return;
+								}
+								return showMessage();
+							}
+						}
+					});
+				}
+			});
+		console.log(adapter.records)
+
+		$("#productDetailsJqxGrid").jqxGrid({
+			width: '100%',
+			height: 'auto',
+			rowsheight: 60,
+			columnsheight: 40,
+			columnsresize: true,
+			pageable: true,
+			source: adapter,
+			pagesize: 10,
+			virtualmode: true,
+			autoheight: true,
+			rendergridrows: function() {
+				debugger;
+				return adapter.records;
+			},
+			editable: false,
+			sortable: true,
+			sorttogglestates: 0,
+			filterable: true,
+			showfilterrow: true,
+			showsortcolumnbackground: true,
+			groupable: true,
+
+			columns: [
+				{ text: 'Id', datafield: 'id', width: 50 },
+				{ text: 'Name', datafield: 'name', width: 115 },
+				{ text: 'Price', datafield: 'price', width: 60 },
+				{ text: 'Discount', datafield: 'discount', width: 70 },
+				{ text: 'Quantity', datafield: 'quantity', width: 70 },
+				{ text: 'Cateogry', datafield: 'category', width: 100 },
+			]
+		});
+	}
+	return {
+		getproductDetails: getproductDetails
+	}
+
+})();
+
+function populateProductDetailsModal(orderId) {
+	/*open modal*/
+debugger;
+	$('#productDetailsModel').modal('show');
+
+	OrderId = orderId;
+	productDetails.getproductDetails();
+
+	/*bind grid data*/
 }

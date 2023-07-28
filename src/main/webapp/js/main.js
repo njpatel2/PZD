@@ -192,7 +192,7 @@ AOS.init({
 
 	//this function will display products on Ui
 	//placed this function because its necessary to load all the elements before animation
-	var displayProducts = function() {
+	var displayProducts = function(categoryId) {
 
 		const $divAvailable = $('#productsList');
 		if ($divAvailable.length > 0) {
@@ -204,11 +204,15 @@ AOS.init({
 				type: "GET",
 				url: "/user/getItems",
 				async: false,
-				data: {},
+				data: {
+					page: '1',
+					categoryId: categoryId
+				},
 				contentType: "application/json",
 				success: function(data) {
+					debugger;
 					productList = data;
-					
+
 
 				},
 				error: function(e) {
@@ -306,7 +310,7 @@ AOS.init({
 		}
 
 	};
-	displayProducts();
+	displayProducts(6);
 
 	var contentWayPoint = function() {
 		var i = 0;

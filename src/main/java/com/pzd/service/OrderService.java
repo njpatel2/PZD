@@ -16,4 +16,6 @@ public interface OrderService {
 
 	OrderDTO getOrderPojo();
 
+	void changeStatusToCompleted(long orderId);
+
 }

@@ -20,6 +20,7 @@ import com.pzd.mail.EmailSenderService;
 import com.pzd.security.CustomUser;
 import com.pzd.serviceImpl.ProductServiceImpl;
 import com.pzd.serviceImpl.UserServiceImpl;
+import com.pzd.utils.PaginationUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -39,18 +40,21 @@ public class UserController {
 
 	@RequestMapping("/getItems")
 	@ResponseBody
-	public ArrayList<ProductDTO> getItems() {
+	public ArrayList<ProductDTO> getItems(
+	        @RequestParam(name = "page") Integer page,
+	        @RequestParam(name = "categoryId") Integer categoryId) {
 
-		ArrayList<ProductDTO> productDTOs = new ArrayList<>();
+	    ArrayList<ProductDTO> productDTOs = new ArrayList<>();
 
-		try {
-			productDTOs = productServiceImpl.getProductList();
-		} catch (Exception e) {
-			throw e;
-		}
-		return productDTOs;
+	    try {
+	        productDTOs = productServiceImpl.getProductList(categoryId, page);
+	    } catch (Exception e) {
+	        throw e;
+	    }
+	    return productDTOs;
 	}
 
+	
 	@RequestMapping("/getProfile")
 	public ModelAndView getProfile() {
 		ModelAndView mv = new ModelAndView("UserProfile");

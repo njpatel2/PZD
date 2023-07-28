@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
 			singleOrder.put("id", Long.toString(order.getId()));
 			singleOrder.put("username", order.getUser().getName());
 			singleOrder.put("price", Float.toString(order.getPrice()));
-			singleOrder.put("completed", Boolean.toString(order.isCompleted()));
+			singleOrder.put("Change Status", Boolean.toString(order.isCompleted()));
 			
 //			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 //	        String formattedTimestamp = dateFormat.format(order.getDate());
@@ -82,6 +82,12 @@ public class OrderServiceImpl implements OrderService {
 
 		orderDTO.setDate(formattedTimestamp);
 		return orderDTO;
+	}
+
+	@Override
+	public void changeStatusToCompleted(long orderId) {
+		orderRepository.changeStatusToCompleted(true,orderId);
+		
 	}
 
 }

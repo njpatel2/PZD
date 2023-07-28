@@ -1,7 +1,9 @@
 package com.pzd.repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.persistence.Column;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,15 +31,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT count(*) from Users u where u.role LIKE '%ROLE_USER%'")
 	public int getCustomerCount();
 
-	@Query("SELECT u.name from Users u")
+	@Query("SELECT u.id , u.name, u.email , u.contactNumber, u.role from Users u")
 	public ArrayList<String> getCustomerNameList();
-
-	@Query("SELECT \r\n"
-			+ "  (SELECT COUNT(*) FROM Users u WHERE u.role LIKE '%ROLE_USER%') AS userCount, \r\n"
-			+ "  COUNT(DISTINCT p_id) AS productCount, \r\n"
-			+ "  COUNT(DISTINCT categoryld) AS categoryCount \r\n"
-			+ "FROM Users, product, category\r\n"
-			+ "")
+	
+//	@Query("SELECT  (SELECT COUNT(*) FROM Users u WHERE u.role LIKE '%ROLE_USER%') AS userCount,   COUNT(DISTINCT p_id) AS productCount,   COUNT(DISTINCT categoryld) AS categoryCount FROM Users, product, category")
+	@Query("SELECT  COUNT(DISTINCT id) AS userCount,   COUNT(DISTINCT p_id) AS productCount,   COUNT(DISTINCT categoryld) AS categoryCount FROM Users, product, category")
 	public String getCountOfCustomerProductCategory();
 
 	

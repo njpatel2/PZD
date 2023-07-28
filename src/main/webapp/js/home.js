@@ -5,6 +5,7 @@
 //code for showing item on ui is written in main.js to apply animation	
 
 $(document).ready(function() {
+	makeItemList();
 });
 
 function showOrderItemPopUp(selectedProduct) {
@@ -99,6 +100,27 @@ function verifyOTP(){
 	
 	if(result = 'Verified successfully'){
 	}
+}
+
+function makeItemList()
+{
+	
+	var sendData = JSON.stringify();
+	var result = doAjaxCall('/product/getCategoryId', 'POST', sendData);
+	debugger;
+	for (var i = 0; i < result.length; i++) {
+		const link = document.createElement("a");
+  link.classList.add("nav-link", "active");
+  link.id = "v-pills-1-tab";
+  link.setAttribute("data-toggle", "pill");
+  link.textContent = result[i].categoryTitle;
+  link.setAttribute("onclick", 'displayProducts('+result[i].categoryId+')');
+  const menuItemsDiv = document.getElementById("menuItems");
+  menuItemsDiv.appendChild(link);
+		
+	}
+	
+  
 }
 
 

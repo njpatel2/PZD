@@ -7,6 +7,31 @@ var audio = new Audio('/audio/alert.mp3');
 var flag = false;
 var inter = null;
 var inter2 = null;
+function doAjaxCall(callUrl, callType, callData) {
+	debugger;
+	var returnData;
+	$.ajax({
+		type: callType,
+		url: callUrl,
+		async: false,
+		data: callData,
+		contentType: "application/json",
+		success: function(data) {
+			returnData = data;
+			debugger;
+
+		},
+		error: function(e) {
+			console.log(e);
+		},
+		done: function(e) {
+			console.log("DONE");
+		}
+	});
+	/*event.preventDefault();*/
+	debugger;
+	return returnData;
+}
 function myFunction() {
 	console.log("Hello world!");
 }
@@ -131,11 +156,11 @@ var orderDetails = (function() {
 				}
 			});
 		console.log(adapter.records)
-		
+
 		$("#orderDetailsJqxGrid").jqxGrid({
 			width: '100%',
 			height: 'auto',
-			rowsheight: 50,
+			rowsheight: 60,
 			columnsheight: 40,
 			columnsresize: true,
 			pageable: true,
@@ -184,6 +209,33 @@ function populateOrderDetailsModal(orderId) {
 
 	/*bind grid data*/
 }
+function populateConfirmationModal(orderId) {
+	/*open modal*/
+
+	$('#confirmationModel').modal('show');
+
+	const confirmButton = document.getElementById("confirmButton");
+	confirmButton.setAttribute("onclick", "changeStatus(" + orderId + ")");
+
+
+	/*bind grid data*/
+}
+function changeStatus(orderId) {
+	debugger;
+	var sendData = JSON.stringify({
+		orderId: orderId,
+	});
+	var result = doAjaxCall('/orders/changeStatusToCompleted', 'POST', sendData);
+	$('#confirmationModel').modal('hide');
+debugger;
+var grid = $("#orderJqxGrid");
+    var rowIndex = grid.jqxGrid('getrowboundindexbyid', orderId);
+    
+    if (rowIndex !== -1) {
+        grid.jqxGrid('deleterow', orderId);
+    }
+}
+
 
 var Orders = (function() {
 
@@ -278,18 +330,18 @@ var Orders = (function() {
 		});*/
 		var customFilter = function(filterValue, rowData, dataField) {
 			debugger;
-    // Convert the rowData to a string for easier substring search
-    var rowString = JSON.stringify(rowData.username).toLowerCase();
+			// Convert the rowData to a string for easier substring search
+			var rowString = JSON.stringify(rowData.username).toLowerCase();
 
-    // Check if the filterValue is present as a substring in the rowString
-    return rowString.indexOf(filterValue.toLowerCase()) >= 0;
-};
+			// Check if the filterValue is present as a substring in the rowString
+			return rowString.indexOf(filterValue.toLowerCase()) >= 0;
+		};
 
 		$("#orderJqxGrid").jqxGrid({
 			width: '90%',
 			height: 'auto',
 			pagermode: 'default',
-			rowsheight: 40,
+			rowsheight: 60,
 			columnsheight: 40,
 			columnsresize: true,
 			pageable: true,
@@ -303,8 +355,8 @@ var Orders = (function() {
 			filtermode: 'custom',
 			filter: customFilter,
 			updatefilterconditions: function(type, filterConditions) {
-    filterConditions.push({ text: 'Custom Filter', value: 'custom' });
-},
+				filterConditions.push({ text: 'Custom Filter', value: 'custom' });
+			},
 			/*filter: function(value, filterValue) {
 				debugger;
 				console.log(filterValue.toString().toLowerCase());
@@ -335,15 +387,16 @@ var Orders = (function() {
 				{ text: 'Price', datafield: 'price', width: 180 },
 				{ text: 'Date', datafield: 'date', width: 300 },
 				{
-					text: 'Completed?',
-					datafield: 'completed',
+					text: 'Change Status',
+					datafield: 'Status',
 					width: 134,
 					cellsalign: 'right',
 					columntype: 'button',
 					cellsrenderer: function(row, column, value, defaultHtml, columnSettings, rowData) {
 						var buttonId = 'btn_' + rowData.id;
-						var buttonHtml = '<button id="' + buttonId + '">Open Modal</button>';
-						return buttonHtml;
+						var buttonHtml = '<button class="custom-button" id="' + buttonId + '">completed</button>';
+						return '<div class="custom-button-container">' + buttonHtml + '</div>';
+
 					}
 				}
 			]
@@ -395,13 +448,14 @@ $(document).ready(function() {
 		debugger;
 		if (!event.args.rightclick) {
 
-
-			if (event.args.columnindex = "Completed?") {
-				debugger
+			var target = $(event.args.originalEvent.target);
+			if (target[0].outerText == "completed") {
+				var rowdata = $("#orderJqxGrid").jqxGrid('getrowdata', rowindex);
+				populateConfirmationModal(rowdata.id);
 
 			}
 			else {
-				rowindex = event.args.rowindex;
+				var rowindex = event.args.rowindex;
 				if (rowindex >= 0) {
 					/*loader.show();*/
 					rowdata = $("#orderJqxGrid").jqxGrid('getrowdata', rowindex);

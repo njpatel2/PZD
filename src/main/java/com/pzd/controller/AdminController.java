@@ -145,18 +145,34 @@ public class AdminController {
 		return categoryList;
 	}
 
-	@RequestMapping("/getCustomerList")
+	@RequestMapping("/getCustomerDetails")
 	@ResponseBody
-	public ArrayList<String> getCustomerList() {
-		ArrayList<String> customerList = null;
+	public ArrayList<HashMap<String, String>> getCustomerList() {
+		ArrayList<HashMap<String, String>> customerList = null;
 		try {
 			customerList = userServiceImpl.getCustomerList();
+			
+			
+//			id, name,email,number, address, role
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return customerList;
 	}
-
+	@RequestMapping("/getProductDetails")
+	@ResponseBody
+	public ArrayList<HashMap<String, String>> getProductList() {
+		ArrayList<HashMap<String, String>> customerList = null;
+		try {
+			customerList = productServiceImpl.getProductDetails();
+			
+			
+//			id, name,price ,quantity, category
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return customerList;
+	}
 	@RequestMapping("/getCountOfCustomerProductCategory")
 	@ResponseBody
 	public HashMap<String, Integer> getCountOfCustomerProductCategory() {

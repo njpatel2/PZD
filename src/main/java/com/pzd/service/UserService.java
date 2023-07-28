@@ -22,7 +22,7 @@ public interface UserService {
 
 	int getCustomerCount();
 
-	ArrayList<String> getCustomerList();
+	ArrayList<HashMap<String, String>> getCustomerList();
 
 	HashMap<String, Integer> getCountOfCustomerProductCategory();
 

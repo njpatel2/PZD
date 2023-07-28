@@ -42,9 +42,7 @@
 <script type="text/javascript" src="/js/main.js"></script>
 
 <style type="text/css">
-.hover-effect:hover {
-	color: #FAC564;
-}
+
 </style>
 </head>
 <body>
@@ -68,7 +66,7 @@
 
 					<li class="nav-item"><a href="/cart/cart"><img
 							class="hover-effect" src="/gif/cart.png" width="60px"></img><span
-							id="totalBill" class="hover-effect">0.00 $</span></a></li>
+							id="totalBill" class="hover-effect totalBill">0.00 $</span></a></li>
 					<li class="nav-item"><a href="/user/getProfile"
 						class="nav-link hover-effect">Profile</a></li>
 					<c:if test="${sessionScope.userRole == '[ROLE_ADMIN]'}">
@@ -78,8 +76,7 @@
 					</c:if>
 					<li class="nav-item"><a href="/logout"
 						class="nav-link hover-effect">Logout</a></li>
-					<li class="nav-item"><a href="/testJsp"
-						class="nav-link hover-effect">testJsp</a></li>
+					
 
 				</ul>
 
