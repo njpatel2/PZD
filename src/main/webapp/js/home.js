@@ -154,9 +154,9 @@ function showPageCount() {
 	{
 		const link = document.createElement('a');
 	link.href = '#';
-	link.innerText = i;
+	link.innerText = i+1;
 
-	if (i ==1) {
+	if (i == 0) {
 		link.classList.add('active');
 	}
 	link.setAttribute("onclick", 'getItems('+i+','+currentCategoryId+')' );
@@ -181,7 +181,9 @@ function getItems(page ,categoryId){
 	debugger;
 	displayProducts(result);
 	contentWayPoint();
-}
+	
+	showPageCount();
+	}
 
 function displayProducts(productList) {
 debugger;
