@@ -25,6 +25,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query("select p.pId as id, p.pName as name, p.pPrice as price, p.pDiscount as discount, p.pQuantity as quantity, p.category.categoryTitle as category  FROM product p")
 	ArrayList<String> getProductList();
 
+	@Query("select COUNT(p) from product p where p.category.id=:categoryId")
+	int getProductCountByCategoryId(Integer categoryId);
+
 //	public void save(ProductDTO productDTO);
 
 }

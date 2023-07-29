@@ -16,10 +16,10 @@
 	rel="stylesheet">
 
 <%@include file="header.jsp"%>
-
+<script type="text/javascript" src="/js/main.js"></script>
 <script type="text/javascript" src="/js/home.js"></script>
 <script type="text/javascript" src="/js/Cart.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
+
 
 
 <style>
@@ -128,6 +128,30 @@
   justify-content: center;
   margin-bottom: 2.5rem !important;
 }
+.pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            color: #007BFF;
+            padding: 8px 12px;
+            text-decoration: none;
+            border: 1px solid #007BFF;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+
+        .pagination a.active {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .pagination a:hover {
+            background-color: #f2f2f2;
+        }
 </style>
 
 </head>
@@ -141,12 +165,12 @@
 			<div class="row justify-content-center mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate text-center">
 				<div class="nav ftco-animate nav-pills fadeInUp ftco-animated menu" id="menuItems" role="tablist" aria-orientation="vertical">
-		              <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" onclick="getItem()" role="tab" aria-controls="v-pills-1" aria-selected="true">Pizza</a>
+		              <!-- <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" onclick="getItem()" role="tab" aria-controls="v-pills-1" aria-selected="true">Pizza</a>
 
 		              <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Drinks</a>
 
 		              <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Vapes</a>
-
+ -->
 		             </div>
 					<h2 class="mb-4">Hot Pizza Meals</h2>
 					<p>Far far away, behind the word mountains, far from the
@@ -237,8 +261,17 @@
 				</div> -->
 			</div>
 		</div>
-
-		<div class="container">
+<div class="pagination" id="pagination">
+		<a href="#">Previous</a>...
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>...
+        <a href="#">Next</a>
+        
+        
+        <!-- Add more page links here as needed -->
+    </div>
+		<!-- <div class="container">
 			<div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
 				<div class="col-md-7 heading-section text-center ftco-animate">
 					<h2 class="mb-4">Our Menu Pricing</h2>
@@ -386,7 +419,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</section>
 
 	<div class=" modal fade" id="orderItemModel" tabindex="-1"

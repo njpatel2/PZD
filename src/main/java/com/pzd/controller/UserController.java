@@ -38,21 +38,7 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 
-	@RequestMapping("/getItems")
-	@ResponseBody
-	public ArrayList<ProductDTO> getItems(
-	        @RequestParam(name = "page") Integer page,
-	        @RequestParam(name = "categoryId") Integer categoryId) {
-
-	    ArrayList<ProductDTO> productDTOs = new ArrayList<>();
-
-	    try {
-	        productDTOs = productServiceImpl.getProductList(categoryId, page);
-	    } catch (Exception e) {
-	        throw e;
-	    }
-	    return productDTOs;
-	}
+	
 
 	
 	@RequestMapping("/getProfile")

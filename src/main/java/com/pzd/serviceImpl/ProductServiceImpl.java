@@ -139,6 +139,13 @@ public class ProductServiceImpl implements ProductService {
 		return ListOfCategories;
 	}
 
+	public int getProductCount(Integer categoryId) {
+		
+		productRepository.getProductCountByCategoryId(categoryId);
+		
+		return productRepository.getProductCountByCategoryId(categoryId);
+	}
+
 
 	
 }

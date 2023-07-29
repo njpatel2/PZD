@@ -34,5 +34,37 @@ public class ProductController {
 	    }
 	    return categoryIdList;
 	}
+	
+	@RequestMapping("/getItems")
+	@ResponseBody
+	public ArrayList<ProductDTO> getItems(
+	        @RequestParam(name = "page") Integer page,
+	        @RequestParam(name = "categoryId") Integer categoryId) {
 
+	    ArrayList<ProductDTO> productDTOs = new ArrayList<>();
+
+	    try {
+	        productDTOs = productServiceImpl.getProductList(categoryId, page);
+	    } catch (Exception e) {
+	        throw e;
+	    }
+	    return productDTOs;
+	}
+	
+	@RequestMapping("/getPageCount")
+	@ResponseBody
+	public int getPageCount(
+	        @RequestParam(name = "categoryId") Integer categoryId) {
+
+	   int productCount = 0;
+
+	    try {
+	    	productCount = productServiceImpl.getProductCount(categoryId);
+	    } catch (Exception e) {
+	        throw e;
+	    }
+	    return productCount;
+	}
+
+	
 }
