@@ -160,6 +160,8 @@ function showPageCount() {
 		link.classList.add('active');
 	}
 	link.setAttribute("onclick", 'getItems('+i+','+currentCategoryId+')' );
+	var pageNo = i+1;
+	link.setAttribute("id", "page"+pageNo );
 	paginationElement.appendChild(link);
 		
 	}
@@ -169,6 +171,7 @@ function showPageCount() {
 function getItems(page ,categoryId){
 	currentCategoryId = categoryId;
 	currentPageNumber = page;
+	
 	
 	
 	var sendData = {

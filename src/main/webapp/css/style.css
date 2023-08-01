@@ -8981,5 +8981,6 @@ textarea.form-control {
 }
 .totalBill{
     color: #bfbfbf;
+    display: contents;
     }
 

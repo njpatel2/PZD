@@ -40,7 +40,7 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
-
+<script type="text/javascript" src="/js/Cart.js"></script>
 <style type="text/css">
 
 </style>
