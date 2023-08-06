@@ -7679,6 +7679,7 @@ h1, h2, h3, h4, h5,
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
   .btn.btn-primary {
+  cursor: pointer;
     background: #fac564;
     border: 1px solid #fac564;
     color: #000; }
@@ -8197,7 +8198,7 @@ textarea.form-control {
   font-size: 24px; }
 
 .ftco-section {
-  padding: 7em 0;
+  padding: 2em 0;
   position: relative; }
   @media (max-width: 767.98px) {
     .ftco-section {
@@ -8983,4 +8984,12 @@ textarea.form-control {
     color: #bfbfbf;
     display: contents;
     }
+.zoomOnHover{
+	transition: transform 0.2s ease-in-out !important;
+}
+.zoomOnHover:hover {
+            transform: scale(1.2); /* Apply a 10% zoom effect on hover */
+        }
+        
+
 

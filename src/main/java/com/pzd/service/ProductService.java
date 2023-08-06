@@ -15,9 +15,13 @@ public interface ProductService {
 
 	ArrayList<HashMap<String, String>> getProductDetails();
 
-	ArrayList<ProductDTO> getProductList(int categoryId, int page);
-
 	ArrayList<HashMap<String, String>> getCategoryIdList();
+
+	ArrayList<ProductDTO> getProductList(int categoryId, int page, String searchQuery);
+
+	ArrayList<ProductDTO> getProductListBySearchQuery(int page, String searchQuery);
+
+	ArrayList<ProductDTO> getProductListBySearchQuery(int categoryId, int page, String searchQuery);
 
 	
 }

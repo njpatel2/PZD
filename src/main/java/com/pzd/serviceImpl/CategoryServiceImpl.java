@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 		for (Category categoryItem : category) {
 
-			categoryList.put(categoryItem.getCategoryld(), categoryItem.getCategoryTitle());
+			categoryList.put(categoryItem.getCategoryId(), categoryItem.getCategoryTitle());
 
 		}
 		return categoryList;

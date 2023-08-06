@@ -50,6 +50,7 @@ public class SecurityConfiguration {
 				.antMatchers("/cart/**").authenticated()
 				.antMatchers("/home").authenticated()
 				.antMatchers("/orders/**").authenticated()
+				.antMatchers("/product/**").authenticated()
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.antMatchers("/websocket/**").permitAll()
 				.and()

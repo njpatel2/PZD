@@ -34,8 +34,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT u.id , u.name, u.email , u.contactNumber, u.role from Users u")
 	public ArrayList<String> getCustomerNameList();
 	
-//	@Query("SELECT  (SELECT COUNT(*) FROM Users u WHERE u.role LIKE '%ROLE_USER%') AS userCount,   COUNT(DISTINCT p_id) AS productCount,   COUNT(DISTINCT categoryld) AS categoryCount FROM Users, product, category")
-	@Query("SELECT  COUNT(DISTINCT id) AS userCount,   COUNT(DISTINCT p_id) AS productCount,   COUNT(DISTINCT categoryld) AS categoryCount FROM Users, product, category")
+//	@Query("SELECT  (SELECT COUNT(*) FROM Users u WHERE u.role LIKE '%ROLE_USER%') AS userCount,   COUNT(DISTINCT p_id) AS productCount,   COUNT(DISTINCT categoryId) AS categoryCount FROM Users, product, category")
+	@Query("SELECT  COUNT(DISTINCT id) AS userCount,   COUNT(DISTINCT p_id) AS productCount,   COUNT(DISTINCT category_Id) AS categoryCount FROM Users, product, category")
+//	@Query("SELECT " +
+//	        "(SELECT COUNT(DISTINCT u.id) FROM Users u) AS userCount, " +
+//	        "(SELECT COUNT(DISTINCT p.pId) FROM product p) AS productCount, " +
+//	        "(SELECT COUNT(DISTINCT c.categoryId) FROM category c) AS categoryCount " +
+//	        "FROM Users u, product p, category c")
 	public String getCountOfCustomerProductCategory();
 
 	

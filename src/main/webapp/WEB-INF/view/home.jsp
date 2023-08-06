@@ -156,13 +156,46 @@
 .pagination a:hover {
     background-color: #f2f2f2;
 }
+.searchbar-input-group {
+            display: grid;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .searchbar-form-outline {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .searchbar-form-control {
+            width: 20%;
+            -webkit-appearance: auto;
+        }
+
+        .searchbar-btn-primary {
+            margin-left:10px;
+        }
+        .categoryNames {
+        color: cornsilk !important;
+        }
+        
 
 </style>
 
 </head>
 <body>
 
-
+<div class="searchbar-input-group">
+        <div class="searchbar-form-outline">
+            <input type="search" id="searchbar-form" class="searchbar-form-control" />
+            <!-- <label class="searchbar-form-label" for="searchbar-form1">Search</label> -->
+             <button type="button" class="btn btn-primary searchbar-btn-primary" onclick="getItemsBySearchQuery()">search
+            <!-- <i class="fas fa-search"></i> -->
+        </button>
+        </div>
+       
+    </div>
+    
 	<section class="ftco-section">
 	
 		<div class="container">

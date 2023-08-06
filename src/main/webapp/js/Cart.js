@@ -18,26 +18,26 @@ $(document).ready(function() {
 	connect();
 });
 
-function connect(){
-	
-	 socket = new SockJS('/websocket');
-	 stompClient = Stomp.over(socket);
+function connect() {
 
-		stompClient.connect({}, function(frame) {
-			console.log('Connected: ' + frame);
-		});
-	
+	socket = new SockJS('/websocket');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function(frame) {
+		console.log('Connected: ' + frame);
+	});
+
 }
 
-function sendAlert(){
+function sendAlert() {
 	debugger;
 	var message = {
-				'username': 1,
-				'orderDetails': 1
-			};
+		'username': 1,
+		'orderDetails': 1
+	};
 	stompClient.send('/app/admin/alert', {}, JSON.stringify(message), function() {
-				console.log('Message sent'); // add this line
-			});
+		console.log('Message sent'); // add this line
+	});
 }
 /*function confirmUserDetails(){
 	debugger;
@@ -70,16 +70,16 @@ function sendAlert(){
 	/*var result = doAjaxCall('/user/confirmUserDetails', 'GET', encodedData);
 }*/
 
-function getUserDetails(){
-	
+function getUserDetails() {
+
 	$('#confirmDetailsModel').modal('show');
-	
-		var sendData = JSON.stringify();
+
+	var sendData = JSON.stringify();
 	var result = doAjaxCall('/user/getUserDetails', 'GET', sendData);
-debugger;	
-	document.getElementById("contactNumber").value =result.contact;
+	debugger;
+	document.getElementById("contactNumber").value = result.contact;
 	document.getElementById("address").value = result.address;
-	
+
 }
 
 function doAjaxCall(callUrl, callType, callData) {
@@ -201,7 +201,7 @@ function getAllCartItems() {
 		inputElement.setAttribute("required", "required");
 		inputElement.setAttribute("min", "1");
 		inputElement.setAttribute("onchange", "updateCartProductQuantity(" + result[i].productId + ',' + result[i].productPrice + ")");
-		inputElement.setAttribute("id", "quantity-input-"+result[i].productId);
+		inputElement.setAttribute("id", "quantity-input-" + result[i].productId);
 
 		// add the input element and the delete button to the input container div
 		inputContainer.appendChild(inputElement);
@@ -278,11 +278,14 @@ function getTotalCartPrice() {
 	debugger;
 	var sendData = JSON.stringify();
 	var result = doAjaxCall('/cart/getTotalCartPrice', 'GET', sendData);
+	debugger;
+	console.log("Length of data:", result.length);
+	if (typeof result.length == 'undefined') {
+		document.getElementById("totalBill").textContent = result + ' $';
 
-	document.getElementById("totalBill").textContent = result + ' $';
-
-	if (document.querySelector("#totalPriceOfCart")) {
-		document.getElementById("totalPriceOfCart").textContent = '$ ' + result;
+		if (document.querySelector("#totalPriceOfCart")) {
+			document.getElementById("totalPriceOfCart").textContent = '$ ' + result;
+		}
 	}
 }
 
@@ -300,7 +303,7 @@ function deleteProductFromCart(productId) {
 function updateCartProductQuantity(productId, price) {
 	debugger;
 
-	var quantity = document.getElementById("quantity-input-"+productId).value;
+	var quantity = document.getElementById("quantity-input-" + productId).value;
 
 	var sendData = JSON.stringify({
 		productId: productId,

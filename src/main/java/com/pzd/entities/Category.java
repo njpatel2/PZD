@@ -15,7 +15,7 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int categoryld;
+	private int categoryId;
 
 	private String categoryTitle;
 	private String categoryDescription;
@@ -23,12 +23,12 @@ public class Category {
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Product> products = new ArrayList<>();
 	
-	public int getCategoryld() {
-		return categoryld;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategoryld(int categoryld) {
-		this.categoryld = categoryld;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getCategoryTitle() {
@@ -51,9 +51,9 @@ public class Category {
 		super();
 	}
 
-	public Category(int categoryld, String categoryTitle, String categoryDescription) {
+	public Category(int categoryId, String categoryTitle, String categoryDescription) {
 		super();
-		this.categoryld = categoryld;
+		this.categoryId = categoryId;
 		this.categoryTitle = categoryTitle;
 		this.categoryDescription = categoryDescription;
 	}
@@ -73,9 +73,9 @@ public class Category {
 		this.products = products;
 	}
 
-	public Category(int categoryld, String categoryTitle, String categoryDescription, List<Product> products) {
+	public Category(int categoryId, String categoryTitle, String categoryDescription, List<Product> products) {
 		super();
-		this.categoryld = categoryld;
+		this.categoryId = categoryId;
 		this.categoryTitle = categoryTitle;
 		this.categoryDescription = categoryDescription;
 		this.products = products;
@@ -83,7 +83,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [categoryld=" + categoryld + ", categoryTitle=" + categoryTitle + ", categoryDescription="
+		return "Category [categoryId=" + categoryId + ", categoryTitle=" + categoryTitle + ", categoryDescription="
 				+ categoryDescription + ", products=" + products + "]";
 	}
 	

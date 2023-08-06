@@ -5,7 +5,8 @@
 
 $(document).ready(function() {
 	makeItemList();
-	getItems(0 ,6);
+	//getItems(0 ,6);
+	getInitialItems();
 	showPageCount();
 });
 var currentPageNumber;
@@ -114,18 +115,18 @@ function makeItemList() {
 	for (var i = 0; i < result.length; i++) {
 		const link = document.createElement("a");
 
-		link.id = "v-pills-" + i + "-tab";
+		link.id = "category"+result[i].categoryId;
 		link.setAttribute("data-toggle", "pill");
 		link.textContent = result[i].categoryTitle;  
 		link.setAttribute("onclick", 'getItems( '+ 0 +','+result[i].categoryId +' )');
 		link.setAttribute("role", "tab");
 		link.setAttribute("aria-controls", "v-pills-" + i);
 		if (i == 0) {
-			link.classList.add("nav-link", "active");
+			link.classList.add("nav-link", "active","categoryNames","zoomOnHover");
 			link.setAttribute("aria-selected", "true");
 		}
 		else {
-			link.classList.add("nav-link");
+			link.classList.add("nav-link","categoryNames","zoomOnHover");
 			link.setAttribute("aria-selected", "false");
 		}
 
@@ -147,10 +148,10 @@ function showPageCount() {
 
 	var result = doAjaxCall('/product/getPageCount', 'GET', sendData);
 	document.getElementById('pagination').innerHTML = '';
-
+debugger;
 	const paginationElement = document.getElementById('pagination');
 	//<a href="#">Previous</a>
-	for(i=0 ; i<result;i++)
+	for(i=0 ; i<result/4;i++)
 	{
 		const link = document.createElement('a');
 	link.href = '#';
@@ -167,16 +168,63 @@ function showPageCount() {
 	}
 
 }
+function getItemsBySearchQuery(){
+	var searchQuery = "";
+	debugger;
+	const searchbarForm = document.getElementById("searchbar-form").value;
+
+if (searchbarForm) {
+	searchQuery = searchbarForm;
+}
+	var sendData = {
+    searchQuery : searchQuery
+};
+
+	var result = doAjaxCall('/product/getItemsBySearchQuery', 'GET', sendData);
+	debugger;
+	currentCategoryId = result.categoryId;
+	currentPageNumber = 0;
+	
+	displayProducts(result.productList);
+	contentWayPoint();
+	
+	showPageCount()
+	activateTab('category'+currentCategoryId);
+	
+}
+
+function getInitialItems(){
+	var sendData = {
+};
+
+
+
+
+	var result = doAjaxCall('/product/getInitialItems', 'GET', null);
+	debugger;
+	currentCategoryId = result.categoryId;
+	currentPageNumber = 0;
+	
+	displayProducts(result.productList);
+	contentWayPoint();
+	
+	showPageCount();
+	}
 
 function getItems(page ,categoryId){
 	currentCategoryId = categoryId;
 	currentPageNumber = page;
-	
-	
-	
+	var searchQuery = "";
+	debugger;
+	const searchbarForm = document.getElementById("searchbar-form").value;
+
+if (searchbarForm) {
+	searchQuery = searchbarForm;
+}
 	var sendData = {
     categoryId: currentCategoryId,
-    page: page
+    page: page,
+    searchQuery : searchQuery
 };
 
 
@@ -187,6 +235,7 @@ function getItems(page ,categoryId){
 	
 	showPageCount();
 	}
+	
 
 function displayProducts(productList) {
 debugger;
@@ -278,3 +327,18 @@ debugger;
 		}
 
 	};
+	
+function activateTab(tabId) {
+        const menuItems = document.getElementById('menuItems').children;
+        for (let i = 0; i < menuItems.length; i++) {
+            const menuItem = menuItems[i];
+            if (menuItem.id === tabId) {
+                menuItem.classList.add('active');
+            } else {
+                menuItem.classList.remove('active');
+            }
+        }
+    }
+
+    // Example: To make "category3" tab active
+    

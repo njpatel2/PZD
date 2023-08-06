@@ -11,10 +11,10 @@ import com.pzd.entities.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-	@Query("SELECT c.categoryld, c.categoryTitle FROM category c")
+	@Query("SELECT c.categoryId, c.categoryTitle FROM category c")
 	public HashMap<Integer, String> getCategoryList();
 
-	@Query("SELECT c.categoryld, c.categoryTitle FROM category c")
+	@Query("SELECT c.categoryId, c.categoryTitle FROM category c")
 	public  ArrayList<Object[]> getCategoryIDlist();
 
 }

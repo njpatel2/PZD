@@ -196,7 +196,6 @@ AOS.init({
 
 	var contentWayPoint = function() {
 		var i = 0;
-		debugger;
 		$('.ftco-animate').waypoint(function(direction) {
 
 			if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
