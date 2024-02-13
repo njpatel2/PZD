@@ -14,7 +14,7 @@ Welcome to the Food Delivery System, a robust and user-friendly platform designe
 ## Technologies
 
 - **Backend:** Java, Spring Boot
-- **Frontend:** React
+- **Frontend:** Html, Css
 - **Database:** SQL Server
 - **ORM:** Hibernate
 - **Security:** OAuth 2.0, SSL
