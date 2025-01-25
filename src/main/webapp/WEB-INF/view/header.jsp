@@ -64,9 +64,7 @@
 					<li class="nav-item active"><a href="/home" class="nav-link">Home</a></li>
 
 
-					<li class="nav-item"><a href="/cart/cart"><img
-							class="hover-effect" src="/gif/cart.png" width="60px"></img><span
-							id="totalBill" class="hover-effect totalBill">0.00 $</span></a></li>
+					
 					<li class="nav-item"><a href="/user/getProfile"
 						class="nav-link hover-effect">Profile</a></li>
 					<c:if test="${sessionScope.userRole == '[ROLE_ADMIN]'}">
@@ -76,7 +74,10 @@
 					</c:if>
 					<li class="nav-item"><a href="/logout"
 						class="nav-link hover-effect">Logout</a></li>
-					
+						<li class="nav-item"><a href="/cart/cart"><img
+							class="hover-effect" src="/gif/cart.png" width="60px"></img><span
+							id="totalBill" class="hover-effect totalBill">0.00 $</span></a></li>
+					<li class="nav-item active"><a href="/testJsp" class="nav-link">Test</a></li>
 
 				</ul>
 
